@@ -1,0 +1,30 @@
+<header ng-switch on="$location.path().indexOf('/Planets/new') > -1">
+    <h3 ng-switch-when="true">Create a new Planet</h3>
+    <h3 ng-switch-when="false">View or edit Planet</h3>
+</header>
+<form id="PlanetForm" name="PlanetForm" class="form-horizontal" role="form">
+    
+
+    <div class="form-group" ng-class="{'has-error': PlanetForm.Name.$invalid}">
+        <label for="Name" class="col-sm-2 control-label">Name</label>
+        <div id="NameControls" class="col-sm-10">
+            <input id="Name" name="Name" type="text" class="form-control" ng-model="planet.Name" placeholder="Enter the Planet Name"></input>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': PlanetForm.Galaxy.$invalid}">
+        <label for="Galaxy" class="col-sm-2 control-label">Galaxy</label>
+        <div id="GalaxyControls" class="col-sm-10">
+            <input id="Galaxy" name="Galaxy" type="text" class="form-control" ng-model="planet.Galaxy" placeholder="Enter the Planet Galaxy"></input>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="savePlanet" name="savePlanet" class="btn btn-primary" ng-disabled="isClean() || PlanetForm.$invalid" ng-click="save()"><span class="glyphicon glyphicon-ok-sign"></span> Save</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button>
+            <button id="deletePlanet" name="deletePlanet" class="btn btn-danger" ng-show="planet.id" ng-click="remove()"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+        </div>
+    </div>
+</form>
