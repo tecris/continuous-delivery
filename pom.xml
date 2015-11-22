@@ -15,12 +15,12 @@
     <repository>
       <id>deployment</id>
       <name>Internal Releases</name>
-      <url>http://192.168.1.69:8081/content/repositories/releases/</url>
+      <url>http://maven-nexus.repository:8081/content/repositories/releases/</url>
     </repository>
     <snapshotRepository>
       <id>deployment</id>
       <name>Internal Releases</name>
-      <url>http://192.168.1.69:8081/content/repositories/snapshots</url>
+      <url>http://maven-nexus.repository:8081/content/repositories/snapshots</url>
     </snapshotRepository>
   </distributionManagement>
   <dependencyManagement>
