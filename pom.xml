@@ -74,6 +74,15 @@
   </dependencies>
   <build>
     <finalName>planets</finalName>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.jolokia</groupId>
+          <artifactId>docker-maven-plugin</artifactId>
+          <version>0.13.6</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
         <artifactId>maven-war-plugin</artifactId>
@@ -88,6 +97,27 @@
         <version>1.0.2.Final</version>
         <configuration>
           <port>9990</port>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.jolokia</groupId>
+        <artifactId>docker-maven-plugin</artifactId>
+        <configuration>
+          <logDate>default</logDate>
+          <verbose>true</verbose>
+          <images>
+            <image>
+              <name>org.tecris:5000/planets:1</name>
+              <build>
+                <tags>
+                  <tag>latest</tag>
+                </tags>
+                <assembly>
+                  <dockerFileDir>snapshot</dockerFileDir>
+                </assembly>
+              </build>
+            </image>
+          </images>
         </configuration>
       </plugin>
     </plugins>
