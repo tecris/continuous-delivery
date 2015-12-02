@@ -2,7 +2,7 @@
 # --named - maven artifactId
 project-new --named planets --topLevelPackage org.planets --finalName planets --type war
 jpa-setup
-jpa-new-entity --named Planet
+jpa-new-entity --named Planet --idStrategy IDENTITY
 jpa-new-field --named name
 jpa-new-field --named galaxy
 scaffold-setup --provider AngularJS
