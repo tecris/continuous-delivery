@@ -7,7 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Version;
+import javax.xml.bind.annotation.XmlRootElement;
 @Entity
+@XmlRootElement
 public class Planet implements Serializable {
 
 	@Id
@@ -19,10 +21,10 @@ public class Planet implements Serializable {
 	private int version;
 
 	@Column
-	private String Name;
+	private String name;
 
 	@Column
-	private String Galaxy;
+	private String galaxy;
 
 	public Long getId() {
 		return this.id;
@@ -66,28 +68,28 @@ public class Planet implements Serializable {
 	}
 
 	public String getName() {
-		return Name;
+		return name;
 	}
 
-	public void setName(String Name) {
-		this.Name = Name;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getGalaxy() {
-		return Galaxy;
+		return galaxy;
 	}
 
-	public void setGalaxy(String Galaxy) {
-		this.Galaxy = Galaxy;
+	public void setGalaxy(String galaxy) {
+		this.galaxy = galaxy;
 	}
 
 	@Override
 	public String toString() {
 		String result = getClass().getSimpleName() + " ";
-		if (Name != null && !Name.trim().isEmpty())
-			result += "Name: " + Name;
-		if (Galaxy != null && !Galaxy.trim().isEmpty())
-			result += ", Galaxy: " + Galaxy;
+		if (name != null && !name.trim().isEmpty())
+			result += "Name: " + name;
+		if (galaxy != null && !galaxy.trim().isEmpty())
+			result += ", Galaxy: " + galaxy;
 		return result;
 	}
 }
