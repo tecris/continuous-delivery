@@ -19,7 +19,8 @@ public class PlanetEndpointIT {
 
 		given().contentType("application/json").body(myJson).when().post("");
 		
-		get("/1").then().body("name", equalTo(expectedName));
-		get("/1").then().body("galaxy", equalTo(expectedGalaxy));
+		get("/1").then().
+		body("name", equalTo(expectedName)).
+		body("galaxy", equalTo(expectedGalaxy));
 	}
 }
