@@ -11,6 +11,12 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <database.name>planetsdb</database.name>
   </properties>
+  <scm>
+    <url>https://github.com/tecris/planets.git</url>
+    <connection>scm:git:git://github.com/tecris/planets.git</connection>
+    <developerConnection>scm:git:git@github.com:tecris/planets.git</developerConnection>
+    <!--tag>1.0</tag-->
+  </scm>
   <distributionManagement>
     <repository>
       <id>deployment</id>
@@ -132,7 +138,7 @@
             </image>
             <image>
               <alias>planets-web</alias>
-              <name>org.tecris:5000/planets:1</name>
+              <name>org.tecris:5000/planets:$\{buildNumber}</name>
               <build>
                 <tags>
                   <tag>latest</tag>
@@ -198,6 +204,23 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>buildnumber-maven-plugin</artifactId>
+        <version>1.4</version>
+        <executions>
+          <execution>
+            <phase>validate</phase>
+            <goals>
+              <goal>create</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <doCheck>true</doCheck>
+          <doUpdate>true</doUpdate>
+        </configuration>
       </plugin>
     </plugins>
   </build>
