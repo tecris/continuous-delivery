@@ -131,6 +131,23 @@
           <verbose>true</verbose>
           <images>
             <image>
+              <alias>planets-db</alias>
+              <name>org.tecris:5000/mysql:5.7</name>
+              <run>
+                <namingStrategy>alias</namingStrategy>
+                <env>
+                  <MYSQL_ROOT_PASSWORD>mysql</MYSQL_ROOT_PASSWORD>
+                  <MYSQL_DATABASE>planetsdb</MYSQL_DATABASE>
+                  <MYSQL_USER>planets</MYSQL_USER>
+                  <MYSQL_PASSWORD>1planets!</MYSQL_PASSWORD>
+                </env>
+                <ports>
+                  <port>3306:3306</port>
+                </ports>
+              </run>
+            </image>
+            <image>
+              <alias>planets-web</alias>
               <name>org.tecris:5000/planets:1</name>
               <build>
                 <tags>
@@ -140,6 +157,23 @@
                   <dockerFileDir>web-server</dockerFileDir>
                 </assembly>
               </build>
+              <run>
+                <namingStrategy>alias</namingStrategy>
+                <env>
+                  <MYSQL_ROOT_PASSWORD>mysql</MYSQL_ROOT_PASSWORD>
+                  <MYSQL_DATABASE>planetsdb</MYSQL_DATABASE>
+                  <MYSQL_USER>planets</MYSQL_USER>
+                  <MYSQL_PASSWORD>1planets!</MYSQL_PASSWORD>
+                </env>
+                <ports>
+                  <port>8080:8080</port>
+                  <port>9990:9990</port>
+                </ports>
+                <links>
+                  <link>planets-db</link>
+                </links>
+                <cmd>-Dmysql.ipaddress=planets-db -Dmysql.port=3306 -Dmysql.database=planetsdb -Dmysql.username=planets -Dmysql.password=1planets!</cmd>
+              </run>
             </image>
           </images>
         </configuration>
