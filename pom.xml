@@ -231,6 +231,16 @@
           <port>9990</port>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-maven-plugin</artifactId>
+        <version>3.2.1</version>
+        <configuration>
+          <url>jdbc:mysql://localhost:3306/${database.name}</url>
+          <user>root</user>
+          <password>mysql</password>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 </project>
