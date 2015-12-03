@@ -105,25 +105,6 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>org.flywaydb</groupId>
-        <artifactId>flyway-maven-plugin</artifactId>
-        <version>3.2.1</version>
-        <configuration>
-          <url>jdbc:mysql://localhost:3306/${database.name}</url>
-          <user>root</user>
-          <password>mysql</password>
-        </configuration>
-        <executions>
-          <execution>
-            <id>compile</id>
-            <phase>pre-integration-test</phase>
-            <goals>
-              <goal>migrate</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
         <groupId>org.jolokia</groupId>
         <artifactId>docker-maven-plugin</artifactId>
         <configuration>
@@ -144,6 +125,9 @@
                 <ports>
                   <port>3306:3306</port>
                 </ports>
+                <wait>
+                  <time>10000</time>
+                </wait>
               </run>
             </image>
             <image>
@@ -177,6 +161,43 @@
             </image>
           </images>
         </configuration>
+        <!-- Hooking into the lifecycle -->
+        <executions>
+          <execution>
+            <id>start</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>build</goal>
+              <goal>start</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>stop</id>
+            <phase>post-integration-test</phase>
+            <goals>
+              <goal>stop</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-maven-plugin</artifactId>
+        <version>3.2.1</version>
+        <configuration>
+          <url>jdbc:mysql://localhost:3306/${database.name}</url>
+          <user>root</user>
+          <password>mysql</password>
+        </configuration>
+        <executions>
+          <execution>
+            <id>compile</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>migrate</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
