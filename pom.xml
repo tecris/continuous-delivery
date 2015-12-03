@@ -123,15 +123,9 @@
           </execution>
         </executions>
         <configuration>
-          <!--doCheck>true</doCheck>
+          <doCheck>true</doCheck>
           <doUpdate>true</doUpdate>
-          <shortRevisionLength>5</shortRevisionLength-->
-          <format>{0,number}.{1,number}.{2,number}</format>
-          <items>
-            <item>buildNumber0</item>
-            <item>buildNumber1</item>
-            <item>buildNumber2</item>
-          </items>
+          <shortRevisionLength>12</shortRevisionLength>
         </configuration>
       </plugin>
       <plugin>
