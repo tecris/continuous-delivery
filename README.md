@@ -15,3 +15,4 @@
   1. In Jenkins create job with following:
    1. `mvn clean deploy`
    1. `mvn integration-test -Pcontinuous-delivery`
+   1. `mvn verify -Pcontinuous-delivery`
