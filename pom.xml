@@ -155,7 +155,7 @@
             </image>
             <image>
               <alias>planets-web</alias>
-              <name>org.tecris:5000/planets:$\{buildNumber}</name>
+              <name>org.tecris:5000/planets:${buildNumber}</name>
               <build>
                 <tags>
                   <tag>latest</tag>
