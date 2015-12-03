@@ -15,7 +15,6 @@
     <url>https://github.com/tecris/planets.git</url>
     <connection>scm:git:git://github.com/tecris/planets.git</connection>
     <developerConnection>scm:git:git@github.com:tecris/planets.git</developerConnection>
-    <!--tag>1.0</tag-->
   </scm>
   <distributionManagement>
     <repository>
