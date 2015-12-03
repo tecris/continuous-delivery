@@ -137,7 +137,7 @@
                   <tag>latest</tag>
                 </tags>
                 <assembly>
-                  <dockerFileDir>snapshot</dockerFileDir>
+                  <dockerFileDir>web-server</dockerFileDir>
                 </assembly>
               </build>
             </image>
