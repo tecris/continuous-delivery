@@ -154,10 +154,10 @@
                 </image>
                 <image>
                   <alias>planets-web</alias>
-                  <name>org.tecris:5000/planets:${buildNumber}</name>
+                  <name>org.tecris:5000/planets</name>
                   <build>
                     <tags>
-                      <tag>latest</tag>
+                      <tag>${buildNumber}</tag>
                     </tags>
                     <assembly>
                       <dockerFileDir>web-server</dockerFileDir>
