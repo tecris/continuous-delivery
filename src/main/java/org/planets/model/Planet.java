@@ -87,9 +87,9 @@ public class Planet implements Serializable {
 	public String toString() {
 		String result = getClass().getSimpleName() + " ";
 		if (name != null && !name.trim().isEmpty())
-			result += "Name: " + name;
+			result += "name: " + name;
 		if (galaxy != null && !galaxy.trim().isEmpty())
-			result += ", Galaxy: " + galaxy;
+			result += ", galaxy: " + galaxy;
 		return result;
 	}
 }

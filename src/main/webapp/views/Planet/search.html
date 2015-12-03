@@ -13,16 +13,16 @@
         
 
     <div class="form-group">
-        <label for="Name" class="col-sm-2 control-label">Name</label>
+        <label for="name" class="col-sm-2 control-label">Name</label>
         <div class="col-sm-10">
-            <input id="Name" name="Name" class="form-control" type="text" ng-model="search.Name" placeholder="Enter the Planet Name"></input>
+            <input id="name" name="name" class="form-control" type="text" ng-model="search.name" placeholder="Enter the Planet Name"></input>
         </div>
     </div>
 
     <div class="form-group">
-        <label for="Galaxy" class="col-sm-2 control-label">Galaxy</label>
+        <label for="galaxy" class="col-sm-2 control-label">Galaxy</label>
         <div class="col-sm-10">
-            <input id="Galaxy" name="Galaxy" class="form-control" type="text" ng-model="search.Galaxy" placeholder="Enter the Planet Galaxy"></input>
+            <input id="galaxy" name="galaxy" class="form-control" type="text" ng-model="search.galaxy" placeholder="Enter the Planet Galaxy"></input>
         </div>
     </div>
 
@@ -45,8 +45,8 @@
             </thead>
             <tbody id="search-results-body">
                 <tr ng-repeat="result in filteredResults | startFrom:currentPage*pageSize | limitTo:pageSize">
-                    <td><a href="#/Planets/edit/{{result.id}}">{{result.Name}}</a></td>
-                    <td><a href="#/Planets/edit/{{result.id}}">{{result.Galaxy}}</a></td>
+                    <td><a href="#/Planets/edit/{{result.id}}">{{result.name}}</a></td>
+                    <td><a href="#/Planets/edit/{{result.id}}">{{result.galaxy}}</a></td>
                 </tr>
             </tbody>
         </table>
