@@ -15,7 +15,7 @@
  4. Docker
  5. Maven
  6. [Jolokia docker maven plugin](https://github.com/rhuss/docker-maven-plugin)
- 7. Flyway
+ 7. [Flywaydb](http://flywaydb.org/)
 
 ## Prerequisites
 ### Generate project with jboss forge.
