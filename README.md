@@ -1,5 +1,21 @@
 # Continuous delivery with docker for a java web application
 
+## This project attempts to demonstrate following continous delivery life-cycle
+ - Build war artifact
+ - Upload war to maven repository
+ - Start mysql container and apply database scripts with flyway
+ - Build docker image with latest war artifact and start container
+ - Execute integration test
+ - Stop and remove web and database containers
+
+## Techno stack
+ 1. Java JEE (Web Application)
+ 2. Wildfly
+ 3. MySQL
+ 4. Docker
+ 5. Maven
+ 6. Flyway
+
 ## Prerequisites
 ### Generate project with jboss forge.
 1. Install forge
