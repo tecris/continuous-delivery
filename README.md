@@ -9,6 +9,12 @@
  1. `runForgeScript.sh buildProject.sh`
  1. Edit src/main/resources/META-INF/persistence.xml set property hibernate.hbm2ddl.auto to none
 
+### Prepare web and database images.
+1. TODO
+
+### Prepare maven repository image.
+1. TODO
+
 ## How to run / deploy
 1. Start web(wildfly) and database(mysql) containers
  1. `docker-compose up -d`
