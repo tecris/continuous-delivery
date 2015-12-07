@@ -15,12 +15,10 @@ db:
 web:
   image: org.tecris:5000/wildfly-mysql:9.0.2
   hostname: web
-  command: -Dmysql.ipaddress=db -Dmysql.port=3306 -Dmysql.database=planetsdb -Dmysql.username=planets -Dmysql.password=1planets!
+  command: -Dmysql.ipaddress=continuousdelivery_db_1 -Dmysql.port=3306 -Dmysql.database=planetsdb -Dmysql.username=planets -Dmysql.password=1planets!
   stdin_open: true
   tty: true
   restart: always
   ports:
   - "8080:8080"
   - "9990:9990"
-  links:
-  - db

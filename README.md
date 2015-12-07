@@ -10,12 +10,13 @@
 
 ## Techno stack
  1. Java JEE (Web Application)
- 2. Wildfly
- 3. MySQL
- 4. Docker
- 5. Maven
- 6. [Jolokia docker maven plugin](https://github.com/rhuss/docker-maven-plugin)
- 7. [Flywaydb](http://flywaydb.org/)
+ 2. Wildfly 9.0.2
+ 3. MySQL 5.7
+ 4. Docker 1.9
+ 5. Docker Compose 1.5
+ 6. Maven 3.3
+ 7. [Jolokia docker maven plugin](https://github.com/rhuss/docker-maven-plugin)
+ 8. [Flywaydb](http://flywaydb.org/)
 
 ## Prerequisites
 ### Generate project with jboss forge.
@@ -34,7 +35,7 @@
 
 ## How to run / deploy
 1. Start web(wildfly) and database(mysql) containers
- 1. `docker-compose up -d`
+ 1. `docker-compose --x-networking up -d`
 1. Deploy database scripts
  1. `mvn compile flyway:migrate`
 1. Deploy application
