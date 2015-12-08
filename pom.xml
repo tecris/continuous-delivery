@@ -185,6 +185,7 @@
                     <tags>
                       <tag>${buildNumber}</tag>
                     </tags>
+                    <cleanup>true</cleanup>
                     <assembly>
                       <dockerFileDir>web-server</dockerFileDir>
                     </assembly>
