@@ -188,7 +188,7 @@
                     <assembly>
                       <dockerFileDir>web-server</dockerFileDir>
                     </assembly>
-                    <cleanup>true</cleanup>
+                    <nocache>true</nocache>
                   </build>
                   <run>
                     <namingStrategy>alias</namingStrategy>
