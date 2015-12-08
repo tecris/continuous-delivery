@@ -1,4 +1,4 @@
-# Continuous delivery with docker for a java web application
+# Java web application continuous delivery with docker
 
 ## Continuous delivery life-cycle
  - Build war artifact
