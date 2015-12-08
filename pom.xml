@@ -108,7 +108,7 @@
             <plugin>
               <groupId>org.jolokia</groupId>
               <artifactId>docker-maven-plugin</artifactId>
-              <version>0.14.0-SNAPSHOT</version>
+              <version>0.13.7</version>
             </plugin>
           </plugins>
         </pluginManagement>
@@ -188,7 +188,6 @@
                     <assembly>
                       <dockerFileDir>web-server</dockerFileDir>
                     </assembly>
-                    <nocache>true</nocache>
                   </build>
                   <run>
                     <namingStrategy>alias</namingStrategy>
