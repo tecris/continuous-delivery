@@ -1,5 +1,5 @@
 db:
-  image: org.tecris:5000/mysql:5.7
+  image: casa.docker/mysql:5.7
   hostname: db
   stdin_open: true
   tty: true
@@ -13,7 +13,7 @@ db:
   - MYSQL_DATABASE=planetsdb
 
 web:
-  image: org.tecris:5000/wildfly-mysql:9.0.2
+  image: casa.docker/wildfly-mysql:9.0.2
   hostname: web
   # http://docs.docker.com/compose/networking/
   command: -Dmysql.ipaddress=continuousdelivery_db_1 -Dmysql.port=3306 -Dmysql.database=planetsdb -Dmysql.username=planets -Dmysql.password=1planets!

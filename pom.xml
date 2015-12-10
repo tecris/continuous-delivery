@@ -108,7 +108,7 @@
             <plugin>
               <groupId>org.jolokia</groupId>
               <artifactId>docker-maven-plugin</artifactId>
-              <version>0.13.7</version>
+              <version>0.14.0-SNAPSHOT</version>
             </plugin>
           </plugins>
         </pluginManagement>
@@ -161,7 +161,7 @@
               <images>
                 <image>
                   <alias>planets-db</alias>
-                  <name>org.tecris:5000/mysql:5.7</name>
+                  <name>casa.docker/mysql:5.7</name>
                   <run>
                     <namingStrategy>alias</namingStrategy>
                     <env>
@@ -180,11 +180,12 @@
                 </image>
                 <image>
                   <alias>planets-web</alias>
-                  <name>org.tecris:5000/planets</name>
+                  <name>casa.docker/planets</name>
                   <build>
                     <tags>
                       <tag>${buildNumber}</tag>
                     </tags>
+                    <nocache>true</nocache>
                     <assembly>
                       <dockerFileDir>web-server</dockerFileDir>
                     </assembly>
