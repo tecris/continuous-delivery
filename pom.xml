@@ -10,6 +10,7 @@
     <maven.compiler.target>1.7</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <database.name>planetsdb</database.name>
+    <jayway-restassured.version>2.7.0</jayway-restassured.version>
   </properties>
   <scm>
     <url>https://github.com/tecris/planets.git</url>
@@ -95,7 +96,7 @@
     <dependency>
       <groupId>com.jayway.restassured</groupId>
       <artifactId>rest-assured</artifactId>
-      <version>2.7.0</version>
+      <version>${jayway-restassured.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -288,7 +289,7 @@
       <plugin>
         <groupId>org.wildfly.plugins</groupId>
         <artifactId>wildfly-maven-plugin</artifactId>
-        <version>1.0.2.Final</version>
+        <version>1.1.0.Alpha4</version>
         <configuration>
           <port>9990</port>
         </configuration>
