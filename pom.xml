@@ -10,6 +10,9 @@
     <maven.compiler.target>1.7</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <database.name>planetsdb</database.name>
+    <mysql.root.password>mysql</mysql.root.password>
+    <mysql.username>planets</mysql.username>
+    <mysql.password>1planets!</mysql.password>
     <jayway-restassured.version>2.7.0</jayway-restassured.version>
   </properties>
   <scm>
@@ -166,10 +169,10 @@
                   <run>
                     <namingStrategy>alias</namingStrategy>
                     <env>
-                      <MYSQL_ROOT_PASSWORD>mysql</MYSQL_ROOT_PASSWORD>
-                      <MYSQL_DATABASE>planetsdb</MYSQL_DATABASE>
-                      <MYSQL_USER>planets</MYSQL_USER>
-                      <MYSQL_PASSWORD>1planets!</MYSQL_PASSWORD>
+                      <MYSQL_ROOT_PASSWORD>${mysql.root.password}</MYSQL_ROOT_PASSWORD>
+                      <MYSQL_DATABASE>${database.name}</MYSQL_DATABASE>
+                      <MYSQL_USER>${mysql.username}</MYSQL_USER>
+                      <MYSQL_PASSWORD>${mysql.password}</MYSQL_PASSWORD>
                     </env>
                     <ports>
                       <port>3306:3306</port>
@@ -194,10 +197,10 @@
                   <run>
                     <namingStrategy>alias</namingStrategy>
                     <env>
-                      <MYSQL_ROOT_PASSWORD>mysql</MYSQL_ROOT_PASSWORD>
-                      <MYSQL_DATABASE>planetsdb</MYSQL_DATABASE>
-                      <MYSQL_USER>planets</MYSQL_USER>
-                      <MYSQL_PASSWORD>1planets!</MYSQL_PASSWORD>
+                      <MYSQL_ROOT_PASSWORD>${mysql.root.password}</MYSQL_ROOT_PASSWORD>
+                      <MYSQL_DATABASE>${database.name}</MYSQL_DATABASE>
+                      <MYSQL_USER>${mysql.username}</MYSQL_USER>
+                      <MYSQL_PASSWORD>${mysql.password}</MYSQL_PASSWORD>
                     </env>
                     <ports>
                       <port>8080:8080</port>
@@ -206,7 +209,7 @@
                     <links>
                       <link>planets-db</link>
                     </links>
-                    <cmd>-Dmysql.ipaddress=planets-db -Dmysql.port=3306 -Dmysql.database=planetsdb -Dmysql.username=planets -Dmysql.password=1planets!</cmd>
+                    <cmd>-Dmysql.ipaddress=planets-db -Dmysql.port=3306 -Dmysql.database=${database.name} -Dmysql.username=${mysql.username} -Dmysql.password=${mysql.password}</cmd>
                     <wait>
                       <!-- Check for this URL to return a 200 return code .... -->
                       <url>http://localhost:8080/planets</url>
@@ -242,7 +245,7 @@
             <configuration>
               <url>jdbc:mysql://localhost:3306/${database.name}</url>
               <user>root</user>
-              <password>mysql</password>
+              <password>${mysql.root.password}</password>
             </configuration>
             <executions>
               <execution>
