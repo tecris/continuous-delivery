@@ -11,6 +11,7 @@
     <url>https://github.com/tecris/continuous-delivery.git</url>
     <connection>scm:git:git://github.com/tecris/continuous-delivery.git</connection>
     <developerConnection>scm:git:git@github.com:tecris/continuous-delivery.git</developerConnection>
+    <tag>HEAD</tag>
   </scm>
   <distributionManagement>
     <repository>
