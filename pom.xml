@@ -8,9 +8,9 @@
   <packaging>war</packaging>
 
   <scm>
-    <url>https://github.com/tecris/planets.git</url>
-    <connection>scm:git:git://github.com/tecris/planets.git</connection>
-    <developerConnection>scm:git:git@github.com:tecris/planets.git</developerConnection>
+    <url>https://github.com/tecris/continuous-delivery.git</url>
+    <connection>scm:git:git://github.com/tecris/continuous-delivery.git</connection>
+    <developerConnection>scm:git:git@github.com:tecris/continuous-delivery.git</developerConnection>
   </scm>
   <distributionManagement>
     <repository>
