@@ -33,36 +33,45 @@ Showcase for a continuous delivery based on following principles:
 
 #### Project preparation:
  - This project depends on some docker images that can be built using following script:
-  - `./pre_requisites.sh`
+  - `#  ./pre_requisites.sh`
  - Follow [instructions](https://github.com/tecris/docker/blob/v3.5/nexus/README.md) to add jboss repository (as proxy repository) to nexus
+
+#### And a Hack :(
+ - Re: [Jolokia docker maven plugin](https://github.com/rhuss/docker-maven-plugin), either I am misusing it or some functionality is missing. Until this is sorted out this hack is required to get project deployed:
+
+ ```
+ # git clone https://github.com/tecris/docker-maven-plugin
+ # cd docker-maven-plugin
+ # mvn install
+ ```
 
 ### How to run / deploy
 #### With Wildfly & MySQL
 1. Start web(wildfly) and database(mysql) containers
- 1. `docker-compose --x-networking up -d`
+ 1. `# docker-compose --x-networking up -d`
 1. Deploy database scripts
- 1. `mvn compile flyway:migrate -Pdb-mysql`
+ 1. `# mvn clean compile flyway:migrate -Pdb-mysql`
 1. Deploy application
- 1. `mvn clean wildfly:deploy`
+ 1. `# mvn clean wildfly:deploy`
 1. Run integration tetss
- 1. `mvn clean integration-test -Prun-it`
+ 1. `# mvn clean integration-test -Prun-it`
  
 #### With Wildfly & PostgreSQL
 1. Start web(wildfly) and database(postgresql) containers
- 1. `docker-compose --x-networking -f wildfly-postgres.yml up -d`
+ 1. `# docker-compose --x-networking -f wildfly-postgres.yml up -d`
 1. Deploy database scripts
- 1. `mvn compile flyway:migrate -Pdb-postgres`
+ 1. `# mvn clean compile flyway:migrate -Pdb-postgres`
 1. Deploy application
- 1. `mvn clean wildfly:deploy -Ddatasource.name=PostgresDS`
+ 1. `# mvn clean wildfly:deploy -Ddatasource.name=PostgresDS`
 1. Run integration tetss
- 1. `mvn clean integration-test -Prun-it`
+ 1. `# mvn clean integration-test -Prun-it`
 
 Go to http://localhost:8080/planets
 
 ### Continuous delivery
 1. With Wildfly and MySQL
- * `mvn clean verify -Pcd-mysql`
+ * `# mvn clean verify -Pcd-mysql`
 1. With Wildfly and PostgreSQL
- * `mvn clean verify -Pcd-postgres`
+ * `# mvn clean verify -Pcd-postgres`
  
  Use `-Dmaven.buildNumber.doCheck=false` if project contains local changes
