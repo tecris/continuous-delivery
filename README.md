@@ -45,13 +45,13 @@ Showcase for a continuous delivery based on following principles:
 1. Deploy database scripts
  1. `mvn compile flyway:migrate`
 1. Deploy application
- 1. `mvn clean wildfly:deploy -Dwildfly.username=admin -Dwildfly.password=1admin!`
+ 1. `mvn clean wildfly:deploy`
  
 Go to http://localhost:8080/planets
 
 ### Continuous delivery
 1. With wildfly and MySQL
- * `mvn verify -Pcd-mysql`
+ * `mvn clean verify -Pcd-mysql`
 1. With wildfly and PostgreSQL
- * `mvn verify -Pcd-postgres`
+ * `mvn clean verify -Pcd-postgres`
 1. Use `-Dmaven.buildNumber.doCheck=false` if project contains local changes
