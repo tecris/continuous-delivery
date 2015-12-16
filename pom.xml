@@ -30,11 +30,17 @@
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <database.name>planetsdb</database.name>
+    <database.vendor>mysql</database.vendor>
     <mysql.root.password>mysql</mysql.root.password>
-    <mysql.username>planets</mysql.username>
-    <mysql.password>1planets!</mysql.password>
+    <database.host>localhost</database.host>
+    <database.port>3306</database.port>
+    <database.name>planetsdb</database.name>
+    <database.username>planets</database.username>
+    <database.password>1planets!</database.password>
+    <wildfly.username>admin</wildfly.username>
+    <wildfly.password>1admin!</wildfly.password>
     <jayway-restassured.version>2.7.0</jayway-restassured.version>
+    <datasource.name>MySqlDS</datasource.name>
   </properties>
 
   <dependencyManagement>
@@ -91,6 +97,11 @@
       <version>5.1.38</version>
     </dependency>
     <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>9.4-1206-jdbc42</version>
+    </dependency>
+    <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
       <version>2.7.0-rc2</version>
@@ -111,58 +122,9 @@
 
   <build>
     <finalName>planets</finalName>
-    <plugins>
-      <plugin>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>2.4</version>
-        <configuration>
-          <failOnMissingWebXml>false</failOnMissingWebXml>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.wildfly.plugins</groupId>
-        <artifactId>wildfly-maven-plugin</artifactId>
-        <version>1.1.0.Alpha4</version>
-        <configuration>
-          <port>9990</port>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.flywaydb</groupId>
-        <artifactId>flyway-maven-plugin</artifactId>
-        <version>3.2.1</version>
-        <configuration>
-          <url>jdbc:mysql://localhost:3306/${database.name}</url>
-          <user>root</user>
-          <password>mysql</password>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-
-  <profiles>
-    <profile>
-      <id>continuous-delivery</id>
-      <build>
-        <pluginManagement>
-          <plugins>
-            <plugin>
-              <groupId>org.jolokia</groupId>
-              <artifactId>docker-maven-plugin</artifactId>
-              <version>0.14.0-SNAPSHOT</version>
-            </plugin>
-          </plugins>
-        </pluginManagement>
-        <plugins>
+    <pluginManagement>
+      <plugins>
           <plugin>
-            <!--
-                By default deploy phase happens-before the pre-integration-test.
-                However, docker images are built during the pre-integration-test phase and
-                these images expect the artifact to be already deployed in maven repository.
-                This is why the deploy phase was moved at in the pre-integration-test phase.
-                Alternatively this can be removed to return to standard maven lifecycle
-                and run mvn clean deploy before running mvn verify
-            -->
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-deploy-plugin</artifactId>
             <version>2.8.2</version>
@@ -175,23 +137,238 @@
               </execution>
             </executions>
           </plugin>
+        <plugin>
+          <groupId>org.jolokia</groupId>
+          <artifactId>docker-maven-plugin</artifactId>
+          <version>0.14.0-SNAPSHOT</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>buildnumber-maven-plugin</artifactId>
+          <version>1.4</version>
+          <executions>
+            <execution>
+              <phase>pre-integration-test</phase>
+              <goals>
+                <goal>create</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <doCheck>true</doCheck>
+            <doUpdate>true</doUpdate>
+            <shortRevisionLength>12</shortRevisionLength>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.flywaydb</groupId>
+          <artifactId>flyway-maven-plugin</artifactId>
+          <version>3.2.1</version>
+          <configuration>
+            <url>jdbc:${database.vendor}://${database.host}:${database.port}/${database.name}</url>
+            <user>${database.username}</user>
+            <password>${database.password}</password>
+          </configuration>
+          <executions>
+            <execution>
+              <id>compile</id>
+              <phase>pre-integration-test</phase>
+              <goals>
+                <goal>migrate</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.wildfly.plugins</groupId>
+          <artifactId>wildfly-maven-plugin</artifactId>
+          <version>1.1.0.Alpha5</version>
+          <configuration>
+            <port>9990</port>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <version>2.17</version>
+          <executions>
+            <execution>
+              <id>integration-test</id>
+              <goals>
+                <goal>integration-test</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>verify</id>
+              <goals>
+                <goal>verify</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.4</version>
+        <configuration>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.wildfly.plugins</groupId>
+        <artifactId>wildfly-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>postgres</id>
+       <properties>
+         <datasource.name>PostgresDS</datasource.name>
+         <database.vendor>postgres</database.vendor>
+         <database.port>5432</database.port>
+       </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <!--
+                By default deploy phase happens-before the pre-integration-test.
+                However, docker images are built during the pre-integration-test phase and
+                these images expect the artifact to be already deployed in maven repository.
+                This is why the deploy phase was moved at in the pre-integration-test phase.
+                Alternatively this can be removed to return to standard maven lifecycle
+                and run mvn clean deploy before running mvn verify
+            -->
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-deploy-plugin</artifactId>
+          </plugin>
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>buildnumber-maven-plugin</artifactId>
-            <version>1.4</version>
+          </plugin>
+          <plugin>
+            <groupId>org.jolokia</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <configuration>
+              <logDate>default</logDate>
+              <verbose>true</verbose>
+              <images>
+                <image>
+                  <alias>planets-db</alias>
+                  <name>casa.docker/postgres:9.4</name>
+                  <run>
+                    <namingStrategy>alias</namingStrategy>
+                    <env>
+                      <POSTGRES_DB>${database.name}</POSTGRES_DB>
+                      <POSTGRES_USER>${database.username}</POSTGRES_USER>
+                      <POSTGRES_PASSWORD>${database.password}</POSTGRES_PASSWORD>
+                    </env>
+                    <ports>
+                      <port>${database.port}:${database.port}</port>
+                    </ports>
+                    <wait>
+                      <time>10000</time>
+                    </wait>
+                  </run>
+                </image>
+                <image>
+                  <alias>planets-web</alias>
+                  <name>casa.docker/planets</name>
+                  <build>
+                    <tags>
+                      <tag>${buildNumber}</tag>
+                    </tags>
+                    <nocache>true</nocache>
+                    <assembly>
+                      <dockerFileDir>web-server/wildfly-postgres</dockerFileDir>
+                    </assembly>
+                  </build>
+                  <run>
+                    <namingStrategy>alias</namingStrategy>
+                    <!--env>
+                      <MYSQL_ROOT_PASSWORD>${mysql.root.password}</MYSQL_ROOT_PASSWORD>
+                      <MYSQL_DATABASE>${database.name}</MYSQL_DATABASE>
+                      <MYSQL_USER>${database.username}</MYSQL_USER>
+                      <MYSQL_PASSWORD>${database.password}</MYSQL_PASSWORD>
+                    </env-->
+                    <ports>
+                      <port>8080:8080</port>
+                      <port>9990:9990</port>
+                    </ports>
+                    <links>
+                      <link>planets-db</link>
+                    </links>
+                    <cmd>-Dpostgres.ipaddress=planets-db -Dpostgres.port=${database.port} -Dpostgres.database=${database.name} -Dpostgres.username=${database.username} -Dpostgres.password=${database.password}</cmd>
+                      <!-- Check for this URL to return a 200 return code .... 
+                    <wait>
+                      <url>http://localhost:8080/planets</url>
+                      <time>10000</time>
+                    </wait>
+-->
+                  </run>
+                </image>
+              </images>
+            </configuration>
+            <!-- Hooking into the lifecycle -->
             <executions>
               <execution>
+                <id>start</id>
                 <phase>pre-integration-test</phase>
                 <goals>
-                  <goal>create</goal>
+                  <goal>stop</goal>
+                  <goal>build</goal>
+                  <goal>start</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>stop</id>
+                <phase>post-integration-test</phase>
+                <goals>
+                  <goal>stop</goal>
                 </goals>
               </execution>
             </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-maven-plugin</artifactId>
             <configuration>
-              <doCheck>true</doCheck>
-              <doUpdate>true</doUpdate>
-              <shortRevisionLength>12</shortRevisionLength>
+              <driver>org.postgresql.Driver</driver>
             </configuration>
+          </plugin>
+          <plugin>
+            <artifactId>maven-failsafe-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>continuous-delivery</id>
+      <build>
+        <plugins>
+          <plugin>
+            <!--
+                By default deploy phase happens-before the pre-integration-test.
+                However, docker images are built during the pre-integration-test phase and
+                these images expect the artifact to be already deployed in maven repository.
+                This is why the deploy phase was moved at in the pre-integration-test phase.
+                Alternatively this can be removed to return to standard maven lifecycle
+                and run mvn clean deploy before running mvn verify
+            -->
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-deploy-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>buildnumber-maven-plugin</artifactId>
           </plugin>
           <plugin>
             <groupId>org.jolokia</groupId>
@@ -208,8 +385,8 @@
                     <env>
                       <MYSQL_ROOT_PASSWORD>${mysql.root.password}</MYSQL_ROOT_PASSWORD>
                       <MYSQL_DATABASE>${database.name}</MYSQL_DATABASE>
-                      <MYSQL_USER>${mysql.username}</MYSQL_USER>
-                      <MYSQL_PASSWORD>${mysql.password}</MYSQL_PASSWORD>
+                      <MYSQL_USER>${database.username}</MYSQL_USER>
+                      <MYSQL_PASSWORD>${database.password}</MYSQL_PASSWORD>
                     </env>
                     <ports>
                       <port>3306:3306</port>
@@ -228,7 +405,7 @@
                     </tags>
                     <nocache>true</nocache>
                     <assembly>
-                      <dockerFileDir>web-server</dockerFileDir>
+                      <dockerFileDir>web-server/wildfly-mysql</dockerFileDir>
                     </assembly>
                   </build>
                   <run>
@@ -236,8 +413,8 @@
                     <env>
                       <MYSQL_ROOT_PASSWORD>${mysql.root.password}</MYSQL_ROOT_PASSWORD>
                       <MYSQL_DATABASE>${database.name}</MYSQL_DATABASE>
-                      <MYSQL_USER>${mysql.username}</MYSQL_USER>
-                      <MYSQL_PASSWORD>${mysql.password}</MYSQL_PASSWORD>
+                      <MYSQL_USER>${database.username}</MYSQL_USER>
+                      <MYSQL_PASSWORD>${database.password}</MYSQL_PASSWORD>
                     </env>
                     <ports>
                       <port>8080:8080</port>
@@ -246,7 +423,7 @@
                     <links>
                       <link>planets-db</link>
                     </links>
-                    <cmd>-Dmysql.ipaddress=planets-db -Dmysql.port=3306 -Dmysql.database=${database.name} -Dmysql.username=${mysql.username} -Dmysql.password=${mysql.password}</cmd>
+                    <cmd>-Dmysql.ipaddress=planets-db -Dmysql.port=3306 -Dmysql.database=${database.name} -Dmysql.username=${database.username} -Dmysql.password=${database.password}</cmd>
                     <wait>
                       <!-- Check for this URL to return a 200 return code .... -->
                       <url>http://localhost:8080/planets</url>
@@ -279,39 +456,12 @@
           <plugin>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-maven-plugin</artifactId>
-            <version>3.2.1</version>
             <configuration>
-              <url>jdbc:mysql://localhost:3306/${database.name}</url>
-              <user>root</user>
-              <password>${mysql.root.password}</password>
+              <driver>com.mysql.jdbc.Driver</driver>
             </configuration>
-            <executions>
-              <execution>
-                <id>compile</id>
-                <phase>pre-integration-test</phase>
-                <goals>
-                  <goal>migrate</goal>
-                </goals>
-              </execution>
-            </executions>
           </plugin>
           <plugin>
             <artifactId>maven-failsafe-plugin</artifactId>
-            <version>2.17</version>
-            <executions>
-              <execution>
-                <id>integration-test</id>
-                <goals>
-                  <goal>integration-test</goal>
-                </goals>
-              </execution>
-              <execution>
-                <id>verify</id>
-                <goals>
-                  <goal>verify</goal>
-                </goals>
-              </execution>
-            </executions>
           </plugin>
         </plugins>
       </build>

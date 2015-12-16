@@ -1,0 +1,23 @@
+db:
+  container_name: cd-db
+  image: casa.docker/postgres:9.4
+  hostname: cd-db
+  restart: always
+  ports:
+  - "5432:5432"
+  environment:
+  - POSTGRES_PASSWORD=admin
+  - POSTGRES_USER=planets
+  - POSTGRES_DB=planetsdb
+
+web:
+  container_name: cd-web
+  image: casa.docker/wildfly-postgres:9.0.2
+  hostname: cd-web
+  command: -Dpostgres.ipaddress=db -Dpostgres.port=5432 -Dpostgres.database=planetsdb -Dpostgres.username=planets -Dpostgres.password=admin
+  restart: always
+  ports:
+  - "8080:8080"
+  - "9990:9990"
+  links:
+  - db
