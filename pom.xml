@@ -293,12 +293,6 @@
                   </build>
                   <run>
                     <namingStrategy>alias</namingStrategy>
-                    <!--env>
-                      <MYSQL_ROOT_PASSWORD>${mysql.root.password}</MYSQL_ROOT_PASSWORD>
-                      <MYSQL_DATABASE>${database.name}</MYSQL_DATABASE>
-                      <MYSQL_USER>${database.username}</MYSQL_USER>
-                      <MYSQL_PASSWORD>${database.password}</MYSQL_PASSWORD>
-                    </env-->
                     <ports>
                       <port>8080:8080</port>
                       <port>9990:9990</port>
@@ -307,12 +301,11 @@
                       <link>planets-db</link>
                     </links>
                     <cmd>-Dpostgres.ipaddress=planets-db -Dpostgres.port=${database.port} -Dpostgres.database=${database.name} -Dpostgres.username=${database.username} -Dpostgres.password=${database.password}</cmd>
-                      <!-- Check for this URL to return a 200 return code .... 
                     <wait>
+                      <!-- Check for this URL to return a 200 return code ....  -->
                       <url>http://localhost:8080/planets</url>
                       <time>10000</time>
                     </wait>
--->
                   </run>
                 </image>
               </images>
