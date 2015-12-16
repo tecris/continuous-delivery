@@ -22,8 +22,6 @@ import javax.ws.rs.core.Response.Status;
 
 import org.demo.planets.model.Planet;
 
-import javax.ws.rs.core.UriBuilder;
-
 /**
  * 
  */
@@ -35,11 +33,10 @@ public class PlanetEndpoint {
 
     @POST
     @Consumes("application/json")
+    @Produces("application/json")
     public Response create(Planet entity) {
         em.persist(entity);
-        return Response
-                .created(UriBuilder.fromResource(PlanetEndpoint.class).path(String.valueOf(entity.getId())).build())
-                .build();
+        return Response.ok(entity).build();
     }
 
     @DELETE
