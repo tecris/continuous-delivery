@@ -3,6 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.demo.planets</groupId>
+  <artifactId>cd-jee</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
@@ -36,6 +37,7 @@
     <database.name>planetsdb</database.name>
     <database.username>planets</database.username>
     <database.password>1planets!</database.password>
+    <db.driver>com.mysql.jdbc.Driver</db.driver>
     <wildfly.username>admin</wildfly.username>
     <wildfly.password>1admin!</wildfly.password>
     <jayway-restassured.version>2.7.0</jayway-restassured.version>
@@ -121,6 +123,12 @@
 
   <build>
     <finalName>planets</finalName>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
     <pluginManagement>
       <plugins>
           <plugin>
@@ -164,6 +172,7 @@
           <artifactId>flyway-maven-plugin</artifactId>
           <version>3.2.1</version>
           <configuration>
+            <driver>${db.driver}</driver>
             <url>jdbc:${database.vendor}://${database.host}:${database.port}/${database.name}</url>
             <user>${database.username}</user>
             <password>${database.password}</password>
@@ -206,12 +215,6 @@
         </plugin>
       </plugins>
     </pluginManagement>
-    <resources>
-      <resource>
-        <directory>src/main/resources</directory>
-        <filtering>true</filtering>
-      </resource>
-    </resources>
     <plugins>
       <plugin>
         <artifactId>maven-war-plugin</artifactId>
@@ -234,6 +237,7 @@
          <datasource.name>PostgresDS</datasource.name>
          <database.vendor>postgresql</database.vendor>
          <database.port>5432</database.port>
+         <db.driver>org.postgresql.Driver</db.driver>
        </properties>
       <build>
         <plugins>
@@ -332,9 +336,6 @@
           <plugin>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-maven-plugin</artifactId>
-            <configuration>
-              <driver>org.postgresql.Driver</driver>
-            </configuration>
           </plugin>
           <plugin>
             <artifactId>maven-failsafe-plugin</artifactId>
@@ -448,9 +449,6 @@
           <plugin>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-maven-plugin</artifactId>
-            <configuration>
-              <driver>com.mysql.jdbc.Driver</driver>
-            </configuration>
           </plugin>
           <plugin>
             <artifactId>maven-failsafe-plugin</artifactId>
@@ -458,6 +456,37 @@
         </plugins>
       </build>
     </profile>
+    <profile>
+      <id>db-postgres</id>
+      <properties>
+        <database.vendor>postgresql</database.vendor>
+        <database.port>5432</database.port>
+        <db.driver>org.postgresql.Driver</db.driver>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-maven-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>db-mysql</id>
+      <properties>
+        <database.vendor>mysql</database.vendor>
+        <database.port>3306</database.port>
+        <db.driver>com.mysql.jdbc.Driver</db.driver>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-maven-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
   </profiles>
-  <artifactId>cd-jee</artifactId>
 </project>
