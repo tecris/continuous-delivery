@@ -30,7 +30,7 @@ Showcase for a continuous delivery based on following principles:
  - Follow [instructions](https://github.com/tecris/docker/blob/v3.4/nexus/README.md) to add jboss repository (as proxy repository) to nexus
 
 ### How to run / deploy
-#### With MySQL
+#### With Wildfly & MySQL
 1. Start web(wildfly) and database(mysql) containers
  1. `docker-compose --x-networking up -d`
 1. Deploy database scripts
@@ -38,7 +38,7 @@ Showcase for a continuous delivery based on following principles:
 1. Deploy application
  1. `mvn clean wildfly:deploy`
  
-#### With PostgreSQL
+#### With Wildfly & PostgreSQL
 1. Start web(wildfly) and database(postgresql) containers
  1. `docker-compose --x-networking -f wildfly-postgres.yml up -d`
 1. Deploy database scripts
