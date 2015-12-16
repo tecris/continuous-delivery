@@ -30,6 +30,7 @@ Showcase for a continuous delivery based on following principles:
  - Follow [instructions](https://github.com/tecris/docker/blob/v3.4/nexus/README.md) to add jboss repository (as proxy repository) to nexus
 
 ### How to run / deploy
+#### With MySQL
 1. Start web(wildfly) and database(mysql) containers
  1. `docker-compose --x-networking up -d`
 1. Deploy database scripts
