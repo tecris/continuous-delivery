@@ -33,7 +33,7 @@ Showcase for a continuous delivery based on following principles:
 
 #### Project preparation:
  - This project depends on some docker images that can be built using following script:
-  - `./prerequisites.sh`
+  - `./pre_requisites.sh`
  - Follow [instructions](https://github.com/tecris/docker/blob/v3.4/nexus/README.md) to add jboss repository (as proxy repository) to nexus
 
 ### How to run / deploy
