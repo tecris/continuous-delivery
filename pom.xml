@@ -230,7 +230,7 @@
 
   <profiles>
     <profile>
-      <id>postgres</id>
+      <id>cd-postgres</id>
        <properties>
          <datasource.name>PostgresDS</datasource.name>
          <database.vendor>postgresql</database.vendor>
@@ -344,7 +344,7 @@
       </build>
     </profile>
     <profile>
-      <id>continuous-delivery</id>
+      <id>cd-mysql</id>
       <build>
         <plugins>
           <plugin>
