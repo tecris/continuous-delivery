@@ -34,10 +34,18 @@ Showcase for a continuous delivery based on following principles:
 1. Start web(wildfly) and database(mysql) containers
  1. `docker-compose --x-networking up -d`
 1. Deploy database scripts
- 1. `mvn compile flyway:migrate`
+ 1. `mvn compile flyway:migrate -Pdb-mysql`
 1. Deploy application
  1. `mvn clean wildfly:deploy`
  
+#### With PostgreSQL
+1. Start web(wildfly) and database(postgresql) containers
+ 1. `docker-compose --x-networking -f wildfly-postgres.yml up -d`
+1. Deploy database scripts
+ 1. `mvn compile flyway:migrate -Pdb-postgres`
+1. Deploy application
+ 1. `mvn clean wildfly:deploy -Ddatasource.name=PostgresDS`
+
 Go to http://localhost:8080/planets
 
 ### Continuous delivery
