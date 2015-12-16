@@ -233,7 +233,7 @@
       <id>postgres</id>
        <properties>
          <datasource.name>PostgresDS</datasource.name>
-         <database.vendor>postgres</database.vendor>
+         <database.vendor>postgresql</database.vendor>
          <database.port>5432</database.port>
        </properties>
       <build>
