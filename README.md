@@ -37,6 +37,8 @@ Showcase for a continuous delivery based on following principles:
  1. `mvn compile flyway:migrate -Pdb-mysql`
 1. Deploy application
  1. `mvn clean wildfly:deploy`
+1. Run integration tetss
+ 1. `mvn clean integration-test -Prun-it`
  
 #### With Wildfly & PostgreSQL
 1. Start web(wildfly) and database(postgresql) containers
@@ -45,6 +47,8 @@ Showcase for a continuous delivery based on following principles:
  1. `mvn compile flyway:migrate -Pdb-postgres`
 1. Deploy application
  1. `mvn clean wildfly:deploy -Ddatasource.name=PostgresDS`
+1. Run integration tetss
+ 1. `mvn clean integration-test -Prun-it`
 
 Go to http://localhost:8080/planets
 
