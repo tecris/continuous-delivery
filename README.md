@@ -11,7 +11,7 @@
 ## Techno stack
  1. Java JEE (Web Application)
  2. Wildfly 9.0.2
- 3. MySQL 5.7
+ 3. MySQL 5.7 or PostgreSQL 9.4
  4. Docker 1.9
  5. Docker Compose 1.5
  6. Maven 3.3
@@ -44,4 +44,7 @@
 Go to http://localhost:8080/planets
 
 ## Continuous delivery
-1. `mvn verify -Pcontinuous-delivery`
+1. With wildfly and MySQL
+ * `mvn verify -Pcd-mysql`
+1. With wildfly and PostgreSQL
+ * `mvn verify -Pcd-postgres`
