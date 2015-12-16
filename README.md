@@ -8,7 +8,7 @@ Showcase for a continuous delivery based on following principles:
 ### Continuous Delivery life-cycle
  - Build war artifact
  - Upload war to maven repository
- - Start back-end database (mysql/postgresql) container and apply database scripts with flyway
+ - Start database (mysql/postgresql) container and apply database scripts with flyway
  - Build web application docker image (with latest war artifact) and start container
  - Execute integration test
  - Stop and remove web and database containers
@@ -54,3 +54,4 @@ Go to http://localhost:8080/planets
  * `mvn verify -Pcd-mysql`
 1. With wildfly and PostgreSQL
  * `mvn verify -Pcd-postgres`
+1. Use `-Dmaven.buildNumber.doCheck=false` if project contains local changes
