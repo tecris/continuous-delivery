@@ -25,33 +25,24 @@ Showcase for a continuous delivery based on following principles:
  8. [Flywaydb](http://flywaydb.org/)
 
 ### Prerequisites
-#### Generate project with jboss forge.
-1. Install forge
-2. Install AngularJS plugin
- 1. start forge shell and execute `addon-install-from-git --url https://github.com/forge/angularjs-addon.git`
-3. Generate project:
- 1. `runForgeScript.sh buildProject.sh`
- 1. Edit src/main/resources/META-INF/persistence.xml set property hibernate.hbm2ddl.auto to none
-
-#### Prepare web and database images.
-1. TODO
-
-#### Prepare maven repository image.
-1. TODO
+ - This project depends on some docker images that can be built using following script:
+ - `./prerequisites.sh`
+ - Follow [instructions](https://github.com/tecris/docker/blob/v3.4/nexus/README.md) to add jboss repository (as proxy repository) to nexus
 
 ### How to run / deploy
+#### With MySQL
 1. Start web(wildfly) and database(mysql) containers
  1. `docker-compose --x-networking up -d`
 1. Deploy database scripts
  1. `mvn compile flyway:migrate`
 1. Deploy application
- 1. `mvn clean wildfly:deploy -Dwildfly.username=admin -Dwildfly.password=1admin!`
+ 1. `mvn clean wildfly:deploy`
  
 Go to http://localhost:8080/planets
 
 ### Continuous delivery
 1. With wildfly and MySQL
- * `mvn verify -Pcd-mysql`
+ * `mvn clean verify -Pcd-mysql`
 1. With wildfly and PostgreSQL
- * `mvn verify -Pcd-postgres`
+ * `mvn clean verify -Pcd-postgres`
 1. Use `-Dmaven.buildNumber.doCheck=false` if project contains local changes
