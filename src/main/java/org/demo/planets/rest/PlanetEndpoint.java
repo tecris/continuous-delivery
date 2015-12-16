@@ -1,4 +1,4 @@
-package org.planets.rest;
+package org.demo.planets.rest;
 
 import java.util.List;
 
@@ -19,8 +19,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+
+import org.demo.planets.model.Planet;
+
 import javax.ws.rs.core.UriBuilder;
-import org.planets.model.Planet;
 
 /**
  * 

@@ -1,11 +1,11 @@
-package org.planets.rest;
+package org.demo.planets.rest;
 
 import static com.jayway.restassured.RestAssured.get;
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
+import org.demo.planets.model.Planet;
 import org.junit.Test;
-import org.planets.model.Planet;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
