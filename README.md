@@ -1,12 +1,18 @@
-# Java web application continuous delivery with docker
+# Mini Continuous Delivery with Docker for a basic 2 tier Java EE application
 
-## Continuous delivery life-cycle
+Showcase for a continuous delivery based on following principles;
+ - short lived environments (environments build and destroyed for each iteration  / run = mvn verify)
+ - immutable environments (environemnts are built in automated fashion, no manual jobs / touches, hands off :) )
+ - infrastructure as code 
+
+## Continuous Delivery life-cycle
  - Build war artifact
  - Upload war to maven repository
- - Start mysql container and apply database scripts with flyway
- - Build docker image with latest war artifact and start container
+ - Start back-end database (mysql/postgresql) container and apply database scripts with flyway
+ - Build web application docker image (with latest war artifact) and start container
  - Execute integration test
  - Stop and remove web and database containers
+ - INVESTIGATE: Create image from db container
 
 ## Techno stack
  1. Java JEE (Web Application)
