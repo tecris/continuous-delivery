@@ -1,11 +1,13 @@
 package org.planets.model;
 
-import javax.persistence.Entity;
 import java.io.Serializable;
-import javax.persistence.Id;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.TableGenerator;
 import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -14,8 +16,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Planet implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false)
+    @TableGenerator(name="TABLE_GEN",table="TABLE_GENERATOR", pkColumnName = "GEN_KEY", pkColumnValue = "PLANETS.GENERATOR", valueColumnName = "GEN_VALUE", initialValue = 1, allocationSize = 1 )
+    @GeneratedValue(strategy = GenerationType.TABLE, generator="TABLE_GEN")
     private Long id;
     @Version
     @Column(name = "version")
