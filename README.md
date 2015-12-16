@@ -20,13 +20,20 @@ Showcase for a continuous delivery based on following principles:
  3. MySQL 5.7 or PostgreSQL 9.4
  4. Docker 1.9
  5. Docker Compose 1.5
- 6. Maven 3.3
- 7. [Jolokia docker maven plugin](https://github.com/rhuss/docker-maven-plugin)
- 8. [Flywaydb](http://flywaydb.org/)
+ 6. [Jolokia docker maven plugin](https://github.com/rhuss/docker-maven-plugin)
+ 7. [Flywaydb](http://flywaydb.org/)
 
 ### Prerequisites
+#### What is required to run this project:
+ - Linux with:
+  - Java 8
+  - Maven 3.3
+  - Docker 1.9
+  - Docker Compose 1.5
+
+#### Project preparation:
  - This project depends on some docker images that can be built using following script:
- - `./prerequisites.sh`
+  - `./prerequisites.sh`
  - Follow [instructions](https://github.com/tecris/docker/blob/v3.4/nexus/README.md) to add jboss repository (as proxy repository) to nexus
 
 ### How to run / deploy
@@ -53,8 +60,9 @@ Showcase for a continuous delivery based on following principles:
 Go to http://localhost:8080/planets
 
 ### Continuous delivery
-1. With wildfly and MySQL
+1. With Wildfly and MySQL
  * `mvn clean verify -Pcd-mysql`
-1. With wildfly and PostgreSQL
+1. With Wildfly and PostgreSQL
  * `mvn clean verify -Pcd-postgres`
-1. Use `-Dmaven.buildNumber.doCheck=false` if project contains local changes
+ 
+ Use `-Dmaven.buildNumber.doCheck=false` if project contains local changes
