@@ -38,9 +38,12 @@ Showcase for a continuous delivery based on following principles:
 
 ### Continuous delivery
 1. With Wildfly and MySQL
- * `# mvn clean verify -Pcd-mysql`
+ * `# mvn clean integration-test -Pcd-mysql`
 1. With Wildfly and PostgreSQL
- * `# mvn clean verify -Pcd-postgres`
+ * `# mvn clean integration-test -Pcd-postgres`
+ 
+ 1. `integration-test` will build web image, start web and db containers and run integration tests.
+ 2. `verify` will do `integration-test` plus cleanup (stop and remove web and db containers). 
  
  Use `-Dmaven.buildNumber.doCheck=false` if project contains local changes
 
