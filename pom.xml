@@ -4,7 +4,7 @@
 
   <groupId>org.demo.planets</groupId>
   <artifactId>cd-jee</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
 
   <scm>
@@ -131,23 +131,10 @@
     </resources>
     <pluginManagement>
       <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-deploy-plugin</artifactId>
-            <version>2.8.2</version>
-            <executions>
-              <execution>
-                <phase>pre-integration-test</phase>
-                <goals>
-                  <goal>deploy</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
         <plugin>
           <groupId>org.jolokia</groupId>
           <artifactId>docker-maven-plugin</artifactId>
-          <version>0.14.0-SNAPSHOT</version>
+          <version>0.13.7</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -242,18 +229,6 @@
       <build>
         <plugins>
           <plugin>
-            <!--
-                By default deploy phase happens-before the pre-integration-test.
-                However, docker images are built during the pre-integration-test phase and
-                these images expect the artifact to be already deployed in maven repository.
-                This is why the deploy phase was moved at in the pre-integration-test phase.
-                Alternatively this can be removed to return to standard maven lifecycle
-                and run mvn clean deploy before running mvn verify
-            -->
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-deploy-plugin</artifactId>
-          </plugin>
-          <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>buildnumber-maven-plugin</artifactId>
           </plugin>
@@ -286,12 +261,13 @@
                   <alias>planets-web</alias>
                   <name>casa.docker/planets</name>
                   <build>
+                    <from>casa.docker/wildfly-postgres:9.0.2</from>
                     <tags>
                       <tag>${buildNumber}</tag>
                     </tags>
-                    <nocache>true</nocache>
                     <assembly>
-                      <dockerFileDir>web-server/wildfly-postgres</dockerFileDir>
+                      <basedir>/opt/jboss/wildfly/standalone/deployments</basedir>
+                      <descriptor>assembly.xml</descriptor>
                     </assembly>
                   </build>
                   <run>
@@ -348,18 +324,6 @@
       <build>
         <plugins>
           <plugin>
-            <!--
-                By default deploy phase happens-before the pre-integration-test.
-                However, docker images are built during the pre-integration-test phase and
-                these images expect the artifact to be already deployed in maven repository.
-                This is why the deploy phase was moved at in the pre-integration-test phase.
-                Alternatively this can be removed to return to standard maven lifecycle
-                and run mvn clean deploy before running mvn verify
-            -->
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-deploy-plugin</artifactId>
-          </plugin>
-          <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>buildnumber-maven-plugin</artifactId>
           </plugin>
@@ -393,12 +357,13 @@
                   <alias>planets-web</alias>
                   <name>casa.docker/planets</name>
                   <build>
+                    <from>casa.docker/wildfly-mysql:9.0.2</from>
                     <tags>
                       <tag>${buildNumber}</tag>
                     </tags>
-                    <nocache>true</nocache>
                     <assembly>
-                      <dockerFileDir>web-server/wildfly-mysql</dockerFileDir>
+                      <basedir>/opt/jboss/wildfly/standalone/deployments</basedir>
+                      <descriptor>assembly.xml</descriptor>
                     </assembly>
                   </build>
                   <run>
