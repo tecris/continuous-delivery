@@ -36,8 +36,8 @@ Showcase for a continuous delivery based on following principles:
   - `#  ./pre_requisites.sh`
  - Follow [instructions][3] to add jboss repository (as proxy repository) to nexus
  - Maven configuration. The project depends on [settings.xml][4]. Options to integrate:
-  - Copy or merge [settings.xml][4] to ~/.m2/settings.xml
-  - Use `-s` flag to specify alternate user settings file (`mvn -s /path/to/settings.xml ...`)
+  - Copy or merge [settings.xml][4] to your user settings (usually ~/.m2/settings.xml)
+  - If above not an option, use `-s` flag to specify alternate user settings file (`mvn -s /path/to/settings.xml ...`)
 
 #### And a Hack :(
  - Re: [Jolokia][1] docker maven plugin, either I am misusing it or some functionality is missing. Until this is sorted out this hack is required to get project deployed:
