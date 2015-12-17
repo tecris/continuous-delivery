@@ -1,8 +1,8 @@
 ## Mini Continuous Delivery with Docker for a basic 2 tier Java EE application
 
 Showcase for a continuous delivery based on following principles:
- - short lived environments (environments built and destroyed for each iteration  / run = mvn verify)
- - immutable environments (environemnts built in automated fashion, no manual jobs / touches, hands off :) )
+ - short lived environments (built and destroyed for each iteration  / run = mvn verify)
+ - immutable environments (built in automated fashion, no manual jobs / touches, hands off :) )
  - infrastructure as code 
 
 ### Continuous Delivery life-cycle
@@ -45,6 +45,18 @@ Showcase for a continuous delivery based on following principles:
  # mvn install
  ```
 
+
+### Continuous delivery
+1. With Wildfly and MySQL
+ * `# mvn clean verify -Pcd-mysql`
+1. With Wildfly and PostgreSQL
+ * `# mvn clean verify -Pcd-postgres`
+ 
+ Use `-Dmaven.buildNumber.doCheck=false` if project contains local changes
+
+ Continuous delivery life cycle is defined in `cd-mysql` & `cd-postgres` maven profiles.
+
+
 ### How to run / deploy
 #### With Wildfly & MySQL
 1. Start web(wildfly) and database(mysql) containers
@@ -67,11 +79,3 @@ Showcase for a continuous delivery based on following principles:
  1. `# mvn clean integration-test -Prun-it`
 
 Go to http://localhost:8080/planets
-
-### Continuous delivery
-1. With Wildfly and MySQL
- * `# mvn clean verify -Pcd-mysql`
-1. With Wildfly and PostgreSQL
- * `# mvn clean verify -Pcd-postgres`
- 
- Use `-Dmaven.buildNumber.doCheck=false` if project contains local changes
