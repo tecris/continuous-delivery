@@ -79,3 +79,5 @@ Go to http://localhost:8080/planets
 
 [1]:https://github.com/rhuss/docker-maven-plugin
 [2]:http://flywaydb.org
+[3]:https://github.com/tecris/docker/blob/v3.6/nexus/README.md
+[4]:https://github.com/tecris/docker/blob/v3.6/nexus/settings.xml
