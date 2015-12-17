@@ -32,22 +32,8 @@ Showcase for a continuous delivery based on following principles:
   - Docker Compose 1.5
 
 #### Project preparation:
- - This project depends on some docker images that can be built using following script:
+ - The project expects base images present, following script will create them:
   - `#  ./pre_requisites.sh`
- - Follow [instructions][3] to add jboss repository (as proxy repository) to nexus
- - Maven configuration. The project depends on [settings.xml][4]. Options to integrate:
-  - Copy or merge [settings.xml][4] to your user settings (usually ~/.m2/settings.xml)
-  - If above not an option, use `-s` flag to specify alternate user settings file (`mvn -s /path/to/settings.xml ...`)
-
-#### And a Hack :(
- - Re: [Jolokia][1] docker maven plugin, either I am misusing it or some functionality is missing. Until this is sorted out this hack is required to get project deployed:
-
- ```
- # git clone https://github.com/tecris/docker-maven-plugin
- # cd docker-maven-plugin
- # mvn install
- ```
-
 
 ### Continuous delivery
 1. With Wildfly and MySQL
@@ -85,5 +71,3 @@ Go to http://localhost:8080/planets
 
 [1]:https://github.com/rhuss/docker-maven-plugin
 [2]:http://flywaydb.org
-[3]:https://github.com/tecris/docker/blob/v3.6/nexus/README.md
-[4]:https://github.com/tecris/docker/blob/v3.6/nexus/settings.xml
