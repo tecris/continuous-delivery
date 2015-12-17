@@ -35,6 +35,9 @@ Showcase for a continuous delivery based on following principles:
  - This project depends on some docker images that can be built using following script:
   - `#  ./pre_requisites.sh`
  - Follow [instructions](https://github.com/tecris/docker/blob/v3.6/nexus/README.md) to add jboss repository (as proxy repository) to nexus
+ - Maven configuration. The project depends on [settings.xml](https://github.com/tecris/docker/blob/v3.6/nexus/settings.xml). Options to integrate:
+  - Copy or merge [settings.xml](https://github.com/tecris/docker/blob/v3.6/nexus/settings.xml) to ~/.m2/settings.xml
+  - Use `-s` flag to specify alternate user settings file (`mvn -s /path/to/settings.xml ...`)
 
 #### And a Hack :(
  - Re: [Jolokia docker maven plugin](https://github.com/rhuss/docker-maven-plugin), either I am misusing it or some functionality is missing. Until this is sorted out this hack is required to get project deployed:
