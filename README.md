@@ -7,7 +7,6 @@ Showcase for a continuous delivery based on following principles:
 
 ### Continuous Delivery life-cycle
  - Build war artifact
- - Upload war to maven repository
  - Start database (mysql/postgresql) container and apply database scripts with flyway
  - Build web application docker image (with latest war artifact) and start container
  - Execute integration test
