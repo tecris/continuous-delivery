@@ -17,11 +17,12 @@ Showcase for a continuous delivery based on following principles:
 ### Techno stack
  1. Java JEE (Web Application)
  2. Wildfly 9.0.2
- 3. MySQL 5.7 or PostgreSQL 9.4
- 4. Docker 1.9
- 5. Docker Compose 1.5
- 6. [Jolokia][1] docker maven plugin
- 7. [Flywaydb][2]
+ 3. MySQL 5.7
+ 4. PostgreSQL 9.4
+ 5. Docker 1.9
+ 6. Docker Compose 1.5
+ 7. [Jolokia][1] docker maven plugin
+ 8. [Flywaydb][2]
 
 ### Prerequisites
 #### What is required to run this project:
