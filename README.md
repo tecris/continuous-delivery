@@ -20,8 +20,8 @@ Showcase for a continuous delivery based on following principles:
  3. MySQL 5.7 or PostgreSQL 9.4
  4. Docker 1.9
  5. Docker Compose 1.5
- 6. [Jolokia docker maven plugin](https://github.com/rhuss/docker-maven-plugin)
- 7. [Flywaydb](http://flywaydb.org/)
+ 6. [Jolokia][1] docker maven plugin
+ 7. [Flywaydb][2]
 
 ### Prerequisites
 #### What is required to run this project:
@@ -34,13 +34,13 @@ Showcase for a continuous delivery based on following principles:
 #### Project preparation:
  - This project depends on some docker images that can be built using following script:
   - `#  ./pre_requisites.sh`
- - Follow [instructions](https://github.com/tecris/docker/blob/v3.6/nexus/README.md) to add jboss repository (as proxy repository) to nexus
- - Maven configuration. The project depends on [settings.xml](https://github.com/tecris/docker/blob/v3.6/nexus/settings.xml). Options to integrate:
-  - Copy or merge [settings.xml](https://github.com/tecris/docker/blob/v3.6/nexus/settings.xml) to ~/.m2/settings.xml
+ - Follow [instructions][3] to add jboss repository (as proxy repository) to nexus
+ - Maven configuration. The project depends on [settings.xml][4]. Options to integrate:
+  - Copy or merge [settings.xml][4] to ~/.m2/settings.xml
   - Use `-s` flag to specify alternate user settings file (`mvn -s /path/to/settings.xml ...`)
 
 #### And a Hack :(
- - Re: [Jolokia docker maven plugin](https://github.com/rhuss/docker-maven-plugin), either I am misusing it or some functionality is missing. Until this is sorted out this hack is required to get project deployed:
+ - Re: [Jolokia][1] docker maven plugin, either I am misusing it or some functionality is missing. Until this is sorted out this hack is required to get project deployed:
 
  ```
  # git clone https://github.com/tecris/docker-maven-plugin
@@ -82,3 +82,8 @@ Showcase for a continuous delivery based on following principles:
  1. `# mvn clean integration-test -Prun-it`
 
 Go to http://localhost:8080/planets
+
+[1]:https://github.com/rhuss/docker-maven-plugin
+[2]:http://flywaydb.org
+[3]:https://github.com/tecris/docker/blob/v3.6/nexus/README.md
+[4]:https://github.com/tecris/docker/blob/v3.6/nexus/settings.xml
