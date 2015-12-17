@@ -12,6 +12,7 @@ Showcase for a continuous delivery based on following principles:
  - Execute integration test
  - Stop and remove web and database containers
  - INVESTIGATE: Create image from db container
+ - INVESTIGATE: Push images to a registry
 
 ### Techno stack
  1. Java JEE (Web Application)
