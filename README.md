@@ -54,6 +54,7 @@ For following to work:
  - Maven configuration. The project depends on [settings.xml][4]. Options to integrate:
   - Copy or merge [settings.xml][4] to your user settings (usually ~/.m2/settings.xml)
   - If above not an option, use `-s` flag to specify alternate user settings file (`mvn -s /path/to/settings.xml ...`)
+
 #### With Wildfly & MySQL
 1. Start web(wildfly) and database(mysql) containers
  1. `# docker-compose --x-networking up -d`
