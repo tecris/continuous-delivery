@@ -39,9 +39,9 @@ Showcase for a continuous delivery based on following principles:
 
 ### Continuous delivery
 1. With Wildfly and MySQL
- * `# mvn clean integration-test -Pcd-mysql`
+ * `# mvn -Pcd-mysql clean integration-test`
 1. With Wildfly and PostgreSQL
- * `# mvn clean integration-test -Pcd-postgres`
+ * `# mvn -Pcd-postgres clean integration-test`
  
  1. `integration-test` will build web image, start web and db containers and run integration tests.
  2. `verify` will do `integration-test` plus cleanup (stop and remove web and db containers). 
@@ -63,21 +63,21 @@ For following to work:
 1. Start web(wildfly) and database(mysql) containers
  1. `# docker-compose --x-networking up -d`
 1. Deploy database scripts
- 1. `# mvn clean compile flyway:migrate -Pdb-mysql`
+ 1. `# mvn -Pdb-mysql clean compile flyway:migrate`
 1. Deploy application
  1. `# mvn clean wildfly:deploy`
 1. Run integration tests
- 1. `# mvn clean integration-test -Prun-it`
+ 1. `# mvn  -Prun-it clean integration-test`
  
 #### With Wildfly & PostgreSQL
 1. Start web(wildfly) and database(postgresql) containers
  1. `# docker-compose --x-networking -f wildfly-postgres.yml up -d`
 1. Deploy database scripts
- 1. `# mvn clean compile flyway:migrate -Pdb-postgres`
+ 1. `# mvn  -Pdb-postgres clean compile flyway:migrate`
 1. Deploy application
  1. `# mvn clean wildfly:deploy -Ddatasource.name=PostgresDS`
 1. Run integration tetss
- 1. `# mvn clean integration-test -Prun-it`
+ 1. `# mvn -Prun-it clean integration-test`
 
 Go to http://localhost:8080/planet
 
