@@ -1,6 +1,6 @@
 FROM casa.docker/wildfly-postgres:9.0.2
 
-ENV MAVEN_GROUP_ID org.demo.planets
+ENV MAVEN_GROUP_ID org.terra.planet
 ENV MAVEN_ARTIFACT_ID cd-jee
 
 ENV MAVEN_REPOSITORY_URL 172.17.0.1

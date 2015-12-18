@@ -78,7 +78,7 @@ For following to work:
 1. Run integration tetss
  1. `# mvn clean integration-test -Prun-it`
 
-Go to http://localhost:8080/planets
+Go to http://localhost:8080/planet
 
 [1]:https://github.com/rhuss/docker-maven-plugin
 [2]:http://flywaydb.org

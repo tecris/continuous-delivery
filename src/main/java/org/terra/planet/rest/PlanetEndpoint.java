@@ -26,7 +26,7 @@ import org.terra.planet.model.Planet;
  * 
  */
 @Stateless
-@Path("/planets")
+@Path("/planet")
 public class PlanetEndpoint {
     @PersistenceContext(unitName = "pl-persistence-unit")
     private EntityManager em;

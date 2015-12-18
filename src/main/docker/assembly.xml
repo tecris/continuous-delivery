@@ -5,10 +5,10 @@
     <dependencySet>
       <useProjectArtifact>true</useProjectArtifact>
       <includes>
-        <include>org.demo.planets:cd-jee</include>
+        <include>org.terra.planet:cd-jee</include>
       </includes>
       <outputDirectory>.</outputDirectory>
-      <outputFileNameMapping>planets.war</outputFileNameMapping>
+      <outputFileNameMapping>planet.war</outputFileNameMapping>
     </dependencySet>
   </dependencySets>
 </assembly>
