@@ -65,7 +65,7 @@ For following to work:
  1. `# mvn clean compile flyway:migrate -Pdb-mysql`
 1. Deploy application
  1. `# mvn clean wildfly:deploy`
-1. Run integration tetss
+1. Run integration tests
  1. `# mvn clean integration-test -Prun-it`
  
 #### With Wildfly & PostgreSQL
