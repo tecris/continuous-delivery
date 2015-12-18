@@ -34,7 +34,7 @@ Showcase for a continuous delivery based on following principles:
   - Docker Compose 1.5
 
 #### Project preparation:
- - The project expects base images present, following script will create them:
+ - The project depends on 2 base images, one for Wildfly and one for database (PostgreSQL or MySQL). Also these base images depend on other images, use following script to create them:
   - `#  ./pre_requisites.sh`
 
 ### Continuous delivery
