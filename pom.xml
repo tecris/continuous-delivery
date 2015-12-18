@@ -282,7 +282,7 @@
                     <cmd>-Dpostgres.ipaddress=planets-db -Dpostgres.port=${database.port} -Dpostgres.database=${database.name} -Dpostgres.username=${database.username} -Dpostgres.password=${database.password}</cmd>
                     <wait>
                       <!-- Check for this URL to return a 200 return code ....  -->
-                      <url>http://localhost:8080/planets</url>
+                      <url>http://localhost:8080/planet</url>
                       <time>10000</time>
                     </wait>
                   </run>
