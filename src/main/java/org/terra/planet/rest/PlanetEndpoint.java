@@ -1,4 +1,4 @@
-package org.demo.planets.rest;
+package org.terra.planet.rest;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import org.demo.planets.model.Planet;
+import org.terra.planet.model.Planet;
 
 /**
  * 

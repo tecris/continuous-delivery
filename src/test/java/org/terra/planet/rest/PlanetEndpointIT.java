@@ -1,18 +1,18 @@
-package org.demo.planets.rest;
+package org.terra.planet.rest;
 
 import static com.jayway.restassured.RestAssured.get;
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
-import org.demo.planets.model.Planet;
 import org.junit.Test;
+import org.terra.planet.model.Planet;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class PlanetEndpointIT {
     
-    private static final String REST_URL = "http://127.0.0.1:8080/planets/rest/planets";
+    private static final String REST_URL = "http://127.0.0.1:8080/planet/rest/planet";
 
     @Test
     public void postExample() throws JsonProcessingException {

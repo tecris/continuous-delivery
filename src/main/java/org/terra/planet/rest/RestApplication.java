@@ -1,4 +1,4 @@
-package org.demo.planets.rest;
+package org.terra.planet.rest;
 
 import javax.ws.rs.core.Application;
 import javax.ws.rs.ApplicationPath;

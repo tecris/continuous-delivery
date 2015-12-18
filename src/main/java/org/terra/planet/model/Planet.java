@@ -1,4 +1,4 @@
-package org.demo.planets.model;
+package org.terra.planet.model;
 
 import java.io.Serializable;
 
