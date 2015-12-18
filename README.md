@@ -30,6 +30,7 @@ Showcase for a continuous delivery based on following principles:
   - Java 8
   - Maven 3.3
   - Docker 1.9
+    - [No sudo when you use the docker command ... ](https://docs.docker.com/engine/installation/ubuntulinux/#create-a-docker-group)
   - Docker Compose 1.5
 
 #### Project preparation:
