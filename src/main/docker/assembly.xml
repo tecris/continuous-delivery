@@ -5,7 +5,7 @@
     <dependencySet>
       <useProjectArtifact>true</useProjectArtifact>
       <includes>
-        <include>org.terra.planet:cd-jee</include>
+        <include>org.terra:planet</include>
       </includes>
       <outputDirectory>.</outputDirectory>
       <outputFileNameMapping>planet.war</outputFileNameMapping>

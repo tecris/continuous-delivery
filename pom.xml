@@ -2,8 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.terra.planet</groupId>
-  <artifactId>cd-jee</artifactId>
+  <groupId>org.terra</groupId>
+  <artifactId>planet</artifactId>
   <version>1.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
 
@@ -259,12 +259,9 @@
                 </image>
                 <image>
                   <alias>planets-web</alias>
-                  <name>casa.docker/planets</name>
+                  <name>casa.docker/planets:${buildNumber}</name>
                   <build>
                     <from>casa.docker/wildfly-postgres:9.0.2</from>
-                    <tags>
-                      <tag>${buildNumber}</tag>
-                    </tags>
                     <assembly>
                       <basedir>/opt/jboss/wildfly/standalone/deployments</basedir>
                       <descriptor>assembly.xml</descriptor>
