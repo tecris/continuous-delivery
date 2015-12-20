@@ -1,4 +1,4 @@
-## Mini Continuous Delivery with Docker for a basic 2 tier Java EE application
+## Java Continuous Delivery by Docker
 
 Showcase for a continuous delivery based on following principles:
  - short lived environments (built and destroyed for each iteration  / run = mvn verify)
