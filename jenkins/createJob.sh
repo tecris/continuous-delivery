@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ./createJob.sh 192.168.1.69 planets config.xml
+# ./createJob.sh localhost planets config.xml
 
 HOST=$1
 JOB_NAME=$2
