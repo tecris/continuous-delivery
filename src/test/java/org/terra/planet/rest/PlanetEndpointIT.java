@@ -12,11 +12,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class PlanetEndpointIT {
     
-    private static final String REST_URL = "http://127.0.0.1:8080/planet/rest/planet";
+    private static final String HOST = System.getProperty("test.host","localhost");
+    private static final String PORT = System.getProperty("test.port","8080");
+    private static final String REST_URL = "http://"+HOST+":"+PORT+"/planet/rest/planet";
 
     @Test
     public void postExample() throws JsonProcessingException {
-
+        
         String expectedName = "Mercury";
         String expectedGalaxy = "Milky Way";
         ObjectMapper mapper = new ObjectMapper();
