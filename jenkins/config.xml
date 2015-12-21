@@ -92,7 +92,7 @@
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <hudson.tasks.Shell>
       <command>sleep 10
-mvn -Pdb-mysql clean compile flyway:migrate -Ddatabase.host=172.17.0.1</command>
+mvn -Pdb-mysql -s /opt/maven_config/.m2/settings.xml clean compile flyway:migrate -Ddatabase.host=172.17.0.1</command>
     </hudson.tasks.Shell>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.CommitCommand">
@@ -133,7 +133,7 @@ mvn -Pdb-mysql clean compile flyway:migrate -Ddatabase.host=172.17.0.1</command>
         <containerName>planets-mysql-db</containerName>
         <envVars></envVars>
         <links></links>
-        <exposedPorts></exposedPorts>
+        <exposedPorts>3306/tcp</exposedPorts>
         <cpuShares></cpuShares>
         <memoryLimit></memoryLimit>
       </dockerCmd>
@@ -206,7 +206,7 @@ mvn -Pdb-mysql clean compile flyway:migrate -Ddatabase.host=172.17.0.1</command>
       <command>sleep 10</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>mvn -Prun-it clean integration-test -Dtest.host=172.17.0.1 -Dtest.port=8089</command>
+      <command>mvn -Prun-it -s /opt/maven_config/.m2/settings.xml clean integration-test -Dtest.host=172.17.0.1 -Dtest.port=8089</command>
     </hudson.tasks.Shell>
   </postbuilders>
   <runPostStepsIfResult>
