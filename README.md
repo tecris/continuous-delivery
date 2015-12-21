@@ -37,12 +37,16 @@ Showcase for a continuous delivery based on following principles:
  - The project depends on 2 base images, one for Wildfly and one for database (PostgreSQL or MySQL). Also these base images depend on other images, use following script to create them:
   - `#  ./pre_requisites.sh`
 
-### Continuous delivery
+### Continuous delivery with Jenkins
+ - `# cd jenkins`
+ - `# ./createJob.sh localhost planets config.xml`
+ - http://localhost:8088/job/planets -> 'Build Now'
+
+### Run integration tests
  1. With Wildfly and MySQL
   * `# mvn -Pcd-mysql clean integration-test`
  1. With Wildfly and PostgreSQL
   * `# mvn -Pcd-postgres clean integration-test`
- 
 
  *  `integration-test` will:
   - stop and remove web and db containers (if any)
@@ -57,7 +61,6 @@ Showcase for a continuous delivery based on following principles:
   - stop and remove db container
  
 Use `-Dmaven.buildNumber.doCheck=false` if project contains local changes
-
 
 ### How to run / deploy
 
