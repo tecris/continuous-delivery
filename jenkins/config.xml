@@ -102,9 +102,6 @@ mvn -Pdb-mysql clean compile flyway:migrate -Ddatabase.host=172.17.0.1</command>
         <runCmd></runCmd>
       </dockerCmd>
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
-    <hudson.tasks.Shell>
-      <command>sleep 1</command>
-    </hudson.tasks.Shell>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.PushImageCommand">
         <dockerRegistryEndpoint plugin="docker-commons@1.2">
