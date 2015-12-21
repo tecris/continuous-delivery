@@ -58,8 +58,6 @@ Showcase for a continuous delivery based on following principles:
  
 Use `-Dmaven.buildNumber.doCheck=false` if project contains local changes
 
-Continuous delivery life cycle is defined in `cd-mysql` & `cd-postgres` maven profiles.
-
 
 ### How to run / deploy
 
