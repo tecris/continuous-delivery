@@ -208,6 +208,33 @@ mvn -Pdb-mysql -s /opt/maven_config/.m2/settings.xml clean compile flyway:migrat
     <hudson.tasks.Shell>
       <command>mvn -Prun-it -s /opt/maven_config/.m2/settings.xml clean integration-test -Dtest.host=172.17.0.1 -Dtest.port=8089</command>
     </hudson.tasks.Shell>
+    <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
+      <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.StopCommand">
+        <containerIds>planets-web,planets-mysql-db</containerIds>
+      </dockerCmd>
+    </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
+    <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
+      <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.RemoveCommand">
+        <containerIds>planets-web,planets-mysql-db</containerIds>
+        <ignoreIfNotFound>false</ignoreIfNotFound>
+        <removeVolumes>false</removeVolumes>
+        <force>false</force>
+      </dockerCmd>
+    </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
+    <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
+      <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.RemoveImageCommand">
+        <imageName>casa.docker/planets-web:$BUILD_NUMBER</imageName>
+        <imageId></imageId>
+        <ignoreIfNotFound>true</ignoreIfNotFound>
+      </dockerCmd>
+    </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
+    <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
+      <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.RemoveImageCommand">
+        <imageName>casa.docker/planets-mysql-db:$BUILD_NUMBER</imageName>
+        <imageId></imageId>
+        <ignoreIfNotFound>true</ignoreIfNotFound>
+      </dockerCmd>
+    </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
   </postbuilders>
   <runPostStepsIfResult>
     <name>SUCCESS</name>
