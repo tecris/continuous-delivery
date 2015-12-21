@@ -3,16 +3,7 @@
 Showcase for a continuous delivery based on following principles:
  - short lived environments (built and destroyed for each iteration  / run = mvn verify)
  - immutable environments (built in automated fashion, no manual jobs / touches, hands off :) )
- - infrastructure as code 
-
-### Continuous Delivery life-cycle
- - Build war artifact
- - Start database (mysql/postgresql) container and apply database scripts with flyway
- - Build web application docker image (with latest war artifact) and start container
- - Execute integration test
- - Stop and remove web and database containers
- - INVESTIGATE: Create image from db container
- - INVESTIGATE: Push images to a registry
+ - infrastructure as code
 
 ### Techno stack
  1. Java JEE (Web Application)
@@ -24,6 +15,15 @@ Showcase for a continuous delivery based on following principles:
  7. [Jolokia][1] docker maven plugin
  8. [Flywaydb][2]
 
+### Continuous Delivery life-cycle
+ - Build war artifact
+ - Start database (mysql/postgresql) container and apply database scripts with flyway
+ - Build web application docker image (with latest war artifact) and start container
+ - Execute integration test
+ - Stop and remove web and database containers
+ - INVESTIGATE: Create image from db container
+ - INVESTIGATE: Push images to a registry
+
 ### Prerequisites
 #### What is required to run this project:
  - Linux with:
@@ -34,7 +34,7 @@ Showcase for a continuous delivery based on following principles:
   - Docker Compose 1.5
 
 #### Project preparation:
- - The project depends on 2 base images, one for Wildfly and one for database (PostgreSQL or MySQL). Also these base images depend on other images, use following script to create them:
+ - The project depends on various images that can be build using:
   - `#  ./pre_requisites.sh`
 
 ### Continuous delivery with Jenkins
