@@ -42,7 +42,7 @@ Showcase for a continuous delivery based on following principles:
  - `# ./createJob.sh localhost planets config.xml`
  - http://localhost:8088/job/planets -> 'Build Now'
 
-### Run integration tests
+### Run app & integration tests with [Jolokia][1] docker maven plugin
  1. With Wildfly and MySQL
   * `# mvn -Pcd-mysql clean integration-test`
  1. With Wildfly and PostgreSQL
@@ -62,7 +62,7 @@ Showcase for a continuous delivery based on following principles:
  
 Use `-Dmaven.buildNumber.doCheck=false` if project contains local changes
 
-### How to run / deploy
+### Run app & integration tests with Docker Compose and maven
 
 For following to work:
  - Follow [instructions][3] to add jboss repository (as proxy repository) to nexus
