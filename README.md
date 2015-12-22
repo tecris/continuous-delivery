@@ -6,14 +6,19 @@ Showcase for a continuous delivery based on following principles:
  - infrastructure as code
 
 ### Techno stack
+#### Application
  1. Java JEE (Web Application)
- 2. Wildfly 9.0.2
- 3. MySQL 5.7
- 4. PostgreSQL 9.4
- 5. Docker 1.9
- 6. Docker Compose 1.5
- 7. [Jolokia][1] docker maven plugin
- 8. [Flywaydb][2]
+ 1. Wildfly 9.0.2
+ 1. MySQL 5.7
+ 1. PostgreSQL 9.4
+
+#### Continuous Delivery plumbing
+ 1. Docker 1.9
+ 1. Docker Compose 1.5
+ 1. [Jolokia][1] docker maven plugin
+ 1. [Flywaydb][2]
+ 1. Nexus
+ 11. Jenkins
 
 ### Continuous Delivery life-cycle
  - Build war artifact
