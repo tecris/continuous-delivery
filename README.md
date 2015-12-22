@@ -18,7 +18,7 @@ Showcase for a continuous delivery based on following principles:
  1. [Jolokia][1] docker maven plugin
  1. [Flywaydb][2]
  1. Nexus
- 11. Jenkins
+ 1. Jenkins
 
 ### Continuous Delivery life-cycle
  - Build war artifact
