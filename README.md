@@ -20,18 +20,6 @@ Showcase for a continuous delivery based on following principles:
  1. Docker Compose 1.5
  1. [Jolokia][1] docker maven plugin
 
-### Continuous Delivery life-cycle
- - Build war artifact
- - Upload artifact to maven repository
- - Create database image with latest database scripts (flyway)
- - Push database image to private docker registry
- - Create web application image with latest war artifact
- - Push web application image to private docker registry
- - Start database container
- - Start web application container
- - Execute integration test
- - Stop and remove web and database containers
-
 ### Prerequisites
 #### What is required to run this project:
  - Linux with:
@@ -49,6 +37,18 @@ Showcase for a continuous delivery based on following principles:
  - `# cd jenkins`
  - `# ./createJob.sh localhost planets config.xml`
  - http://localhost:8088/job/planets -> 'Build Now'
+
+##### Continuous Delivery life-cycle
+ - Build war artifact
+ - Upload artifact to maven repository
+ - Create database image with latest database scripts (flyway)
+ - Push database image to private docker registry
+ - Create web application image with latest war artifact
+ - Push web application image to private docker registry
+ - Start database container
+ - Start web application container
+ - Execute integration test
+ - Stop and remove web and database containers
 
 ### Run app & integration tests with [Jolokia][1] docker maven plugin
  1. With Wildfly and MySQL
