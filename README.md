@@ -26,7 +26,7 @@ Showcase for a continuous delivery based on following principles:
  - Create database image with latest database scripts (flyway)
  - Push database image to private docker registry
  - Create web application image with latest war artifact
- - Push web application image to docker registry
+ - Push web application image to private docker registry
  - Start database container
  - Start web application container
  - Execute integration test
