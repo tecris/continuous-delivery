@@ -14,20 +14,23 @@ Showcase for a continuous delivery based on following principles:
 
 #### Continuous Delivery plumbing
  1. Docker 1.9
+ 1. Jenkins
+ 1. Nexus
+ 1. [Flywaydb][2]
  1. Docker Compose 1.5
  1. [Jolokia][1] docker maven plugin
- 1. [Flywaydb][2]
- 1. Nexus
- 1. Jenkins
 
 ### Continuous Delivery life-cycle
  - Build war artifact
- - Start database (mysql/postgresql) container and apply database scripts with flyway
- - Build web application docker image (with latest war artifact) and start container
+ - Upload artifact to maven repository
+ - Create database image with latest database scripts (flyway)
+ - Push database image to private docker registry
+ - Create web application image with latest war artifact
+ - Push web application image to docker registry
+ - Start database container
+ - Start web application container
  - Execute integration test
  - Stop and remove web and database containers
- - INVESTIGATE: Create image from db container
- - INVESTIGATE: Push images to a registry
 
 ### Prerequisites
 #### What is required to run this project:
