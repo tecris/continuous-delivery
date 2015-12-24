@@ -235,6 +235,26 @@ mvn -Pdb-mysql -s /opt/maven_config/.m2/settings.xml clean compile flyway:migrat
         <ignoreIfNotFound>true</ignoreIfNotFound>
       </dockerCmd>
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
+    <hudson.tasks.Maven>
+      <targets>http://localhost:8088/job/planets/config.xml</targets>
+      <mavenName>maven3</mavenName>
+      <pom>pom.xml</pom>
+      <usePrivateRepository>false</usePrivateRepository>
+      <settings class="jenkins.mvn.FilePathSettingsProvider">
+        <path>/opt/maven_config/.m2/settings.xml</path>
+      </settings>
+      <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
+    </hudson.tasks.Maven>
+    <hudson.tasks.Maven>
+      <targets>sonar:sonar -Psonar</targets>
+      <mavenName>maven3</mavenName>
+      <pom>pom.xml</pom>
+      <usePrivateRepository>false</usePrivateRepository>
+      <settings class="jenkins.mvn.FilePathSettingsProvider">
+        <path>/opt/maven_config/.m2/settings.xml</path>
+      </settings>
+      <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
+    </hudson.tasks.Maven>
   </postbuilders>
   <runPostStepsIfResult>
     <name>SUCCESS</name>
