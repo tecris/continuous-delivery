@@ -236,8 +236,8 @@ mvn -Pdb-mysql -s /opt/maven_config/.m2/settings.xml clean compile flyway:migrat
       </dockerCmd>
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <hudson.tasks.Maven>
-      <targets>http://localhost:8088/job/planets/config.xml</targets>
-      <mavenName>maven3</mavenName>
+      <targets>org.jacoco:jacoco-maven-plugin:0.7.4.201502262128:prepare-agent install -Psonar</targets>
+      <mavenName>M3</mavenName>
       <pom>pom.xml</pom>
       <usePrivateRepository>false</usePrivateRepository>
       <settings class="jenkins.mvn.FilePathSettingsProvider">
@@ -247,7 +247,7 @@ mvn -Pdb-mysql -s /opt/maven_config/.m2/settings.xml clean compile flyway:migrat
     </hudson.tasks.Maven>
     <hudson.tasks.Maven>
       <targets>sonar:sonar -Psonar</targets>
-      <mavenName>maven3</mavenName>
+      <mavenName>M3</mavenName>
       <pom>pom.xml</pom>
       <usePrivateRepository>false</usePrivateRepository>
       <settings class="jenkins.mvn.FilePathSettingsProvider">
