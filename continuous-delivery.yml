@@ -3,6 +3,8 @@ nexus:
   container_name: nexus
   ports:
     - "172.17.0.1:8081:8081"
+  volumes:
+    - /opt/docker_volumes/nexus-data:/sonatype-work
 
 jenkins:
   image: casa.docker/jenkins-cd:1.625.3
