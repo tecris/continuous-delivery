@@ -67,7 +67,7 @@
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.CreateContainerCommand">
-        <image>casa.docker/mysql-no-volumes:5.7</image>
+        <image>casadocker/mysql-no-volumes:5.7</image>
         <command></command>
         <hostName></hostName>
         <containerName>planets-mysql-db</containerName>
@@ -97,7 +97,7 @@ mvn -Pdb-mysql -s /opt/maven_config/.m2/settings.xml clean compile flyway:migrat
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.CommitCommand">
         <containerId>planets-mysql-db</containerId>
-        <repo>casa.docker/planets-mysql-db</repo>
+        <repo>casadocker/planets-mysql-db</repo>
         <tag>$BUILD_NUMBER</tag>
         <runCmd></runCmd>
       </dockerCmd>
@@ -109,7 +109,7 @@ mvn -Pdb-mysql -s /opt/maven_config/.m2/settings.xml clean compile flyway:migrat
         </dockerRegistryEndpoint>
         <image>planets-mysql-db</image>
         <tag>$BUILD_NUMBER</tag>
-        <registry>casa.docker</registry>
+        <registry>casadocker</registry>
       </dockerCmd>
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
@@ -127,7 +127,7 @@ mvn -Pdb-mysql -s /opt/maven_config/.m2/settings.xml clean compile flyway:migrat
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.CreateContainerCommand">
-        <image>casa.docker/planets-mysql-db:$BUILD_NUMBER</image>
+        <image>casadocker/planets-mysql-db:$BUILD_NUMBER</image>
         <command>mysqld</command>
         <hostName></hostName>
         <containerName>planets-mysql-db</containerName>
@@ -153,7 +153,7 @@ mvn -Pdb-mysql -s /opt/maven_config/.m2/settings.xml clean compile flyway:migrat
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.CreateImageCommand">
         <dockerFolder>$WORKSPACE/jenkins/docker</dockerFolder>
-        <imageTag>casa.docker/planets-web:$BUILD_NUMBER</imageTag>
+        <imageTag>casadocker/planets-web:$BUILD_NUMBER</imageTag>
         <noCache>true</noCache>
         <rm>false</rm>
       </dockerCmd>
@@ -165,7 +165,7 @@ mvn -Pdb-mysql -s /opt/maven_config/.m2/settings.xml clean compile flyway:migrat
         </dockerRegistryEndpoint>
         <image>planets-web</image>
         <tag>$BUILD_NUMBER</tag>
-        <registry>casa.docker</registry>
+        <registry>casadocker</registry>
       </dockerCmd>
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
@@ -178,7 +178,7 @@ mvn -Pdb-mysql -s /opt/maven_config/.m2/settings.xml clean compile flyway:migrat
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.CreateContainerCommand">
-        <image>casa.docker/planets-web:$BUILD_NUMBER</image>
+        <image>casadocker/planets-web:$BUILD_NUMBER</image>
         <command>-Dmysql.ipaddress=planets-db -Dmysql.port=3306 -Dmysql.database=planetsdb -Dmysql.username=planets -Dmysql.password=1planets!</command>
         <hostName></hostName>
         <containerName>planets-web</containerName>
@@ -223,14 +223,14 @@ mvn -Pdb-mysql -s /opt/maven_config/.m2/settings.xml clean compile flyway:migrat
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.RemoveImageCommand">
-        <imageName>casa.docker/planets-web:$BUILD_NUMBER</imageName>
+        <imageName>casadocker/planets-web:$BUILD_NUMBER</imageName>
         <imageId></imageId>
         <ignoreIfNotFound>true</ignoreIfNotFound>
       </dockerCmd>
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.RemoveImageCommand">
-        <imageName>casa.docker/planets-mysql-db:$BUILD_NUMBER</imageName>
+        <imageName>casadocker/planets-mysql-db:$BUILD_NUMBER</imageName>
         <imageId></imageId>
         <ignoreIfNotFound>true</ignoreIfNotFound>
       </dockerCmd>

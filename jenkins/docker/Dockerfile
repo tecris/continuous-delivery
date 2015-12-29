@@ -1,4 +1,4 @@
-FROM casa.docker/wildfly-mysql:9.0.2
+FROM casadocker/wildfly-mysql:9.0.2
 
 ENV MAVEN_GROUP_ID org.terra
 ENV MAVEN_ARTIFACT_ID planet

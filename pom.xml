@@ -242,7 +242,7 @@
               <images>
                 <image>
                   <alias>planets-db</alias>
-                  <name>casa.docker/postgres:9.4</name>
+                  <name>casadocker/postgres:9.4</name>
                   <run>
                     <namingStrategy>alias</namingStrategy>
                     <env>
@@ -260,9 +260,9 @@
                 </image>
                 <image>
                   <alias>planets-web</alias>
-                  <name>casa.docker/planets:${buildNumber}</name>
+                  <name>casadocker/planets:${buildNumber}</name>
                   <build>
-                    <from>casa.docker/wildfly-postgres:9.0.2</from>
+                    <from>casadocker/wildfly-postgres:9.0.2</from>
                     <assembly>
                       <basedir>/opt/jboss/wildfly/standalone/deployments</basedir>
                       <descriptor>assembly.xml</descriptor>
@@ -334,7 +334,7 @@
               <images>
                 <image>
                   <alias>planets-db</alias>
-                  <name>casa.docker/mysql:5.7</name>
+                  <name>casadocker/mysql:5.7</name>
                   <run>
                     <namingStrategy>alias</namingStrategy>
                     <env>
@@ -353,9 +353,9 @@
                 </image>
                 <image>
                   <alias>planets-web</alias>
-                  <name>casa.docker/planets</name>
+                  <name>casadocker/planets</name>
                   <build>
-                    <from>casa.docker/wildfly-mysql:9.0.2</from>
+                    <from>casadocker/wildfly-mysql:9.0.2</from>
                     <tags>
                       <tag>${buildNumber}</tag>
                     </tags>

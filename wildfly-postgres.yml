@@ -1,6 +1,6 @@
 db:
   container_name: postgres-db
-  image: casa.docker/postgres:9.4
+  image: casadocker/postgres:9.4
   hostname: postgres-db
   restart: always
   ports:
@@ -12,7 +12,7 @@ db:
 
 web:
   container_name: planets-web
-  image: casa.docker/wildfly-postgres:9.0.2
+  image: casadocker/wildfly-postgres:9.0.2
   hostname: planets-web
   command: -Dpostgres.ipaddress=postgres-db -Dpostgres.port=5432 -Dpostgres.database=planetsdb -Dpostgres.username=planets -Dpostgres.password=1planets!
   restart: always

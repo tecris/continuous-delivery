@@ -1,5 +1,5 @@
 nexus:
-  image: casa.docker/nexus:2.12.0-01
+  image: casadocker/nexus:2.12.0-01
   container_name: nexus
   ports:
     - "172.17.0.1:8081:8081"
@@ -7,7 +7,7 @@ nexus:
     - /opt/docker_volumes/nexus-data:/sonatype-work
 
 jenkins:
-  image: casa.docker/jenkins-cd:1.625.3
+  image: casadocker/jenkins-cd:1.625.3
   container_name: jenkins
   ports:
     - "8088:8080"
@@ -15,7 +15,7 @@ jenkins:
     - "docker.host:192.168.1.68"
 
 sonar:
-  image: casa.docker/sonarqube:5.2
+  image: casadocker/sonarqube:5.2
   container_name: sonar
   ports:
    - "172.17.0.1:19000:9000"
@@ -23,7 +23,7 @@ sonar:
    - SONARQUBE_JDBC_URL=jdbc:postgresql://172.17.0.1:5432/sonar
 
 sonar-db:
-  image: casa.docker/postgres:9.4
+  image: casadocker/postgres:9.4
   container_name: sonar-db
   ports:
    - "172.17.0.1:5432:5432"

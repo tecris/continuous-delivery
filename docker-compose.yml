@@ -1,5 +1,5 @@
 db:
-  image: casa.docker/mysql-no-volumes:5.7
+  image: casadocker/mysql-no-volumes:5.7
   hostname: planets-db
   container_name: mysql-planets-db
   stdin_open: true
@@ -13,7 +13,7 @@ db:
   - MYSQL_DATABASE=planetsdb
 
 web:
-  image: casa.docker/wildfly-mysql:9.0.2
+  image: casadocker/wildfly-mysql:9.0.2
   hostname: web
   container_name: planets-web
   # http://docs.docker.com/compose/networking/
