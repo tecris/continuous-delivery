@@ -67,7 +67,7 @@
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.CreateContainerCommand">
-        <image>casadocker/mysql-no-volumes:5.7</image>
+        <image>casadocker/mysql:5.7</image>
         <command></command>
         <hostName></hostName>
         <containerName>planets-mysql-db</containerName>
