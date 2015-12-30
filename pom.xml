@@ -41,7 +41,7 @@
     <db.driver>com.mysql.jdbc.Driver</db.driver>
     <wildfly.username>admin</wildfly.username>
     <wildfly.password>1admin!</wildfly.password>
-    <jayway-restassured.version>2.7.0</jayway-restassured.version>
+    <jayway-restassured.version>2.8.0</jayway-restassured.version>
     <datasource.name>MySqlDS</datasource.name>
   </properties>
 
@@ -218,15 +218,25 @@
     </plugins>
   </build>
 
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+        <version>2.6</version>
+      </plugin>
+    </plugins>
+  </reporting>
+
   <profiles>
     <profile>
       <id>cd-postgres</id>
-       <properties>
-         <datasource.name>PostgresDS</datasource.name>
-         <database.vendor>postgresql</database.vendor>
-         <database.port>5432</database.port>
-         <db.driver>org.postgresql.Driver</db.driver>
-       </properties>
+      <properties>
+        <datasource.name>PostgresDS</datasource.name>
+        <database.vendor>postgresql</database.vendor>
+        <database.port>5432</database.port>
+        <db.driver>org.postgresql.Driver</db.driver>
+      </properties>
       <build>
         <plugins>
           <plugin>
