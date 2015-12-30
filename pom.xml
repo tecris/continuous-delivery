@@ -43,6 +43,7 @@
     <wildfly.password>1admin!</wildfly.password>
     <jayway-restassured.version>2.8.0</jayway-restassured.version>
     <datasource.name>MySqlDS</datasource.name>
+    <sonar.language>java</sonar.language>
   </properties>
 
   <dependencyManagement>
