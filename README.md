@@ -90,7 +90,7 @@ For following to work:
  
 #### With Wildfly & PostgreSQL
 1. Start web(wildfly) and database(postgresql) containers
- 1. `# docker-compose --x-networking -f wildfly-postgres.yml up -d`
+ 1. `# docker-compose --x-networking -f wildfly-postgresql.yml up -d`
 1. Deploy database scripts
  1. `# mvn  -Pdb-postgres clean compile flyway:migrate`
 1. Deploy application

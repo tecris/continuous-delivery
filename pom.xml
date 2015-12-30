@@ -262,7 +262,7 @@
                   <alias>planets-web</alias>
                   <name>casadocker/planets:${buildNumber}</name>
                   <build>
-                    <from>casadocker/wildfly-postgres:9.0.2</from>
+                    <from>casadocker/wildfly-postgresql:9.0.2</from>
                     <assembly>
                       <basedir>/opt/jboss/wildfly/standalone/deployments</basedir>
                       <descriptor>assembly.xml</descriptor>

@@ -5,7 +5,7 @@ docker build --no-cache -t casadocker/jdk:8 docker/jdk/8
 docker build --no-cache -t casadocker/wildfly:9.0.2 docker/wildfly/9
 docker build --no-cache -t casadocker/wildfly-mysql:9.0.2 docker/wildfly-mysql
 docker build --no-cache -t casadocker/mysql:5.7 docker/mysql/57
-docker build --no-cache -t casadocker/wildfly-postgres:9.0.2 docker/wildfly-postgresql
+docker build --no-cache -t casadocker/wildfly-postgresql:9.0.2 docker/wildfly-postgresql
 docker build --no-cache -t casadocker/postgres:9.4 docker/postgres/94
 docker build --no-cache -t casadocker/nexus:2.11.4-01 docker/nexus
 rm -rf docker
