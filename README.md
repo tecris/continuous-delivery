@@ -12,14 +12,6 @@ Showcase for a continuous delivery based on following principles:
  1. MySQL 5.7
  1. PostgreSQL 9.4
 
-#### Continuous Delivery plumbing
- 1. Docker 1.9
- 1. Jenkins
- 1. Nexus
- 1. [Flywaydb][2]
- 1. Docker Compose 1.5
- 1. [Jolokia][1] docker maven plugin
-
 ### Prerequisites
 #### What is required to run this project:
  - Linux with:
@@ -29,11 +21,8 @@ Showcase for a continuous delivery based on following principles:
     - [Configured to run without sudo ... ](https://docs.docker.com/engine/installation/ubuntulinux/#create-a-docker-group)
   - Docker Compose 1.5
 
-#### Project preparation:
- - The project depends on various images that can be build using:
-  - `#  ./pre_requisites.sh`
-
 ### Continuous delivery with Jenkins
+ - `# docker-compose -f continuous-delivery.yml up -d`
  - `# cd jenkins`
  - `# ./createJob.sh localhost planets config.xml`
  - http://localhost:8088/job/planets -> 'Build Now'
@@ -47,7 +36,7 @@ Showcase for a continuous delivery based on following principles:
  - Push web application image to private docker registry
  - Start database container
  - Start web application container
- - Execute integration test
+ - Execute integration tests
  - Stop and remove web and database containers
 
 ### Run app & integration tests with [Jolokia][1] docker maven plugin
