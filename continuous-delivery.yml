@@ -1,3 +1,13 @@
+sonar-db:
+  image: casadocker/postgresql:9.4
+  container_name: sonar-db
+  ports:
+   - "172.17.0.1:5432:5432"
+  environment:
+   - POSTGRES_DB=sonar 
+   - POSTGRES_USER=sonar
+   - POSTGRES_PASSWORD=sonar
+
 nexus:
   image: casadocker/nexus:2.12.0-01
   container_name: nexus
@@ -21,13 +31,3 @@ sonar:
    - "172.17.0.1:19000:9000"
   environment:
    - SONARQUBE_JDBC_URL=jdbc:postgresql://172.17.0.1:5432/sonar
-
-sonar-db:
-  image: casadocker/postgresql:9.4
-  container_name: sonar-db
-  ports:
-   - "172.17.0.1:5432:5432"
-  environment:
-   - POSTGRES_DB=sonar 
-   - POSTGRES_USER=sonar
-   - POSTGRES_PASSWORD=sonar
