@@ -17,7 +17,13 @@ public class StatusEndpoint {
     @GET
     @Produces("application/json")
     public String status() {
-        System.out.println("LOADING PROPERTIES rest");
+        return PropertiesFileReader.getGitSha1();
+    }
+
+    @GET
+    @Produces("application/json")
+    @Path("/version")
+    public String version() {
         return PropertiesFileReader.getGitSha1();
     }
 }
