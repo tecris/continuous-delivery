@@ -134,16 +134,6 @@
     <pluginManagement>
       <plugins>
         <plugin>
-          <groupId>org.jacoco</groupId>
-          <artifactId>jacoco-maven-plugin</artifactId>
-          <version>0.7.5.201505241946</version>
-        </plugin>
-        <plugin>
-          <groupId>org.jolokia</groupId>
-          <artifactId>docker-maven-plugin</artifactId>
-          <version>0.13.7</version>
-        </plugin>
-        <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>buildnumber-maven-plugin</artifactId>
           <version>1.4</version>
@@ -160,6 +150,11 @@
             <doUpdate>true</doUpdate>
             <shortRevisionLength>12</shortRevisionLength>
           </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>sonar-maven-plugin</artifactId>
+          <version>2.7.1</version>
         </plugin>
         <plugin>
           <groupId>org.flywaydb</groupId>
@@ -180,6 +175,16 @@
               </goals>
             </execution>
           </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>0.7.5.201505241946</version>
+        </plugin>
+        <plugin>
+          <groupId>org.jolokia</groupId>
+          <artifactId>docker-maven-plugin</artifactId>
+          <version>0.13.7</version>
         </plugin>
         <plugin>
           <groupId>org.wildfly.plugins</groupId>
