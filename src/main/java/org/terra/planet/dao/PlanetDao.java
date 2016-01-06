@@ -16,16 +16,16 @@ public class PlanetDao {
 	@PersistenceContext(unitName = "pl-persistence-unit")
     private EntityManager em;
 
-    public void create(Planet Planet) {
-        this.em.persist(Planet);
+    public void create(Planet planet) {
+        this.em.persist(planet);
     }
 
     public Planet findById(Long pid) {
         return this.em.find(Planet.class, pid);
     }
 
-    public void update(Planet Planet) {
-        this.em.merge(Planet);
+    public void update(Planet planet) {
+        this.em.merge(planet);
     }
 
     public void delete(Long id) {
@@ -51,7 +51,6 @@ public class PlanetDao {
         if (maxResult != null) {
             findAllQuery.setMaxResults(maxResult);
         }
-        final List<Planet> results = findAllQuery.getResultList();
-        return results;
+        return findAllQuery.getResultList();
     }
 }
