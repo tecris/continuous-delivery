@@ -139,7 +139,7 @@
           <version>1.4</version>
           <executions>
             <execution>
-              <phase>pre-integration-test</phase>
+              <phase>validate</phase>
               <goals>
                 <goal>create</goal>
               </goals>
@@ -216,10 +216,22 @@
     </pluginManagement>
     <plugins>
       <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>buildnumber-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
         <artifactId>maven-war-plugin</artifactId>
         <version>2.4</version>
         <configuration>
           <failOnMissingWebXml>false</failOnMissingWebXml>
+          <archive>
+            <manifest>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+            </manifest>
+            <manifestEntries>
+              <git-SHA-1>${buildNumber}</git-SHA-1>
+            </manifestEntries>
+          </archive>
         </configuration>
       </plugin>
       <plugin>
@@ -251,10 +263,6 @@
       <build>
         <plugins>
           <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>buildnumber-maven-plugin</artifactId>
-          </plugin>
-          <plugin>
             <groupId>org.jolokia</groupId>
             <artifactId>docker-maven-plugin</artifactId>
             <configuration>
@@ -263,7 +271,7 @@
               <images>
                 <image>
                   <alias>planets-db</alias>
-                  <name>casadocker/postgres:9.4</name>
+                  <name>casadocker/postgresql:9.4</name>
                   <run>
                     <namingStrategy>alias</namingStrategy>
                     <env>
@@ -342,10 +350,6 @@
       <id>cd-mysql</id>
       <build>
         <plugins>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>buildnumber-maven-plugin</artifactId>
-          </plugin>
           <plugin>
             <groupId>org.jolokia</groupId>
             <artifactId>docker-maven-plugin</artifactId>
