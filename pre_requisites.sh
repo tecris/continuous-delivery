@@ -1,6 +1,6 @@
 #!/bin/bash
 
-git clone --branch v3.6 https://github.com/tecris/docker.git
+git clone --branch v3.6.1 https://github.com/tecris/docker.git
 docker build --no-cache -t casadocker/jdk:8 docker/jdk/8
 docker build --no-cache -t casadocker/wildfly:9.0.2 docker/wildfly/9
 docker build --no-cache -t casadocker/wildfly-mysql:9.0.2 docker/wildfly-mysql
