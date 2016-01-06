@@ -3,6 +3,7 @@ package org.terra.planet.rest;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.OptimisticLockException;
@@ -20,6 +21,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.terra.planet.dao.PlanetDao;
 import org.terra.planet.model.Planet;
 
 /**
@@ -28,6 +30,11 @@ import org.terra.planet.model.Planet;
 @Stateless
 @Path("/planet")
 public class PlanetEndpoint {
+
+
+    @Inject
+    private PlanetDao authorDao;
+    
     @PersistenceContext(unitName = "pl-persistence-unit")
     private EntityManager em;
 
@@ -35,18 +42,14 @@ public class PlanetEndpoint {
     @Consumes("application/json")
     @Produces("application/json")
     public Response create(Planet entity) {
-        em.persist(entity);
+    	 authorDao.create(entity);
         return Response.ok(entity).build();
     }
 
     @DELETE
     @Path("/{id:[0-9][0-9]*}")
     public Response deleteById(@PathParam("id") Long id) {
-        Planet entity = em.find(Planet.class, id);
-        if (entity == null) {
-            return Response.status(Status.NOT_FOUND).build();
-        }
-        em.remove(entity);
+        this.authorDao.delete(id);
         return Response.noContent().build();
     }
 
@@ -54,15 +57,7 @@ public class PlanetEndpoint {
     @Path("/{id:[0-9][0-9]*}")
     @Produces("application/json")
     public Response findById(@PathParam("id") Long id) {
-        TypedQuery<Planet> findByIdQuery = em
-                .createQuery("SELECT DISTINCT p FROM Planet p WHERE p.id = :entityId ORDER BY p.id", Planet.class);
-        findByIdQuery.setParameter("entityId", id);
-        Planet entity;
-        try {
-            entity = findByIdQuery.getSingleResult();
-        } catch (NoResultException nre) {
-            entity = null;
-        }
+        Planet entity = this.authorDao.findById(id);
         if (entity == null) {
             return Response.status(Status.NOT_FOUND).build();
         }
@@ -72,15 +67,7 @@ public class PlanetEndpoint {
     @GET
     @Produces("application/json")
     public List<Planet> listAll(@QueryParam("start") Integer startPosition, @QueryParam("max") Integer maxResult) {
-        TypedQuery<Planet> findAllQuery = em.createQuery("SELECT DISTINCT p FROM Planet p ORDER BY p.id", Planet.class);
-        if (startPosition != null) {
-            findAllQuery.setFirstResult(startPosition);
-        }
-        if (maxResult != null) {
-            findAllQuery.setMaxResults(maxResult);
-        }
-        final List<Planet> results = findAllQuery.getResultList();
-        return results;
+    	return this.authorDao.listAll(startPosition, maxResult);
     }
 
     @PUT
@@ -100,7 +87,7 @@ public class PlanetEndpoint {
             return Response.status(Status.NOT_FOUND).build();
         }
         try {
-            entity = em.merge(entity);
+        	this.authorDao.update(entity);
         } catch (OptimisticLockException e) {
             return Response.status(Response.Status.CONFLICT).entity(e.getEntity()).build();
         }
