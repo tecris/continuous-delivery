@@ -1,5 +1,5 @@
 sonar-db:
-  image: casadocker/postgresql:9.4
+  image: casadocker/postgresql:9.5
   container_name: sonar-db
   ports:
    - "172.17.0.1:5432:5432"

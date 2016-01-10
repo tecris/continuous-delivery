@@ -1,6 +1,6 @@
 db:
   container_name: postgres-db
-  image: casadocker/postgres:9.4
+  image: casadocker/postgres:9.5
   hostname: postgres-db
   restart: always
   ports:

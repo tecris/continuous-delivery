@@ -271,7 +271,7 @@
               <images>
                 <image>
                   <alias>planets-db</alias>
-                  <name>casadocker/postgresql:9.4</name>
+                  <name>casadocker/postgresql:9.5</name>
                   <run>
                     <namingStrategy>alias</namingStrategy>
                     <env>
