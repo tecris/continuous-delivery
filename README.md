@@ -1,6 +1,6 @@
 ## Java Continuous Delivery by Docker
 
-Showcase for a continuous delivery based on following principles:
+Showcase for a continuous delivery solution based on following principles:
  - short lived environments (built and destroyed for each iteration  / run = mvn verify)
  - immutable environments (built in automated fashion, no manual jobs / touches, hands off :) )
  - infrastructure as code
