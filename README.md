@@ -9,8 +9,7 @@ Showcase for a continuous delivery based on following principles:
 #### Application
  1. Java JEE (Web Application)
  1. Wildfly 9.0.2
- 1. MySQL 5.7
- 1. PostgreSQL 9.4
+ 1. MySQL 5.7 or PostgreSQL 9.5
 
 ### Prerequisites
 #### What is required to run this project:
