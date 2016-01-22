@@ -23,9 +23,9 @@ Showcase for a continuous delivery solution based on following principles:
 ### Continuous delivery with Jenkins
  - Enable Docker Remote API edit `/etc/default/docker` and update the DOCKER_OPTS:
   * `DOCKER_OPTS='-H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock ...'`
- - `# docker-compose -f continuous-delivery.yml up -d`
- - `# cd jenkins`
- - `# ./createJob.sh localhost planets config.xml`
+ - `$ docker-compose -f continuous-delivery.yml up -d`
+ - `$ cd jenkins`
+ - `$ ./createJob.sh localhost planets config.xml`
  - http://localhost:8088/job/planets -> 'Build Now'
 
 ##### Continuous Delivery life-cycle
@@ -42,9 +42,9 @@ Showcase for a continuous delivery solution based on following principles:
 
 ### Run app & integration tests with [Jolokia][1] docker maven plugin
  1. With Wildfly and MySQL
-  * `# mvn -Pcd-mysql clean integration-test`
+  * `$ mvn -Pcd-mysql clean integration-test`
  1. With Wildfly and PostgreSQL
-  * `# mvn -Pcd-postgres clean integration-test`
+  * `$ mvn -Pcd-postgres clean integration-test`
 
  *  `integration-test` will:
   - stop and remove web and db containers (if any)
@@ -69,24 +69,20 @@ For following to work:
   - If above not an option, use `-s` flag to specify alternate user settings file (`mvn -s /path/to/settings.xml ...`)
 
 #### With Wildfly & MySQL
-1. Start web(wildfly) and database(mysql) containers
- 1. `# docker-compose --x-networking up -d`
-1. Deploy database scripts
- 1. `# mvn -Pdb-mysql clean compile flyway:migrate`
-1. Deploy application
- 1. `# mvn clean wildfly:deploy`
-1. Run integration tests
- 1. `# mvn  -Prun-it clean integration-test`
+```sh
+   $ docker-compose --x-networking up -d          # start web(wildfly) and database(mysql) containers`
+   $ mvn -Pdb-mysql clean compile flyway:migrate  # deploy database scripts
+   $ mvn clean wildfly:deploy                     # deploy application
+   $ mvn -Prun-it clean integration-test          # run integration tests
+```
  
 #### With Wildfly & PostgreSQL
-1. Start web(wildfly) and database(postgresql) containers
- 1. `# docker-compose --x-networking -f wildfly-postgresql.yml up -d`
-1. Deploy database scripts
- 1. `# mvn  -Pdb-postgres clean compile flyway:migrate`
-1. Deploy application
- 1. `# mvn clean wildfly:deploy -Ddatasource.name=PostgresDS`
-1. Run integration tetss
- 1. `# mvn -Prun-it clean integration-test`
+```sh
+   $ docker-compose --x-networking -f wildfly-postgresql.yml up -d   # start web(wildfly) and database(postgresql) containers
+   $ mvn -Pdb-postgres clean compile flyway:migrate                  # deploy database scripts
+   $ mvn clean wildfly:deploy                                        # deploy application
+   $ mvn -Prun-it clean integration-test                             # run integration tests
+```
 
 Go to http://localhost:8080/planet
 
