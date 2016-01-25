@@ -184,7 +184,7 @@
         <plugin>
           <groupId>org.jolokia</groupId>
           <artifactId>docker-maven-plugin</artifactId>
-          <version>0.13.7</version>
+          <version>0.13.8</version>
         </plugin>
         <plugin>
           <groupId>org.wildfly.plugins</groupId>
