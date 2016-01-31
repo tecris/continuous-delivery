@@ -8,7 +8,7 @@ Showcase for a continuous delivery solution based on following principles:
 ### Techno stack
 #### Application
  1. Java JEE (Web Application)
- 1. Wildfly 9.0.2
+ 1. Wildfly 10.0.0
  1. MySQL 5.7 or PostgreSQL 9.5
 
 ### Prerequisites
