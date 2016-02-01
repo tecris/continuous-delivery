@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: planets-web-svc
+  labels:
+    name: planets-web-svc
+spec:
+  # label keys and values that must match in order to receive traffic for this service
+  selector:
+    app: planets-app
+  ports:
+    # the port that this service should serve on
+    - protocol: TCP
+      port: 8088
+      targetPort: 8080
+      nodePort: 30002
+  type: NodePort
