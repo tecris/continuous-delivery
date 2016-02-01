@@ -87,6 +87,41 @@ For following to work:
 
 Go to http://localhost:8080/planet
 
+#### Kubernetes
+
+ * Assumptions: 
+  
+  - [kubernetes installed](https://github.com/tecris/kubernetes/tree/v1.1.3-2/coreos-libvirt)
+  - Continuous delivery with Jenkins step executed
+
+ * Deploy
+
+   ```$ ./deployToKubernetes.sh```
+   
+ * Rolling update
+ 
+   ```
+   $ kubectl scale --replicas=2 rc planets-web-rc-v1        # scale to 2 pods (optional)     
+   
+   # Replication Controller rolling update from "planets-web-rc-v1" to "planets-web-rc-v2".
+   # (image change from blue.sky/planets-web:1 to blue.sky/planets-web:2)
+   $ kubectl rolling-update planets-web-rc-v1 planets-web-rc-v2 -f kubernetes/planets-web-rc-v2.yaml    
+   ```
+   http://192.168.122.51:30002/planet
+
+
+#### Varia kubectl commands
+ 
+   ```
+    $ kubectl describe pod pod_name
+    $ kubectl delete pod pod_name
+    $ kubectl get rc
+    $ kubectl describe rc planets-web-rc-v1
+    $ kubectl delete rc planets-web-rc-v1
+    $ kubectl delete svc planets-web-svc
+   ```
+
+
 [1]:https://github.com/rhuss/docker-maven-plugin
 [2]:http://flywaydb.org
 [3]:https://github.com/tecris/docker/blob/v3.6/nexus/README.md
