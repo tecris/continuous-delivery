@@ -25,7 +25,7 @@ jenkins:
     - "docker.host:192.168.0.12"
 
 sonar:
-  image: casadocker/sonarqube:5.2
+  image: casadocker/sonarqube:5.3
   container_name: sonar
   ports:
    - "172.17.0.1:19000:9000"
