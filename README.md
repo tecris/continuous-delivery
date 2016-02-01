@@ -19,6 +19,8 @@ Showcase for a continuous delivery solution based on following principles:
   - Docker 1.9
     - [Configured to run without sudo ... ](https://docs.docker.com/engine/installation/ubuntulinux/#create-a-docker-group)
   - Docker Compose 1.5
+  - [Private registry](https://github.com/tecris/docker/tree/v16.02.01/registry2/private)
+  - [Mirror registry](https://github.com/tecris/docker/tree/v16.02.01/registry2/mirror)
 
 ### Continuous delivery with Jenkins
  - Enable Docker Remote API edit `/etc/default/docker` and update the DOCKER_OPTS:
