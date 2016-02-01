@@ -5,6 +5,11 @@ Showcase for a continuous delivery solution based on following principles:
  - immutable environments (built in automated fashion, no manual jobs / touches, hands off :) )
  - infrastructure as code
 
+
+[Continuous delivery with Jenkins](#continuous-delivery-with-jenkins)
+
+[Kubernetes](#kubernetes)
+
 ### Techno stack
 #### Application
  1. Java JEE (Web Application)
