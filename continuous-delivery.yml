@@ -17,12 +17,12 @@ nexus:
     - /opt/docker_volumes/nexus-data:/sonatype-work
 
 jenkins:
-  image: casadocker/jenkins-cd:1.625.3
+  image: casadocker/jenkins-cd:1.642.1
   container_name: jenkins
   ports:
     - "8088:8080"
   extra_hosts:
-    - "docker.host:192.168.1.66"
+    - "docker.host:192.168.0.12"
 
 sonar:
   image: casadocker/sonarqube:5.2
