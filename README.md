@@ -25,10 +25,9 @@ Showcase for a continuous delivery solution based on following principles:
 ### Continuous delivery with Jenkins
  - Enable Docker Remote API edit `/etc/default/docker` and update the DOCKER_OPTS:
   * `DOCKER_OPTS='-H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock ...'`
- - `$ docker-compose -f continuous-delivery.yml up -d`
- - `$ cd jenkins`
- - `$ ./createJob.sh localhost planets config.xml`
- - http://localhost:8088/job/planets -> 'Build Now'
+ - `$ ./startCdInfrastructure.sh`
+ - `$ cd jenkins && ./createJob.sh localhost planets config.xml`
+ - http://localhost:8088/job/continuous-delivery -> 'Build Now'
 
 ##### Continuous Delivery life-cycle
  - Build war artifact
