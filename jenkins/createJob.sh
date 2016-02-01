@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ./createJob.sh localhost planets config.xml
+# ./createJob.sh localhost continuous-delivery config.xml
 
 HOST=$1
 JOB_NAME=$2
