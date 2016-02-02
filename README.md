@@ -14,7 +14,6 @@ Continuous delivery demo that aims to use following principles:
 <hr/>
 
 ### Techno stack
-#### Application
  1. Java JEE (Web Application)
  1. Wildfly 10.0.0
  1. MySQL 5.7 or PostgreSQL 9.5
