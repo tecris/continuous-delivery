@@ -1,14 +1,14 @@
 ## Java Continuous Delivery by Docker
 
-Showcase for a continuous delivery solution based on following principles:
- - short lived environments (built and destroyed for each iteration  / run = mvn verify)
- - immutable environments (built in automated fashion, no manual jobs / touches, hands off :) )
+Continuous delivery demo that aims to use following principles:
+ - short lived environments (**built and destroyed** with every run)
+ - immutable / reference environments (built and destroyed **automatically** with every run)
  - infrastructure as code
 
+<hr/>
 
-[Continuous delivery with Jenkins](#continuous-delivery-with-jenkins)
-
-[Kubernetes](#kubernetes)
+- [**Continuous delivery with Jenkins**](#continuous-delivery-with-jenkins)
+- [**Kubernetes**](#kubernetes)
 
 ### Techno stack
 #### Application
