@@ -99,7 +99,7 @@ Go to http://localhost:8080/planet
 
  * Assumptions: 
   
-  - [kubernetes installed](https://github.com/tecris/kubernetes/blob/v16.02.02/coreos-libvirt/README.md)
+  - [**kubernetes installed**](https://github.com/tecris/kubernetes/blob/v16.02.02/coreos-libvirt/README.md)
   - [**Continuous delivery with Jenkins**](#continuous-delivery-with-jenkins) step executed(2 builds are required to execute rolling update demo).
 
  * Deploy
