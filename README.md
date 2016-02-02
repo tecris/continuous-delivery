@@ -7,8 +7,8 @@ Continuous delivery demo that aims to use following principles:
 
 <hr/>
 - [**Continuous delivery with Jenkins**](#continuous-delivery-with-jenkins)
-- [**Kubernetes**](#kubernetes)
 - [**Partial continuous delivery with Jolokia & Maven**](#partial-continuous-delivery-with-jolokia-and-maven)
+- [**Kubernetes**](#kubernetes)
 
 <hr/>
 
