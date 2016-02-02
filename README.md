@@ -2,7 +2,7 @@
 
 Continuous delivery demo that aims to use following principles:
  - short lived environments (**built and destroyed** with every run)
- - immutable / reference environments (built and destroyed **automatically** with every run)
+ - immutable / reference environments (environments build - fully automated)
  - infrastructure as code
 
 <hr/>
