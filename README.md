@@ -6,10 +6,11 @@ Continuous delivery demo that aims to use following principles:
  - infrastructure as code
 
 <hr/>
-
 - [**Continuous delivery with Jenkins**](#continuous-delivery-with-jenkins)
 - [**Kubernetes**](#kubernetes)
 - [**Partial continuous delivery with Jolokia & Maven**](#partial-continuous-delivery-with-jolokia-and-maven)
+
+<hr/>
 
 ### Techno stack
 #### Application
@@ -97,8 +98,8 @@ Go to http://localhost:8080/planet
 
  * Assumptions: 
   
-  - [kubernetes installed](https://github.com/tecris/kubernetes/tree/v1.1.3-2/coreos-libvirt)
-  - Continuous delivery with Jenkins step executed
+  - [kubernetes installed](https://github.com/tecris/kubernetes/blob/v16.02.02/coreos-libvirt/README.md)
+  - [**Continuous delivery with Jenkins**](#continuous-delivery-with-jenkins) step executed(2 builds are required to execute rolling update demo).
 
  * Deploy
 
