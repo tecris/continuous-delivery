@@ -8,6 +8,7 @@ Continuous delivery demo that aims to use following principles:
 <hr/>
 - [**Continuous delivery with Jenkins**](#continuous-delivery-with-jenkins)
 - [**Partial continuous delivery with Jolokia & Maven**](#partial-continuous-delivery-with-jolokia-and-maven)
+- [**Partial continuous delivery with Docker Compose and Maven**](#partial-continuous-delivery-with-docker-compose-and-maven)
 - [**Kubernetes**](#kubernetes)
 
 <hr/>
@@ -68,7 +69,7 @@ Continuous delivery demo that aims to use following principles:
  
 Use `-Dmaven.buildNumber.doCheck=false` if project contains local changes
 
-### Run app & integration tests with Docker Compose and maven
+### Partial continuous delivery with docker compose and Maven
 
 For following to work:
  - Follow [instructions][3] to add jboss repository (as proxy repository) to nexus
