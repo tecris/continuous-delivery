@@ -1,9 +1,14 @@
 ## Java Continuous Delivery by Docker
 
 Continuous delivery demo that aims to use following principles:
- - short lived environments (**built and destroyed** with every run)
- - immutable / reference environments (environments build - fully automated)
- - infrastructure as code
+ - reference images
+  - build process - **fully automated**
+  - images built once only and published to a docker repository
+  - only images from this repository are to be used (dev, test, demo, prod, etc)
+ - immutable environments
+  - running integration tests requires a single task: start containers from reference images
+ - short lived environments (**built and destroyed** with every integration test run)
+ - infrastructure as code (as build process is fully automated this implies code / scripts, that are also version controlled)
 
 <hr/>
 - [**Continuous delivery with Jenkins**](#continuous-delivery-with-jenkins)
