@@ -3,12 +3,14 @@
 Continuous delivery demo that aims to use following principles:
  - reference images
   - build process - **fully automated**
-  - images built once only and published to a docker repository
+  - images built once only (for a given source code version) and published to a docker repository
   - only images from this repository are to be used (dev, test, demo, prod, etc)
  - immutable environments
   - running integration tests requires a single task: start containers from reference images
- - short lived environments (**built and destroyed** with every integration test run)
- - infrastructure as code (as build process is fully automated this implies code / scripts, that are also version controlled)
+ - short lived environments 
+  - **built and destroyed** with every integration test run
+ - infrastructure as code 
+  - all above is achieved with **code / scripts** (also under version control)
 
 <hr/>
 - [**Continuous delivery with Jenkins**](#continuous-delivery-with-jenkins)
