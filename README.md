@@ -56,6 +56,9 @@ Continuous delivery demo that aims to use following principles:
  - Stop and remove web and database containers
 
 ### Partial continuous delivery with [Jolokia][1] and Maven
+
+ * Partial as no images are pushed to docker registry
+
  1. With Wildfly and MySQL
   * `$ mvn -Pcd-mysql clean integration-test`
  1. With Wildfly and PostgreSQL
@@ -76,6 +79,8 @@ Continuous delivery demo that aims to use following principles:
 Use `-Dmaven.buildNumber.doCheck=false` if project contains local changes
 
 ### Partial continuous delivery with docker compose and Maven
+
+* Partial as no images are pushed to docker registry
 
 For following to work:
  - Follow [instructions][3] to add jboss repository (as proxy repository) to nexus
