@@ -13,7 +13,7 @@ db:
   - MYSQL_DATABASE=planetsdb
 
 web:
-  image: casadocker/wildfly-mysql:10.0.0
+  image: casadocker/wildfly-xs-mysql:10.0.0
   hostname: web
   container_name: planets-web
   # http://docs.docker.com/compose/networking/

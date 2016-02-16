@@ -380,7 +380,7 @@
                   <alias>planets-web</alias>
                   <name>casadocker/planets</name>
                   <build>
-                    <from>casadocker/wildfly-mysql:10.0.0</from>
+                    <from>casadocker/wildfly-xs-mysql:10.0.0</from>
                     <tags>
                       <tag>${buildNumber}</tag>
                     </tags>
