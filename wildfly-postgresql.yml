@@ -1,21 +1,23 @@
-db:
-  container_name: postgres-db
-  image: casadocker/postgres:9.5
-  hostname: postgres-db
-  restart: always
-  ports:
-  - "5432:5432"
-  environment:
-  - POSTGRES_PASSWORD=1planets!
-  - POSTGRES_USER=planets
-  - POSTGRES_DB=planetsdb
+version: '2'
+services:
+  db:
+    container_name: postgres-db
+    image: casadocker/postgres:9.5
+    hostname: postgres-db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=1planets!
+      - POSTGRES_USER=planets
+      - POSTGRES_DB=planetsdb
 
-web:
-  container_name: planets-web
-  image: casadocker/wildfly-xs-postgresql:10.0.0
-  hostname: planets-web
-  command: -Dpostgres.ipaddress=postgres-db -Dpostgres.port=5432 -Dpostgres.database=planetsdb -Dpostgres.username=planets -Dpostgres.password=1planets!
-  restart: always
-  ports:
-  - "8080:8080"
-  - "9990:9990"
+  web:
+    container_name: planets-web
+    image: casadocker/alpine-wildfly:10.0.0
+    hostname: planets-web
+    command: -Dpostgres.ipaddress=postgres-db -Dpostgres.port=5432 -Dpostgres.database=planetsdb -Dpostgres.username=planets -Dpostgres.password=1planets!
+    restart: always
+    ports:
+      - "8080:8080"
+      - "9990:9990"

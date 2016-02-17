@@ -30,9 +30,9 @@ Continuous delivery demo that aims to use following principles:
  - Linux with:
   - Java 8
   - Maven 3.3
-  - Docker 1.9
+  - Docker 1.10
     - [Configured to run without sudo ... ](https://docs.docker.com/engine/installation/ubuntulinux/#create-a-docker-group)
-  - Docker Compose 1.5
+  - Docker Compose 1.6
   - [Private registry](https://github.com/tecris/docker/tree/v16.02.01/registry2/private)
   - [Mirror registry](https://github.com/tecris/docker/tree/v16.02.01/registry2/mirror)
 
