@@ -90,18 +90,18 @@ For following to work:
 
 #### With Wildfly & MySQL
 ```sh
-   $ docker-compose up -d          # start web(wildfly) and database(mysql) containers`
-   $ mvn -Pdb-mysql clean compile flyway:migrate  # deploy database scripts
-   $ mvn clean wildfly:deploy                     # deploy application
-   $ mvn -Prun-it clean integration-test          # run integration tests
+   $ docker-compose up -d                           # start web(wildfly) and database(mysql) containers`
+   $ mvn -Pdb-mysql clean compile flyway:migrate    # deploy database scripts
+   $ mvn clean wildfly:deploy                       # deploy application
+   $ mvn -Prun-it clean integration-test            # run integration tests
 ```
  
 #### With Wildfly & PostgreSQL
 ```sh
-   $ docker-compose -f wildfly-postgresql.yml up -d   # start web(wildfly) and database(postgresql) containers
-   $ mvn -Pdb-postgres clean compile flyway:migrate                  # deploy database scripts
-   $ mvn clean wildfly:deploy -Ddatasource.name=PostgresDS           # deploy application
-   $ mvn -Prun-it clean integration-test                             # run integration tests
+   $ docker-compose -f wildfly-postgresql.yml up -d           # start web(wildfly) and database(postgresql) containers
+   $ mvn -Pdb-postgres clean compile flyway:migrate           # deploy database scripts
+   $ mvn clean wildfly:deploy -Ddatasource.name=PostgresDS    # deploy application
+   $ mvn -Prun-it clean integration-test                      # run integration tests
 ```
 
 Go to http://localhost:8080/planet
