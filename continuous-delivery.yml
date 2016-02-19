@@ -3,8 +3,6 @@ services:
   sonar-db:
     image: casadocker/postgresql:9.5
     container_name: sonar-db
-    ports:
-      - "172.17.0.1:5442:5432"
     environment:
       - POSTGRES_DB=sonar
       - POSTGRES_USER=sonar
@@ -32,4 +30,4 @@ services:
     ports:
       - "172.17.0.1:19000:9000"
     environment:
-      - SONARQUBE_JDBC_URL=jdbc:postgresql://172.17.0.1:5442/sonar
+      - SONARQUBE_JDBC_URL=jdbc:postgresql://sonar-db:5432/sonar
