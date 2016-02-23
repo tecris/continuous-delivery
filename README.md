@@ -14,8 +14,8 @@ Continuous delivery demo that aims to use following principles:
 
 <hr/>
 - [**Continuous delivery with Jenkins**](#continuous-delivery-with-jenkins)
-- [**Partial continuous delivery with Jolokia & Maven**](#partial-continuous-delivery-with-jolokia-and-maven)
-- [**Partial continuous delivery with Docker Compose and Maven**](#partial-continuous-delivery-with-docker-compose-and-maven)
+- [**E2E with Jolokia & Maven**](#e2e-with-jolokia-and-maven)
+- [**E2E with Docker Compose and Maven**](#e2e-with-docker-compose-and-maven)
 - [**Kubernetes**](#kubernetes)
 
 <hr/>
@@ -55,30 +55,27 @@ Continuous delivery demo that aims to use following principles:
  - Execute integration tests
  - Stop and remove web and database containers
 
-### Partial continuous delivery with [Jolokia][1] and Maven
+### E2E with [Jolokia][1] and Maven
 
- * Partial as no images are pushed to docker registry
-
- 1. With Wildfly and MySQL
-  * `$ mvn -Pcd-mysql clean integration-test`
- 1. With Wildfly and PostgreSQL
-  * `$ mvn -Pcd-postgres clean integration-test`
-
- *  `integration-test` will:
+ 1. One liners
+    ```
+    $ mvn -Pcd-mysql clean verify       # use mysql as database
+    $ mvn -Pcd-postgres clean verify    # use postgresql as database
+    ```
+ 1. Steps performed:
   - stop and remove web and db containers (if any)
   - build artifact
   - build web image,
   - start db container
   - apply database scripts
   - start web container
-  - run integration tests.
- *  `verify` will do `integration-test` plus:
+  - run integration tests
   - stop and remove web container
   - stop and remove db container
  
 Use `-Dmaven.buildNumber.doCheck=false` if project contains local changes
 
-### Partial continuous delivery with docker compose and Maven
+### E2E with docker compose and Maven
 
 * Partial as no images are pushed to docker registry
 
