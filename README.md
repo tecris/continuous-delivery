@@ -76,21 +76,22 @@ Continuous delivery demo that aims to use following principles:
 Use `-Dmaven.buildNumber.doCheck=false` if project contains local changes
 
 ### E2E with docker compose and Maven
-#### With Wildfly & MySQL
-```sh
-   $ docker-compose up -d                           # start web(wildfly) and database(mysql) containers`
-   $ mvn -Pdb-mysql clean compile flyway:migrate    # deploy database scripts
-   $ mvn clean wildfly:deploy                       # deploy application
-   $ mvn -Prun-it clean integration-test            # run integration tests
-```
- 
-#### With Wildfly & PostgreSQL
-```sh
+  * **Use MySQL database**
+
+    ```sh
+      $ docker-compose up -d                           # start web(wildfly) and database(mysql) containers`
+      $ mvn -Pdb-mysql clean compile flyway:migrate    # deploy database schema
+      $ mvn clean wildfly:deploy                       # deploy application
+      $ mvn -Prun-it clean integration-test            # run integration tests
+    ```
+  * **Use PostgreSQL database**
+
+    ```sh
    $ docker-compose -f wildfly-postgresql.yml up -d           # start web(wildfly) and database(postgresql) containers
-   $ mvn -Pdb-postgres clean compile flyway:migrate           # deploy database scripts
+   $ mvn -Pdb-postgres clean compile flyway:migrate           # deploy database schema
    $ mvn clean wildfly:deploy -Ddatasource.name=PostgresDS    # deploy application
    $ mvn -Prun-it clean integration-test                      # run integration tests
-```
+    ```
 
 Go to http://localhost:8080/planet
 
