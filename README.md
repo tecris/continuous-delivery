@@ -58,9 +58,10 @@ Continuous delivery demo that aims to use following principles:
 ### E2E with [Jolokia][1] and Maven
 
  1. One liners
+    
     ```
-    $ mvn -Pcd-mysql clean verify       # use mysql as database
-    $ mvn -Pcd-postgres clean verify    # use postgresql as database
+    $ mvn -Pcd-mysql clean verify -Dmaven.buildNumber.doCheck=false      # use mysql as database
+    $ mvn -Pcd-postgres clean verify -Dmaven.buildNumber.doCheck=false   # use postgresql as database
     ```
  1. Steps performed:
   - stop and remove web and db containers (if any)
@@ -76,9 +77,6 @@ Continuous delivery demo that aims to use following principles:
 Use `-Dmaven.buildNumber.doCheck=false` if project contains local changes
 
 ### E2E with docker compose and Maven
-
-* Partial as no images are pushed to docker registry
-
 #### With Wildfly & MySQL
 ```sh
    $ docker-compose up -d                           # start web(wildfly) and database(mysql) containers`
