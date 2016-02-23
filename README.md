@@ -82,12 +82,6 @@ Use `-Dmaven.buildNumber.doCheck=false` if project contains local changes
 
 * Partial as no images are pushed to docker registry
 
-For following to work:
- - Follow [instructions][3] to add jboss repository (as proxy repository) to nexus
- - Maven configuration. The project depends on [settings.xml][4]. Options to integrate:
-  - Copy or merge [settings.xml][4] to your user settings (usually ~/.m2/settings.xml)
-  - If above not an option, use `-s` flag to specify alternate user settings file (`mvn -s /path/to/settings.xml ...`)
-
 #### With Wildfly & MySQL
 ```sh
    $ docker-compose up -d                           # start web(wildfly) and database(mysql) containers`
