@@ -1,9 +1,9 @@
 version: '2'
 services:
-  db:
+  planets-db:
     image: casadocker/mysql:5.7
-    hostname: planets-db
-    container_name: mysql-planets-db
+    hostname: planets.db
+    container_name: mysql-demo-db
     stdin_open: true
     tty: true
     ports:
@@ -16,10 +16,10 @@ services:
 
   web:
     image: casadocker/alpine-wildfly-mysql:10.0.0
-    hostname: web
-    container_name: planets-web
+    hostname: planets.web
+    container_name: planets-demo-web
     # http://docs.docker.com/compose/networking/
-    command: -Dmysql.ipaddress=mysql-planets-db -Dmysql.port=3306 -Dmysql.database=planetsdb -Dmysql.username=planets -Dmysql.password=1planets!
+    command: -Dmysql.ipaddress=planets-db -Dmysql.port=3306 -Dmysql.database=planetsdb -Dmysql.username=planets -Dmysql.password=1planets!
     stdin_open: true
     tty: true
     ports:
