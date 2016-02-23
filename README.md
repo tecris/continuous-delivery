@@ -57,7 +57,7 @@ Continuous delivery demo that aims to use following principles:
 
 ### E2E with [Jolokia][1] and Maven
 
-1. One liners
+1. One liner
     
     `$ mvn -Pcd-mysql clean verify -Dmaven.buildNumber.doCheck=false      # use mysql as database`
       - use **cd-postgres** maven profile (replace **-Pcd-mysql** with **-Pcd-postgres**) to run with postgresql as database.
