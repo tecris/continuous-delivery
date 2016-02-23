@@ -1,9 +1,9 @@
 version: '2'
 services:
-  db:
-    container_name: postgres-db
+  postgresql-db:
     image: casadocker/postgresql:9.5
-    hostname: postgres-db
+    container_name: postgres-demo-db
+    hostname: postgres.db
     restart: always
     ports:
       - "5432:5432"
@@ -13,10 +13,10 @@ services:
       - POSTGRES_DB=planetsdb
 
   web:
-    container_name: planets-web
     image: casadocker/alpine-wildfly-postgresql:10.0.0
-    hostname: planets-web
-    command: -Dpostgres.ipaddress=postgres-db -Dpostgres.port=5432 -Dpostgres.database=planetsdb -Dpostgres.username=planets -Dpostgres.password=1planets!
+    container_name: planets-demo-web
+    hostname: planets.web
+    command: [-Dpostgres.ipaddress=postgresql-db, -Dpostgres.port=5432, -Dpostgres.database=planetsdb, -Dpostgres.username=planets, -Dpostgres.password=1planets!]
     restart: always
     ports:
       - "8080:8080"
