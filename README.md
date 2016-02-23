@@ -87,10 +87,10 @@ Use `-Dmaven.buildNumber.doCheck=false` if project contains local changes
   * **Use PostgreSQL database**
 
     ```sh
-   $ docker-compose -f wildfly-postgresql.yml up -d           # start web(wildfly) and database(postgresql) containers
-   $ mvn -Pdb-postgres clean compile flyway:migrate           # deploy database schema
-   $ mvn clean wildfly:deploy -Ddatasource.name=PostgresDS    # deploy application
-   $ mvn -Prun-it clean integration-test                      # run integration tests
+      $ docker-compose -f wildfly-postgresql.yml up -d           # start web(wildfly) and database(postgresql) containers
+      $ mvn -Pdb-postgres clean compile flyway:migrate           # deploy database schema
+      $ mvn clean wildfly:deploy -Ddatasource.name=PostgresDS    # deploy application
+      $ mvn -Prun-it clean integration-test                      # run integration tests
     ```
 
 Go to http://localhost:8080/planet
