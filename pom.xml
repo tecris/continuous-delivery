@@ -369,7 +369,7 @@
                       <MYSQL_PASSWORD>${database.password}</MYSQL_PASSWORD>
                     </env>
                     <ports>
-                      <port>3306:3306</port>
+                      <port>${database.port}:3306</port>
                     </ports>
                     <wait>
                       <time>10000</time>
@@ -398,7 +398,7 @@
                     <links>
                       <link>planets-db</link>
                     </links>
-                    <cmd>-Dmysql.ipaddress=planets-db -Dmysql.port=3306 -Dmysql.database=${database.name} -Dmysql.username=${database.username} -Dmysql.password=${database.password}</cmd>
+                    <cmd>-Dmysql.ipaddress=planets-db -Dmysql.port=${database.port} -Dmysql.database=${database.name} -Dmysql.username=${database.username} -Dmysql.password=${database.password}</cmd>
                     <wait>
                       <!-- Check for this URL to return a 200 return code .... -->
                       <url>http://localhost:8080/planet</url>
@@ -458,7 +458,7 @@
       <id>db-mysql</id>
       <properties>
         <database.vendor>mysql</database.vendor>
-        <database.port>3306</database.port>
+        <database.port>${database.port}</database.port>
         <db.driver>com.mysql.jdbc.Driver</db.driver>
       </properties>
       <build>
