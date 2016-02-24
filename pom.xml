@@ -402,7 +402,7 @@
                     <wait>
                       <!-- Check for this URL to return a 200 return code .... -->
                       <url>http://localhost:8080/planet</url>
-                      <time>10000</time>
+                      <time>120000</time>
                     </wait>
                   </run>
                 </image>
