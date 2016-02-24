@@ -1,0 +1,10 @@
+
+machine:
+  java:
+    version: oraclejdk8
+  services:
+    - docker
+
+test:
+  override:
+    - mvn -Pcd-postgres clean verify
