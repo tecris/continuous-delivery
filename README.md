@@ -1,5 +1,7 @@
 ## Java Continuous Delivery by Docker
 
+[![Build Status](https://travis-ci.org/tecris/continuous-delivery.svg?branch=master)](https://travis-ci.org/tecris/continuous-delivery)
+
 Continuous delivery demo that aims to use following principles:
  - reference images
   - build process - **fully automated**
