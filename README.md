@@ -16,8 +16,7 @@ Continuous delivery demo that aims to use following principles:
   - all above is achieved with **code / scripts** (also under version control)
 
 <hr/>
-- [**Continuous delivery with Jenkins**](#continuous-delivery-with-jenkins)
-- [**E2E with Jolokia & Maven**](#e2e-with-jolokia-and-maven)
+- [**Continuous delivery with Jenkins (on-prem)**](#continuous-delivery-with-jenkins)
 - [**E2E with Docker Compose and Maven**](#e2e-with-docker-compose-and-maven)
 - [**Kubernetes**](#kubernetes)
 
