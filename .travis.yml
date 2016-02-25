@@ -10,11 +10,11 @@ services:
 
 jdk:
   - oraclejdk8
-  
+
 cache:
   directories:
   - $HOME/.m2
-  
+
 before_install:
   # list docker-engine versions
   - apt-cache madison docker-engine
@@ -32,8 +32,8 @@ before_install:
   - "wget http://apache.mirror.iphh.net/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz && tar xfz apache-maven-3.3.9-bin.tar.gz && sudo mv apache-maven-3.3.9 /usr/local/maven-3.3.9 && sudo rm -f /usr/local/maven && sudo ln -s /usr/local/maven-3.3.9 /usr/local/maven"
 
 script:
-  - docker-compose up -d                                                 # start web(wildfly) and database(mysql) containers`
-  - /usr/local/maven/bin/mvn clean -Pdb-mysql compile flyway:migrate     # deploy database schema
-  - /usr/local/maven/bin/mvn clean wildfly:deploy                        # deploy application
+  - docker-compose up -d                                      # start web(wildfly) and database(mysql) containers`
+  - /usr/local/maven/bin/mvn clean compile flyway:migrate     # deploy database schema
+  - /usr/local/maven/bin/mvn clean wildfly:deploy             # deploy application
   - /usr/local/maven/bin/mvn -version
-  - /usr/local/maven/bin/mvn -Prun-it clean integration-test             # run E2E tests
+  - /usr/local/maven/bin/mvn -Prun-it clean integration-test  # run E2E tests
