@@ -458,7 +458,7 @@
       <id>db-mysql</id>
       <properties>
         <database.vendor>mysql</database.vendor>
-        <database.port>${database.port}</database.port>
+        <database.port>3306</database.port>
         <db.driver>com.mysql.jdbc.Driver</db.driver>
       </properties>
       <build>
