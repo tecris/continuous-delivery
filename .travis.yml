@@ -36,4 +36,4 @@ script:
   - mvn -Pdb-mysql clean compile flyway:migrate     # deploy database schema
   - mvn clean wildfly:deploy                        # deploy application
   - /usr/local/maven/bin/mvn -version
-  - /usr/local/maven/bin/mvn -Pcd-mysql verify
+  - /usr/local/maven/bin/mvn -Prun-it clean integration-test  
