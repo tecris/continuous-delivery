@@ -9,14 +9,7 @@ machine:
 dependencies:
    pre:
     - docker version
-    - sudo pip install docker-compose
-    - docker-compose version
 
 test:
-  pre:
-    - sudo service mysql stop                         # stop circleci mysql instance to avoid port clash
-    - docker-compose up -d                            # start web(wildfly) and database(mysql) containers`
-    - mvn -Pdb-mysql clean compile flyway:migrate     # deploy database schema
-    - mvn clean wildfly:deploy                        # deploy application
   override:
-    - mvn -Prun-it clean integration-test  
+    - mvn -Pcd-mysql verify
