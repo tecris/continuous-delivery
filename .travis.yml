@@ -1,5 +1,10 @@
 sudo: required
 
+env:
+  global:
+    - DOCKER_VERSION=1.10.2-0~trusty
+    - DOCKER_COMPOSE_VERSION=1.6.2
+
 services:
   - docker
 
@@ -11,8 +16,24 @@ cache:
   - $HOME/.m2
   
 before_install:
+  # list docker-engine versions
+  - apt-cache madison docker-engine
+
+  # upgrade docker-engine to specific version
+  - sudo apt-get -o Dpkg::Options::="--force-confnew" install -y docker-engine=${DOCKER_VERSION}
+
+  # reinstall docker-compose at specific version
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+  - docker version
+  - docker-compose version
   - "wget http://apache.mirror.iphh.net/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz && tar xfz apache-maven-3.3.9-bin.tar.gz && sudo mv apache-maven-3.3.9 /usr/local/maven-3.3.9 && sudo rm -f /usr/local/maven && sudo ln -s /usr/local/maven-3.3.9 /usr/local/maven"
 
 script:
+  - docker-compose up -d                            # start web(wildfly) and database(mysql) containers`
+  - mvn -Pdb-mysql clean compile flyway:migrate     # deploy database schema
+  - mvn clean wildfly:deploy                        # deploy application
   - /usr/local/maven/bin/mvn -version
   - /usr/local/maven/bin/mvn -Pcd-mysql verify
