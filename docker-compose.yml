@@ -1,25 +1,25 @@
 version: '2'
 services:
-  planets-db:
+  ackris-db:
     image: casadocker/mysql:5.7
-    hostname: planets.db
-    container_name: mysql-demo-db
+    hostname: ackris.db
+    container_name: ackris-demo-db
     stdin_open: true
     tty: true
     ports:
       - "3306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=mysql
-      - MYSQL_USER=planets
-      - MYSQL_PASSWORD=1planets!
-      - MYSQL_DATABASE=planetsdb
+      - MYSQL_USER=bookstore
+      - MYSQL_PASSWORD=1bookstore!
+      - MYSQL_DATABASE=bookstoredb
 
   web:
     image: casadocker/alpine-wildfly-mysql:10.0.0
-    hostname: planets.web
-    container_name: planets-demo-web
+    hostname: ackris.web
+    container_name: ackris-demo-web
     # http://docs.docker.com/compose/networking/
-    command: -Dmysql.ipaddress=planets-db -Dmysql.port=3306 -Dmysql.database=planetsdb -Dmysql.username=planets -Dmysql.password=1planets!
+    command: -Dmysql.ipaddress=ackris-db -Dmysql.port=3306 -Dmysql.database=bookstoredb -Dmysql.username=bookstore -Dmysql.password=1bookstore!
     stdin_open: true
     tty: true
     ports:

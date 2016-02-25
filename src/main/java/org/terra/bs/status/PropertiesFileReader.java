@@ -1,4 +1,4 @@
-package org.terra.planet.status;
+package org.terra.bs.status;
 
 import java.io.IOException;
 import java.io.InputStream;

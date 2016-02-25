@@ -35,9 +35,9 @@
     <mysql.root.password>mysql</mysql.root.password>
     <database.host>localhost</database.host>
     <database.port>3306</database.port>
-    <database.name>planetsdb</database.name>
-    <database.username>planets</database.username>
-    <database.password>1planets!</database.password>
+    <database.name>bookstoredb</database.name>
+    <database.username>bookstore</database.username>
+    <database.password>1bookstore!</database.password>
     <db.driver>com.mysql.jdbc.Driver</db.driver>
     <wildfly.username>admin</wildfly.username>
     <wildfly.password>1admin!</wildfly.password>
@@ -124,7 +124,7 @@
   </dependencies>
 
   <build>
-    <finalName>planet</finalName>
+    <finalName>bookstore</finalName>
     <resources>
       <resource>
         <directory>src/main/resources</directory>
