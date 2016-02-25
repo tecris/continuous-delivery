@@ -71,7 +71,7 @@ Continuous delivery demo that aims to use following principles:
 
 Use `-Dmaven.buildNumber.doCheck=false` if project contains local changes
 
-Go to http://localhost:8080/planet
+Demo: `http://localhost:8080/bookstore`
 
 #### Kubernetes
 
