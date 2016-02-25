@@ -233,6 +233,9 @@
         <groupId>org.wildfly.plugins</groupId>
         <artifactId>wildfly-maven-plugin</artifactId>
       </plugin>
+      <plugin>
+        <artifactId>maven-failsafe-plugin</artifactId>
+      </plugin>
     </plugins>
   </build>
 
@@ -246,16 +249,4 @@
     </plugins>
   </reporting>
 
-  <profiles>
-    <profile>
-      <id>run-it</id>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-failsafe-plugin</artifactId>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 </project>

@@ -26,7 +26,7 @@ Continuous delivery demo that aims to use following principles:
 ### Techno stack
  1. Java JEE (Web Application)
  1. Wildfly 10.0.0
- 1. MySQL 5.7 or PostgreSQL 9.5
+ 1. MySQL 5.7
 
 ### Prerequisites
 #### What is required to run this project:
@@ -58,43 +58,19 @@ Continuous delivery demo that aims to use following principles:
  - Execute integration tests
  - Stop and remove web and database containers
 
-### E2E with [Jolokia][1] and Maven
-
-1. One liner
-    
-    `$ mvn -Pcd-mysql clean verify -Dmaven.buildNumber.doCheck=false      # use mysql as database`
-      - use **cd-postgres** maven profile (replace **-Pcd-mysql** with **-Pcd-postgres**) to run with postgresql as database.
-
-1. Steps performed:
-  - stop and remove web and db containers (if any)
-  - build artifact
-  - build web image,
-  - start db container
-  - apply database scripts
-  - start web container
-  - run integration tests
-  - stop and remove web container
-  - stop and remove db container
  
-Use `-Dmaven.buildNumber.doCheck=false` if project contains local changes
 
 ### E2E with docker compose and Maven
-  * **Use MySQL database**
+  * **Step-by-step**
 
     ```sh
-      $ docker-compose up -d                           # start web(wildfly) and database(mysql) containers`
-      $ mvn -Pdb-mysql clean compile flyway:migrate    # deploy database schema
-      $ mvn clean wildfly:deploy                       # deploy application
-      $ mvn -Prun-it clean integration-test            # run integration tests
+      $ docker-compose up -d                # start web and database containers
+      $ mvn clean compile flyway:migrate    # deploy database schema
+      $ mvn clean wildfly:deploy            # deploy application
+      $ mvn clean integration-test          # run integration tests
     ```
-  * **Use PostgreSQL database**
 
-    ```sh
-      $ docker-compose -f wildfly-postgresql.yml up -d           # start web(wildfly) and database(postgresql) containers
-      $ mvn -Pdb-postgres clean compile flyway:migrate           # deploy database schema
-      $ mvn clean wildfly:deploy -Ddatasource.name=PostgresDS    # deploy application
-      $ mvn -Prun-it clean integration-test                      # run integration tests
-    ```
+Use `-Dmaven.buildNumber.doCheck=false` if project contains local changes
 
 Go to http://localhost:8080/planet
 

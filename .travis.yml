@@ -36,4 +36,4 @@ script:
   - /usr/local/maven/bin/mvn clean compile flyway:migrate     # deploy database schema
   - /usr/local/maven/bin/mvn clean wildfly:deploy             # deploy application
   - /usr/local/maven/bin/mvn -version
-  - /usr/local/maven/bin/mvn -Prun-it clean integration-test  # run E2E tests
+  - /usr/local/maven/bin/mvn clean integration-test           # run E2E tests
