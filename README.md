@@ -1,5 +1,6 @@
 ## Java Continuous Delivery by Docker
 
+[![Circle CI](https://circleci.com/gh/tecris/continuous-delivery.svg?style=svg)](https://circleci.com/gh/tecris/continuous-delivery)
 [![Build Status](https://travis-ci.org/tecris/continuous-delivery.svg?branch=master)](https://travis-ci.org/tecris/continuous-delivery)
 
 Continuous delivery demo that aims to use following principles:
