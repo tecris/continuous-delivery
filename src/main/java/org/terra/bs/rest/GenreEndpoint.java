@@ -19,11 +19,14 @@ import javax.ws.rs.core.Response.Status;
 import org.terra.bs.ejb.dao.GenreDao;
 import org.terra.bs.entities.Genre;
 
+import io.swagger.annotations.Api;
+
 /**
  * 
  */
 @Stateless
 @Path("/genres")
+@Api(value = "/genres")
 public class GenreEndpoint {
 
     @Inject

@@ -63,7 +63,7 @@ Continuous delivery demo that aims to use following principles:
   * **Step-by-step**
 
     ```sh
-      $ docker-compose up -d                # start web and database containers
+      $ docker-compose up -d ackris-db web  # start web and database containers
       $ mvn clean compile flyway:migrate    # deploy database schema
       $ mvn clean wildfly:deploy            # deploy application
       $ mvn clean integration-test          # run integration tests

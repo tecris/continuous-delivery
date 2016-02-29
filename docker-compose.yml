@@ -25,3 +25,12 @@ services:
     ports:
       - "8080:8080"
       - "9990:9990"
+
+  swaggerui:
+    image: schickling/swagger-ui
+    hostname: swagger-ui
+    container_name: swagger-ui-demo
+    ports:
+      - "81:80"
+    environment:
+      - API_URL=http://localhost:8080/bookstore/rest/swagger.json
