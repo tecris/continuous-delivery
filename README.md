@@ -18,6 +18,7 @@ Continuous delivery demo that aims to use following principles:
 <hr/>
 - [**Continuous delivery with Jenkins (on-prem)**](#continuous-delivery-with-jenkins)
 - [**E2E with Docker Compose and Maven**](#e2e-with-docker-compose-and-maven)
+- [**Swagger**](#swagger)
 - [**Kubernetes**](#kubernetes)
 
 <hr/>
@@ -58,7 +59,6 @@ Continuous delivery demo that aims to use following principles:
  - Stop and remove web and database containers
 
  
-
 ### E2E with docker compose and Maven
   * **Step-by-step**
 
@@ -72,6 +72,13 @@ Continuous delivery demo that aims to use following principles:
 Use `-Dmaven.buildNumber.doCheck=false` if project contains local changes
 
 Demo: `http://localhost:8080/bookstore`
+
+#### Swagger
+
+   * `$ docker-compose up -d swaggerui`
+ 
+   * [Swagger UI](https://github.com/swagger-api/swagger-ui) @ `http://localhost:81`
+
 
 #### Kubernetes
 
