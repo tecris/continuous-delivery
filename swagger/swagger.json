@@ -44,18 +44,26 @@
       },
       "post" : {
         "tags" : [ "genres" ],
+        "summary" : "Create genre",
+        "description" : "",
         "operationId" : "create",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
         "parameters" : [ {
           "in" : "body",
           "name" : "body",
-          "required" : false,
+          "description" : "Genre",
+          "required" : true,
           "schema" : {
             "$ref" : "#/definitions/Genre"
           }
         } ],
         "responses" : {
-          "default" : {
-            "description" : "successful operation"
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Genre"
+            }
           }
         }
       }
@@ -117,15 +125,18 @@
   "definitions" : {
     "Genre" : {
       "type" : "object",
+      "required" : [ "genre" ],
       "properties" : {
         "genre" : {
-          "type" : "string"
+          "type" : "string",
+          "description" : "Genre type"
         },
         "genreId" : {
           "type" : "integer",
           "format" : "int32"
         }
-      }
+      },
+      "description" : "Genre model representation"
     }
   }
 }
