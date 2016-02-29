@@ -33,4 +33,5 @@ services:
     ports:
       - "81:80"
     environment:
-      - API_URL=http://localhost:8080/bookstore/rest/swagger.json
+      - API_URL=https://raw.githubusercontent.com/tecris/continuous-delivery/master/swagger/swagger.json
+      #- API_URL=http://localhost:8080/bookstore/rest/swagger.json
