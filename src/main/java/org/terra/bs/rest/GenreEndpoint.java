@@ -20,6 +20,8 @@ import org.terra.bs.ejb.dao.GenreDao;
 import org.terra.bs.entities.Genre;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 /**
  * 
@@ -35,7 +37,8 @@ public class GenreEndpoint {
     @POST
     @Consumes("application/json")
     @Produces("application/json")
-    public Response create(Genre entity) {
+    @ApiOperation(value = "Create genre", response = Genre.class)
+    public Response create(@ApiParam(value = "Genre", required = true) Genre entity) {
         em.create(entity);
         return Response.ok(entity).build();
     }
