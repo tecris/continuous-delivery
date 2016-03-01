@@ -1,11 +1,8 @@
 - name: step 1
-  service: continuous-delivery
   command: mvn clean compile flyway:migrate
 
 - name: step 2
-  service: continuous-delivery
   command: mvn wildfly:deploy
 
 - name: step 3
-  service: continuous-delivery
   command: mvn clean integration-test
