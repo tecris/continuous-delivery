@@ -1,0 +1,3 @@
+- name: ci
+  service: project_name
+  command: mvn clean integration-test
