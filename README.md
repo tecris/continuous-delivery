@@ -100,7 +100,7 @@ Demo: `http://localhost:8080/bookstore`
    # (image change from blue.sky/planets-web:1 to blue.sky/planets-web:2)
    $ kubectl rolling-update planets-web-rc-v1 planets-web-rc-v2 -f kubernetes/planets-web-rc-v2.yaml    
    ```
-   http://192.168.122.51:30002/planet
+   `http://192.168.122.51:30002/bookstore`
 
 
 #### Varia kubectl commands
