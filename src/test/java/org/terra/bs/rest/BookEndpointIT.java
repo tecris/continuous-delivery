@@ -159,7 +159,7 @@ public class BookEndpointIT {
         book.setPrice(price);
         book.setPublishedDate(calendar);
         Publisher publisher = new Publisher();
-        publisher.setPublisherId(new PublisherEndpointIT().creategenericPublisher());
+        publisher.setPublisherId(new PublisherEndpointIT().createPublisher());
         book.setPublisher(publisher);
         book.setShortDesc(shortDescription);
         return book;

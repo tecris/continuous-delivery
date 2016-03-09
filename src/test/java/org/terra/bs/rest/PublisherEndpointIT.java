@@ -17,8 +17,8 @@ public class PublisherEndpointIT {
 	@Test
 	public void testCreatePublisher() throws JsonProcessingException {
 
-		String expectedEmail = "mihail.sadoveanu@email.org";
-		String expectedName = "Mihail";
+		String expectedEmail = "cartea.lumina@email.org";
+		String expectedName = "Cartea Lumina";
 		String expectedPhone = "0064-9-555-5555";
 
 		String jsonInString = this.buildPublisherJson(expectedEmail, expectedName, expectedPhone);
@@ -32,8 +32,8 @@ public class PublisherEndpointIT {
 	@Test
 	public void testGetPublisher() throws JsonProcessingException {
 
-		String expectedEmail = "mihail.sadoveanu@email.org";
-		String expectedName = "Mihail";
+		String expectedEmail = "cartea.mea@email.org";
+		String expectedName = "Cartea Lumina";
 		String expectedPhone = "0064-9-555-5555";
 
 		int publisherId = this.createPublisher(expectedEmail, expectedName, expectedPhone);
@@ -45,12 +45,12 @@ public class PublisherEndpointIT {
 	@Test
 	public void testUpdatePublisher() throws JsonProcessingException {
 
-		String expectedEmail = "mihail.sadoveanu@email.org";
-		String expectedName = "Mihal";
+		String expectedEmail = "cartea.lumina@email.org";
+		String expectedName = "Cartea Lumina";
 		String expectedPhone = "0064-9-555-5555";
 
-		String updatedEmail = "Mihail.Sadoveanu@email.org";
-		String updatedName = "Mihail";
+		String updatedEmail = "Cartea.Lumina@email.org";
+		String updatedName = "Cartea Lumina";
 		String updatedPhone = "0064-9-555-6666";
 
 		int publisherId = this.createPublisher(expectedEmail, expectedName, expectedPhone);
@@ -67,8 +67,8 @@ public class PublisherEndpointIT {
 	@Test
 	public void testDeletePublisher() throws JsonProcessingException {
 
-		String expectedEmail = "mihail.sadoveanu@email.org";
-		String expectedName = "Mihail";
+		String expectedEmail = "cartea.lumina@email.org";
+		String expectedName = "Cartea Lumina";
 		String expectedPhone = "0064-9-555-5555";
 
 		int publisherId = this.createPublisher(expectedEmail, expectedName, expectedPhone);
@@ -76,13 +76,14 @@ public class PublisherEndpointIT {
 		given().expect().statusCode(404).get(PUBLISHERS_REST_URL + "/" + publisherId);
 	}
 
-	public int creategenericPublisher() throws JsonProcessingException {
+	public int createPublisher() throws JsonProcessingException {
 
-		String email = "mihail.sadoveanu@email.org";
-		String name = "Mihail";
-		String phone = "0064-9-555-5555";
+		String expectedEmail = "cartea.lumina@email.org";
+		String expectedName = "Cartea Lumina";
+		String expectedPhone = "0064-9-555-5555";
 
-		Publisher publisher = this.buildPublisher(email, name, phone);
+
+		Publisher publisher = this.buildPublisher(expectedEmail, expectedName, expectedPhone);
 
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonInString = mapper.writeValueAsString(publisher);
