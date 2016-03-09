@@ -90,6 +90,7 @@
         <groupId>com.jayway.restassured</groupId>
         <artifactId>rest-assured</artifactId>
         <version>${jayway-restassured.version}</version>
+        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
@@ -126,12 +127,10 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.hamcrest</groupId>
       <artifactId>hamcrest-library</artifactId>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.jayway.restassured</groupId>
@@ -140,12 +139,10 @@
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-core</artifactId>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-      <scope>test</scope>
     </dependency>
   </dependencies>
 
