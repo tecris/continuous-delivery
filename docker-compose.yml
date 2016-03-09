@@ -14,7 +14,7 @@ services:
       - MYSQL_PASSWORD=1bookstore!
       - MYSQL_DATABASE=bookstoredb
 
-  web:
+  ackris-web:
     image: casadocker/alpine-wildfly-mysql:10.0.0
     hostname: ackris.web
     container_name: ackris-demo-web
