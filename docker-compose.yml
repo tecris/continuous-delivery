@@ -1,7 +1,7 @@
 version: '2'
 services:
   ackris-db:
-    image: casadocker/mysql:5.7
+    image: mysql:5.7
     hostname: ackris.db
     container_name: ackris-demo-db
     stdin_open: true
