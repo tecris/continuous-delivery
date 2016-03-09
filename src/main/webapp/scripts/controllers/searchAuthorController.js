@@ -1,10 +1,10 @@
 
 
-angular.module('planets').controller('SearchPlanetController', function($scope, $http, $filter, PlanetResource ) {
+angular.module('bs2').controller('SearchAuthorController', function($scope, $http, AuthorResource ) {
 
     $scope.search={};
     $scope.currentPage = 0;
-    $scope.pageSize= 10;
+    $scope.pageSize= 5;
     $scope.searchResults = [];
     $scope.filteredResults = [];
     $scope.pageRange = [];
@@ -19,9 +19,8 @@ angular.module('planets').controller('SearchPlanetController', function($scope, 
     };
 
     $scope.performSearch = function() {
-        $scope.searchResults = PlanetResource.queryAll(function(){
-            $scope.filteredResults = $filter('searchFilter')($scope.searchResults, $scope);
-            $scope.currentPage = 0;
+        $scope.searchResults = AuthorResource.queryAll(function(){
+            $scope.numberOfPages();
         });
     };
     

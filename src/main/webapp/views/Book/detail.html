@@ -1,0 +1,81 @@
+<header ng-switch on="$location.path().indexOf('/Books/new') > -1">
+    <h3 ng-switch-when="true">Create a new Book</h3>
+    <h3 ng-switch-when="false">View or edit Book</h3>
+</header>
+<form id="BookForm" name="BookForm" class="form-horizontal" role="form">
+    <div ng-show="displayError" class="alert alert-danger">
+        <strong>Error!</strong> Something broke. Retry, or cancel and start afresh.
+    </div>
+    
+    <div class="form-group" ng-class="{'has-error': BookForm.isbnNo.$invalid}">
+        <label for="isbnNo" class="col-sm-2 control-label">Isbn No</label>
+        <div id="isbnNoControls" class="col-sm-10">
+            <input id="isbnNo" name="isbnNo" type="text" required ng-maxlength="15" class="form-control" ng-model="book.isbnNo" placeholder="Enter the Book Isbn No"></input>
+            <span class="help-block error" ng-show="BookForm.isbnNo.$error.required">required</span> 
+            <span class="help-block error" ng-show="BookForm.isbnNo.$error.maxlength">maximum length is 15</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': BookForm.author.$invalid}">
+        <label for="author" class="col-sm-2 control-label">Author</label>
+        <div id="authorControls" class="col-sm-10">
+            <select id="author" name="author" multiple class="form-control" ng-model="authorSelection" ng-options="a.text for a in authorSelectionList">
+                <option value="">Choose an Author</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': BookForm.genre.$invalid}">
+        <label for="genre" class="col-sm-2 control-label">Genre</label>
+        <div id="genreControls" class="col-sm-10">
+        <select id="genre" name="genre" multiple class="form-control" ng-model="genreSelection" ng-options="g.text for g in genreSelectionList"  >
+            <option value="">Choose a Genre</option>
+        </select>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': BookForm.shortDesc.$invalid}">
+        <label for="shortDesc" class="col-sm-2 control-label">Short Desc</label>
+        <div id="shortDescControls" class="col-sm-10">
+            <input id="shortDesc" name="shortDesc" type="text" required ng-maxlength="100" class="form-control" ng-model="book.shortDesc" placeholder="Enter the Book Short Desc"></input>
+            <span class="help-block error" ng-show="BookForm.shortDesc.$error.required">required</span> 
+            <span class="help-block error" ng-show="BookForm.shortDesc.$error.maxlength">maximum length is 100</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': BookForm.publisher.$invalid}">
+        <label for="publisher" class="col-sm-2 control-label">Publisher</label>
+        <div id="publisherControls" class="col-sm-10">
+        <select id="publisher" name="publisher" class="form-control" ng-model="publisherSelection" ng-options="p.text for p in publisherSelectionList"  >
+            <option value="">Choose a Publisher</option>
+        </select>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': BookForm.price.$invalid}">
+        <label for="price" class="col-sm-2 control-label">Price</label>
+        <div id="priceControls" class="col-sm-10">
+            <input id="price" name="price" type="number" required class="form-control" ng-model="book.price" placeholder="Enter the Book Price"></input>
+            <span class="help-block error" ng-show="BookForm.price.$error.required">required</span> 
+            <span class="help-block error" ng-show="BookForm.price.$error.number">not a number</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': BookForm.publishedDate.$invalid}">
+        <label for="publishedDate" class="col-sm-2 control-label">Published Date</label>
+        <div id="publishedDateControls" class="col-sm-10">
+            <date id="publishedDate" name="publishedDate" ng-model="book.publishedDate" placeholder="Enter the Book Published Date"></date>
+            <span class="help-block error" ng-show="BookForm.publishedDate.$error.maxlength">maximum length is 10</span>
+            <span class="help-block error" ng-show="BookForm.publishedDate.$error.dateFormat">does not match format "yyyy-MM-dd" (e.g. 2013-12-01)</span>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="saveBook" name="saveBook" class="btn btn-primary" ng-disabled="isClean() || BookForm.$invalid" ng-click="save()"><span class="glyphicon glyphicon-ok-sign"></span> Save</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button>
+            <button id="deleteBook" name="deleteBook" class="btn btn-danger" ng-show="book.bookId" ng-click="remove()"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+        </div>
+    </div>
+</form>

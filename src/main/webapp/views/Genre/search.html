@@ -1,28 +1,20 @@
 <div class="form-horizontal">
-    <h3>Create a new Planet</h3>
+    <h3>Create a new Genre</h3>
     <div class="form-group">
         <div class="col-md-offset-2 col-sm-2">
-            <a id="Create" name="Create" class="btn btn-primary" href="#/Planets/new"><span class="glyphicon glyphicon-plus-sign"></span> Create</a>
+            <a id="Create" name="Create" class="btn btn-primary" href="#/Genres/new"><span class="glyphicon glyphicon-plus-sign"></span> Create</a>
         </div>
     </div>
 </div>
 <hr/>
 <div>
-    <h3>Search for Planets</h3>
-    <form id="PlanetSearch" class="form-horizontal">
+    <h3>Search for Genres</h3>
+    <form id="GenreSearch" class="form-horizontal">
         
-
     <div class="form-group">
-        <label for="name" class="col-sm-2 control-label">Name</label>
+        <label for="genre" class="col-sm-2 control-label">Genre</label>
         <div class="col-sm-10">
-            <input id="name" name="name" class="form-control" type="text" ng-model="search.name" placeholder="Enter the Planet Name"></input>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="galaxy" class="col-sm-2 control-label">Galaxy</label>
-        <div class="col-sm-10">
-            <input id="galaxy" name="galaxy" class="form-control" type="text" ng-model="search.galaxy" placeholder="Enter the Planet Galaxy"></input>
+            <input id="genre" name="genre" class="form-control" type="text" ng-model="search.genre" placeholder="Enter the Genre Genre"></input>
         </div>
     </div>
 
@@ -39,14 +31,12 @@
         <table class="table table-responsive table-bordered table-striped clearfix">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Galaxy</th>
+                    <th>Genre</th>
                 </tr>
             </thead>
             <tbody id="search-results-body">
-                <tr ng-repeat="result in filteredResults | startFrom:currentPage*pageSize | limitTo:pageSize">
-                    <td><a href="#/Planets/edit/{{result.id}}">{{result.name}}</a></td>
-                    <td><a href="#/Planets/edit/{{result.id}}">{{result.galaxy}}</a></td>
+                <tr ng-repeat="result in searchResults | searchFilter:searchResults | startFrom:currentPage*pageSize | limitTo:pageSize">
+                    <td><a href="#/Genres/edit/{{result.genreId}}">{{result.genre}}</a></td>
                 </tr>
             </tbody>
         </table>

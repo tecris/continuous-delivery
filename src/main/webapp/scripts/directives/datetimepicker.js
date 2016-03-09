@@ -1,7 +1,7 @@
 'use strict';
 
 var LOCAL_DATETIME_REGEX = /^([0-2][0-9]{3})\-([0-1][0-9])\-([0-3][0-9])\ ([0-5][0-9])\:([0-5][0-9])\:([0-5][0-9])$/;
-angular.module('planets').directive('datetime', function($parse, dateFilter) {
+angular.module('bs2').directive('datetime', function($parse, dateFilter) {
     return {
         restrict : "E",
         replace : true,

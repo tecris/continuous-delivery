@@ -1,7 +1,7 @@
 'use strict';
 
 var DATE_REGEX = /^([0-2][0-9]{3})\-([0-1][0-9])\-([0-3][0-9])$/;
-angular.module('planets').directive('date', function($parse, dateFilter) {
+angular.module('bs2').directive('date', function($parse, dateFilter) {
     return {
         restrict : "E",
         replace : true,

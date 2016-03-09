@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="planets">
+<html lang="en" ng-app="bs2">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Planets</title>
+	<title>Bookstore</title>
     <link href="styles/bootstrap.css" rel="stylesheet" media="screen">
     <link href="styles/bootstrap-theme.css" rel="stylesheet" media="screen">
     <link href="styles/main.css" rel="stylesheet" media="screen">
@@ -20,7 +20,7 @@
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                     </button>
-				    <a class="navbar-brand" href="#">Planety</a>
+				    <a class="navbar-brand" href="#">Bookstore</a>
 			    </div>
 			</div>
     	</div>
@@ -34,16 +34,15 @@
                     </a>
                     <nav class="sidebar-nav" ng-controller="NavController" role="navigation">
                         <div id="sidebar-entries" class="list-group">
-                        	<a class="list-group-item" ng-class="{active: matchesRoute('Planets')}" href="#/Planets" data-toggle="offcanvas">Planets</a>
+                        	<a class="list-group-item" ng-class="{active: matchesRoute('Authors')}" href="#/Authors" data-toggle="offcanvas">Authors</a>
+                        	<a class="list-group-item" ng-class="{active: matchesRoute('Books')}" href="#/Books" data-toggle="offcanvas">Books</a>
+                        	<a class="list-group-item" ng-class="{active: matchesRoute('Genres')}" href="#/Genres" data-toggle="offcanvas">Genres</a>
+                        	<a class="list-group-item" ng-class="{active: matchesRoute('Publishers')}" href="#/Publishers" data-toggle="offcanvas">Publishers</a>
                         </div>
                     </nav>
                 </div>
                 <!-- main area-->
                 <div class="col-sm-offset-1 col-xs-12 col-sm-8 well mainarea">
-                    <div ng-controller="FlashController" class="alert alert-dismissible" ng-class="'alert-' + flash.getMessage().cssClass" role="alert" ng-show="showAlert">
-                        <button type="button" class="close" ng-click="hideAlert()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        {{flash.getMessage().text}}
-                    </div>
                     <div id="main" ng-view>
                     </div>
                 </div>
@@ -58,8 +57,8 @@
         </div>
     </div>
     
-    <script src="scripts/vendor/modernizr-2.8.3.min.js"></script>
-    <script src="scripts/vendor/jquery-2.1.1.js"></script>
+    <script src="scripts/vendor/modernizr-2.6.2.min.js"></script>
+    <script src="scripts/vendor/jquery-1.9.1.js"></script>
     <script src="scripts/vendor/bootstrap.js"></script>
     <script src="scripts/vendor/angular.js"></script>
     <script src="scripts/vendor/angular-route.js"></script>
@@ -71,12 +70,22 @@
     <script src="scripts/directives/datetimepicker.js"></script>
     <script src="scripts/filters/startFromFilter.js"></script>
     <script src="scripts/filters/genericSearchFilter.js"></script>
-    <script src="scripts/services/flash.js"></script>
     <script src="scripts/services/locationParser.js"></script>
-    <script src="scripts/controllers/flashController.js"></script>
-    <script src="scripts/services/PlanetFactory.js"></script>
-    <script src="scripts/controllers/newPlanetController.js"></script>
-    <script src="scripts/controllers/searchPlanetController.js"></script>
-    <script src="scripts/controllers/editPlanetController.js"></script>
+    <script src="scripts/services/AuthorFactory.js"></script>
+    <script src="scripts/controllers/newAuthorController.js"></script>
+    <script src="scripts/controllers/searchAuthorController.js"></script>
+    <script src="scripts/controllers/editAuthorController.js"></script>
+    <script src="scripts/services/BookFactory.js"></script>
+    <script src="scripts/controllers/newBookController.js"></script>
+    <script src="scripts/controllers/searchBookController.js"></script>
+    <script src="scripts/controllers/editBookController.js"></script>
+    <script src="scripts/services/GenreFactory.js"></script>
+    <script src="scripts/controllers/newGenreController.js"></script>
+    <script src="scripts/controllers/searchGenreController.js"></script>
+    <script src="scripts/controllers/editGenreController.js"></script>
+    <script src="scripts/services/PublisherFactory.js"></script>
+    <script src="scripts/controllers/newPublisherController.js"></script>
+    <script src="scripts/controllers/searchPublisherController.js"></script>
+    <script src="scripts/controllers/editPublisherController.js"></script>
 </body>
 </html>

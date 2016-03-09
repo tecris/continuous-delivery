@@ -1,0 +1,44 @@
+<header ng-switch on="$location.path().indexOf('/Authors/new') > -1">
+    <h3 ng-switch-when="true">Create a new Author</h3>
+    <h3 ng-switch-when="false">View or edit Author</h3>
+</header>
+<form id="AuthorForm" name="AuthorForm" class="form-horizontal" role="form">
+    <div ng-show="displayError" class="alert alert-danger">
+        <strong>Error!</strong> Something broke. Retry, or cancel and start afresh.
+    </div>
+    
+    <div class="form-group" ng-class="{'has-error': AuthorForm.firstName.$invalid}">
+        <label for="firstName" class="col-sm-2 control-label">First Name</label>
+        <div id="firstNameControls" class="col-sm-10">
+            <input id="firstName" name="firstName" type="text" required ng-maxlength="20" class="form-control" ng-model="author.firstName" placeholder="Enter the Author First Name"></input>
+            <span class="help-block error" ng-show="AuthorForm.firstName.$error.required">required</span> 
+            <span class="help-block error" ng-show="AuthorForm.firstName.$error.maxlength">maximum length is 20</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': AuthorForm.lastName.$invalid}">
+        <label for="lastName" class="col-sm-2 control-label">Last Name</label>
+        <div id="lastNameControls" class="col-sm-10">
+            <input id="lastName" name="lastName" type="text" required ng-maxlength="20" class="form-control" ng-model="author.lastName" placeholder="Enter the Author Last Name"></input>
+            <span class="help-block error" ng-show="AuthorForm.lastName.$error.required">required</span> 
+            <span class="help-block error" ng-show="AuthorForm.lastName.$error.maxlength">maximum length is 20</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': AuthorForm.email.$invalid}">
+        <label for="email" class="col-sm-2 control-label">Email</label>
+        <div id="emailControls" class="col-sm-10">
+            <input id="email" name="email" type="text" ng-maxlength="30" class="form-control" ng-model="author.email" placeholder="Enter the Author Email"></input>
+            <span class="help-block error" ng-show="AuthorForm.email.$error.maxlength">maximum length is 30</span>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="saveAuthor" name="saveAuthor" class="btn btn-primary" ng-disabled="isClean() || AuthorForm.$invalid" ng-click="save()"><span class="glyphicon glyphicon-ok-sign"></span> Save</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button>
+            <button id="deleteAuthor" name="deleteAuthor" class="btn btn-danger" ng-show="author.authorId" ng-click="remove()"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+        </div>
+    </div>
+</form>
