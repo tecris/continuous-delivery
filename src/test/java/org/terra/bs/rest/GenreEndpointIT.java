@@ -12,59 +12,87 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class GenreEndpointIT {
 
-    private static final String GENRES_REST_URL = "http://localhost:8080/bookstore/rest/genres";
+	private static final String GENRES_REST_URL = "http://localhost:8080/bookstore/rest/genres";
 
-    @Test
-    public void testGetGenre() throws JsonProcessingException {
+	@Test
+	public void testCreateGenre() throws JsonProcessingException {
 
-        String expectedGenre = "fantasy";
+		String expectedGenre = "fanta";
 
-        int genreId = this.createGenre(expectedGenre);
+		int genreId = this.createGenre(expectedGenre).getGenreId();
 
-        get(GENRES_REST_URL + "/" + genreId).then().body("genre", equalTo(expectedGenre));
-    }
+		get(GENRES_REST_URL + "/" + genreId).then().body("genre", equalTo(expectedGenre));
+	}
 
-    @Test
-    public void testUpdateGenre() throws JsonProcessingException {
+	@Test
+	public void testCreateGenreNullGenre() throws JsonProcessingException {
 
-        String expectedGenre = "fantas";
+		String jsonInString = this.buildGenreJson(null);
 
-        String updatedGenre = "fantasy";
+		given().contentType("application/json").body(jsonInString).when().post(GENRES_REST_URL).then().statusCode(400);
+	}
 
-        int genreId = this.createGenre(expectedGenre);
-        Genre genre = this.buildGenre(updatedGenre);
-        genre.setGenreId(genreId);
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonInString = mapper.writeValueAsString(genre);
-        given().contentType("application/json").body(jsonInString).when().put(GENRES_REST_URL + "/" + genreId);
+	@Test
+	public void testCreateGenreInvalidMinSize() throws JsonProcessingException {
 
-        get(GENRES_REST_URL + "/" + genreId).then().body("genre", equalTo(updatedGenre));
-    }
+		String jsonInString = this.buildGenreJson("scie");
 
-    @Test
-    public void testDeleteGenre() throws JsonProcessingException {
+		given().contentType("application/json").body(jsonInString).when().post(GENRES_REST_URL).then().statusCode(400);
+	}
 
-        String expectedGenre = "fantasy";
+	@Test
+	public void testCreateGenreInvalidMaxSize() throws JsonProcessingException {
 
-        int genreId = this.createGenre(expectedGenre);
-        given().delete(GENRES_REST_URL + "/" + genreId);
-        given().expect().statusCode(404).get(GENRES_REST_URL + "/" + genreId);
-    }
+		String jsonInString = this.buildGenreJson("science-fict");
 
-    public int createGenre(String genreString) throws JsonProcessingException {
-        Genre genre = this.buildGenre(genreString);
+		given().contentType("application/json").body(jsonInString).when().post(GENRES_REST_URL).then().statusCode(400);
+	}
 
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonInString = mapper.writeValueAsString(genre);
+	@Test
+	public void testUpdateGenre() throws JsonProcessingException {
 
-        genre = given().contentType("application/json").body(jsonInString).when().post(GENRES_REST_URL).as(Genre.class);
+		String expectedGenre = "fantas";
 
-        return genre.getGenreId();
-    }
+		String updatedGenre = "fantasy";
 
-    private Genre buildGenre(String genreString) {
-        Genre genre = new Genre();
-        genre.setGenre(genreString);
-        return genre;
-    }
+		int genreId = this.createGenre(expectedGenre).getGenreId();
+		Genre genre = this.buildGenre(updatedGenre);
+		genre.setGenreId(genreId);
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonInString = mapper.writeValueAsString(genre);
+		given().contentType("application/json").body(jsonInString).when().put(GENRES_REST_URL + "/" + genreId);
+
+		get(GENRES_REST_URL + "/" + genreId).then().body("genre", equalTo(updatedGenre));
+	}
+
+	@Test
+	public void testDeleteGenre() throws JsonProcessingException {
+
+		String expectedGenre = "fantasy";
+
+		int genreId = this.createGenre(expectedGenre).getGenreId();
+		given().delete(GENRES_REST_URL + "/" + genreId);
+		given().expect().statusCode(404).get(GENRES_REST_URL + "/" + genreId);
+	}
+
+	public Genre createGenre(String genreString) throws JsonProcessingException {
+
+		String jsonInString = this.buildGenreJson(genreString);
+
+		return given().contentType("application/json").body(jsonInString).when().post(GENRES_REST_URL).as(Genre.class);
+	}
+
+	private String buildGenreJson(String genreString) throws JsonProcessingException {
+
+		Genre genre = this.buildGenre(genreString);
+
+		ObjectMapper mapper = new ObjectMapper();
+		return mapper.writeValueAsString(genre);
+	}
+
+	private Genre buildGenre(String genreString) {
+		Genre genre = new Genre();
+		genre.setGenre(genreString);
+		return genre;
+	}
 }

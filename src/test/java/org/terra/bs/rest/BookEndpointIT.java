@@ -125,7 +125,7 @@ public class BookEndpointIT {
         authorList.add(author);
         book.setAuthor(authorList);
         Genre genre = new Genre();
-        genre.setGenreId(new GenreEndpointIT().createGenre("fantasy"));
+        genre.setGenreId(new GenreEndpointIT().createGenre("fantasy").getGenreId());
         Set<Genre> genreSet = new HashSet<>();
         genreSet.add(genre);
         book.setGenre(genreSet);
@@ -137,13 +137,5 @@ public class BookEndpointIT {
         book.setPublisher(publisher);
         book.setShortDesc(shortDescription);
         return book;
-    }
-
-    private Author buildAuthor(String email, String firstName, String lastName) {
-        Author author = new Author();
-        author.setEmail(email);
-        author.setFirstName(firstName);
-        author.setLastName(lastName);
-        return author;
     }
 }

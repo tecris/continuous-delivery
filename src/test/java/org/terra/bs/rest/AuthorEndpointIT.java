@@ -15,7 +15,7 @@ public class AuthorEndpointIT {
     private static final String AUTHORS_REST_URL = "http://localhost:8080/bookstore/rest/authors";
 
     @Test
-    public void testGetAuthor() throws JsonProcessingException {
+    public void testCreateAuthor() throws JsonProcessingException {
 
         String expectedEmail = "mihail.sadoveanu@email.org";
         String expectedFirstName = "Mihail";
@@ -25,6 +25,18 @@ public class AuthorEndpointIT {
 
         get(AUTHORS_REST_URL + "/" + authorId).then().body("email", equalTo(expectedEmail))
                 .body("firstName", equalTo(expectedFirstName)).body("firstName", equalTo(expectedFirstName));
+    }
+
+
+    @Test
+    public void testCreateAuthorInvalidEmail() throws JsonProcessingException {
+
+        String email = "mihail.sadoveanu_email.org";
+        String firstName = "Mihail";
+        String lastName = "Sadoveanu";
+        String jsonInString = this.buildAuthorJson(email, firstName, lastName);
+
+        given().contentType("application/json").body(jsonInString).when().post(AUTHORS_REST_URL).then().statusCode(400);
     }
 
     @Test
@@ -62,15 +74,19 @@ public class AuthorEndpointIT {
     }
 
     public Long createAuthor(String email, String firstName, String lastName) throws JsonProcessingException {
-        Author author = this.buildAuthor(email, firstName, lastName);
+
+        String jsonInString = this.buildAuthorJson(email, firstName, lastName);
+
+        return given().contentType("application/json").body(jsonInString).when().post(AUTHORS_REST_URL)
+                .as(Author.class).getAuthorId();
+    }
+
+    private String buildAuthorJson(String email, String firstName, String lastName) throws JsonProcessingException {
+    	Author author = this.buildAuthor(email, firstName, lastName);
 
         ObjectMapper mapper = new ObjectMapper();
-        String jsonInString = mapper.writeValueAsString(author);
+        return mapper.writeValueAsString(author);
 
-        author = given().contentType("application/json").body(jsonInString).when().post(AUTHORS_REST_URL)
-                .as(Author.class);
-
-        return author.getAuthorId();
     }
 
     public Long createGenericAuthor() throws JsonProcessingException {
@@ -78,15 +94,10 @@ public class AuthorEndpointIT {
         String email = "mihail.sadoveanu@email.org";
         String firstName = "Mihail";
         String lastName = "Sadoveanu";
-        Author author = this.buildAuthor(email, firstName, lastName);
+        String jsonInString = this.buildAuthorJson(email, firstName, lastName);
 
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonInString = mapper.writeValueAsString(author);
-
-        author = given().contentType("application/json").body(jsonInString).when().post(AUTHORS_REST_URL)
-                .as(Author.class);
-
-        return author.getAuthorId();
+        return given().contentType("application/json").body(jsonInString).when().post(AUTHORS_REST_URL)
+                .as(Author.class).getAuthorId();
     }
 
     private Author buildAuthor(String email, String firstName, String lastName) {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -38,7 +39,7 @@ public class GenreEndpoint {
     @Consumes("application/json")
     @Produces("application/json")
     @ApiOperation(value = "Create genre", response = Genre.class)
-    public Response create(@ApiParam(value = "Genre", required = true) Genre entity) {
+    public Response create(@ApiParam(value = "Genre", required = true) @Valid Genre entity) {
         em.create(entity);
         return Response.ok(entity).build();
     }

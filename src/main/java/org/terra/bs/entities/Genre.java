@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import io.swagger.annotations.ApiModel;
@@ -26,17 +28,9 @@ public class Genre implements java.io.Serializable {
     private int id;
 
     @ApiModelProperty(value = "Genre type", required = true)
+    @NotNull
+    @Size(min = 5, max = 10)
     private String genre;
-
-    public Genre() {
-        super();
-    }
-
-    public Genre(int id, String genre) {
-        super();
-        this.id = id;
-        this.genre = genre;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

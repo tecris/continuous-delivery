@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.OptimisticLockException;
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -33,7 +34,7 @@ public class AuthorEndpoint {
     @POST
     @Consumes("application/json")
     @Produces("application/json")
-    public Response create(Author entity) {
+    public Response create(@Valid Author entity) {
         this.authorDao.create(entity);
         return Response.ok(entity).build();
     }
