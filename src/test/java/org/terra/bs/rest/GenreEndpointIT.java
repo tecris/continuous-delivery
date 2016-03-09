@@ -19,6 +19,16 @@ public class GenreEndpointIT {
 
 		String expectedGenre = "fanta";
 
+		String jsonInString = this.buildGenreJson(expectedGenre);
+
+		given().contentType("application/json").body(jsonInString).when().post(GENRES_REST_URL).then().body("genre", equalTo(expectedGenre));
+	}
+
+	@Test
+	public void testGetGenre() throws JsonProcessingException {
+
+		String expectedGenre = "fanta";
+
 		int genreId = this.createGenre(expectedGenre).getGenreId();
 
 		get(GENRES_REST_URL + "/" + genreId).then().body("genre", equalTo(expectedGenre));

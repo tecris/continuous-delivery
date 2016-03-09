@@ -30,6 +30,28 @@ public class BookEndpointIT {
     private static final String REST_URL = "http://localhost:8080/bookstore/rest/books";
 
     @Test
+    public void testCreateBook() throws JsonProcessingException {
+
+        String expectedShortDescription = "Good read for the week-end";
+        String expectedIsbnNo = "12-345-7777-00";
+        double expectedPrice = 10D;
+
+        LocalTime midnight = LocalTime.MIDNIGHT;
+        LocalDate today = LocalDate.now(ZoneId.of("UTC"));
+        LocalDateTime todayMidnight = LocalDateTime.of(today, midnight);
+
+        ZonedDateTime zdt = ZonedDateTime.of(todayMidnight, ZoneId.of("UTC"));
+        Calendar expectedDate = GregorianCalendar.from(zdt);
+
+
+        String jsonInString = this.buildBookJson(expectedShortDescription, expectedIsbnNo, expectedPrice, expectedDate);
+        given().contentType("application/json").body(jsonInString).when().post(REST_URL).then().body("shortDesc", equalTo(expectedShortDescription))
+                .body("isbnNo", equalTo(expectedIsbnNo)).body("price", equalTo((float) expectedPrice))
+                .body("publishedDate", equalTo(expectedDate.getTimeInMillis()));
+
+    }
+
+    @Test
     public void testGetBook() throws JsonProcessingException {
 
         String expectedShortDescription = "Good read for the week-end";
@@ -106,14 +128,18 @@ public class BookEndpointIT {
 
     public Book createBook(String shortDescription, String isbnNo, double price, Calendar calendar)
             throws JsonProcessingException {
+
+        String jsonInString = this.buildBookJson(shortDescription, isbnNo, price, calendar);
+
+        return given().contentType("application/json").body(jsonInString).when().post(REST_URL).as(Book.class);
+    }
+
+    public String buildBookJson(String shortDescription, String isbnNo, double price, Calendar calendar)
+            throws JsonProcessingException {
         Book book = this.buildBook(shortDescription, isbnNo, price, calendar);
 
         ObjectMapper mapper = new ObjectMapper();
-        String jsonInString = mapper.writeValueAsString(book);
-
-        book = given().contentType("application/json").body(jsonInString).when().post(REST_URL).as(Book.class);
-
-        return book;
+        return mapper.writeValueAsString(book);
     }
 
     private Book buildBook(String shortDescription, String isbnNo, double price, Calendar calendar)

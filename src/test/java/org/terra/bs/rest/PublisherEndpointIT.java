@@ -12,89 +12,107 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class PublisherEndpointIT {
 
-    private static final String PUBLISHERS_REST_URL = "http://localhost:8080/bookstore/rest/publishers";
+	private static final String PUBLISHERS_REST_URL = "http://localhost:8080/bookstore/rest/publishers";
 
-    @Test
-    public void testGetPublisher() throws JsonProcessingException {
+	@Test
+	public void testCreatePublisher() throws JsonProcessingException {
 
-        String expectedEmail = "mihail.sadoveanu@email.org";
-        String expectedName = "Mihail";
-        String expectedPhone = "0064-9-555-5555";
+		String expectedEmail = "mihail.sadoveanu@email.org";
+		String expectedName = "Mihail";
+		String expectedPhone = "0064-9-555-5555";
 
-        int publisherId = this.createPublisher(expectedEmail, expectedName, expectedPhone);
+		String jsonInString = this.buildPublisherJson(expectedEmail, expectedName, expectedPhone);
 
-        get(PUBLISHERS_REST_URL + "/" + publisherId).then().body("email", equalTo(expectedEmail))
-                .body("name", equalTo(expectedName)).body("phone", equalTo(expectedPhone));
-    }
+		given().contentType("application/json").body(jsonInString).when().post(PUBLISHERS_REST_URL).then()
+				.body("email", equalTo(expectedEmail)).body("name", equalTo(expectedName))
+				.body("phone", equalTo(expectedPhone));
 
-    @Test
-    public void testUpdatePublisher() throws JsonProcessingException {
+	}
 
-        String expectedEmail = "mihail.sadoveanu@email.org";
-        String expectedName = "Mihal";
-        String expectedPhone = "0064-9-555-5555";
+	@Test
+	public void testGetPublisher() throws JsonProcessingException {
 
-        String updatedEmail = "Mihail.Sadoveanu@email.org";
-        String updatedName = "Mihail";
-        String updatedPhone = "0064-9-555-6666";
+		String expectedEmail = "mihail.sadoveanu@email.org";
+		String expectedName = "Mihail";
+		String expectedPhone = "0064-9-555-5555";
 
-        int publisherId = this.createPublisher(expectedEmail, expectedName, expectedPhone);
-        Publisher publisher = this.buildPublisher(updatedEmail, updatedName, updatedPhone);
-        publisher.setPublisherId(publisherId);
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonInString = mapper.writeValueAsString(publisher);
-        given().contentType("application/json").body(jsonInString).when().put(PUBLISHERS_REST_URL + "/" + publisherId);
+		int publisherId = this.createPublisher(expectedEmail, expectedName, expectedPhone);
 
-        get(PUBLISHERS_REST_URL + "/" + publisherId).then().body("email", equalTo(updatedEmail))
-                .body("name", equalTo(updatedName)).body("phone", equalTo(updatedPhone));
-    }
+		get(PUBLISHERS_REST_URL + "/" + publisherId).then().body("email", equalTo(expectedEmail))
+				.body("name", equalTo(expectedName)).body("phone", equalTo(expectedPhone));
+	}
 
-    @Test
-    public void testDeletePublisher() throws JsonProcessingException {
+	@Test
+	public void testUpdatePublisher() throws JsonProcessingException {
 
-        String expectedEmail = "mihail.sadoveanu@email.org";
-        String expectedName = "Mihail";
-        String expectedPhone = "0064-9-555-5555";
+		String expectedEmail = "mihail.sadoveanu@email.org";
+		String expectedName = "Mihal";
+		String expectedPhone = "0064-9-555-5555";
 
-        int publisherId = this.createPublisher(expectedEmail, expectedName, expectedPhone);
-        given().delete(PUBLISHERS_REST_URL + "/" + publisherId);
-        given().expect().statusCode(404).get(PUBLISHERS_REST_URL + "/" + publisherId);
-    }
+		String updatedEmail = "Mihail.Sadoveanu@email.org";
+		String updatedName = "Mihail";
+		String updatedPhone = "0064-9-555-6666";
 
-    public int creategenericPublisher() throws JsonProcessingException {
+		int publisherId = this.createPublisher(expectedEmail, expectedName, expectedPhone);
+		Publisher publisher = this.buildPublisher(updatedEmail, updatedName, updatedPhone);
+		publisher.setPublisherId(publisherId);
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonInString = mapper.writeValueAsString(publisher);
+		given().contentType("application/json").body(jsonInString).when().put(PUBLISHERS_REST_URL + "/" + publisherId);
 
-        String email = "mihail.sadoveanu@email.org";
-        String name = "Mihail";
-        String phone = "0064-9-555-5555";
+		get(PUBLISHERS_REST_URL + "/" + publisherId).then().body("email", equalTo(updatedEmail))
+				.body("name", equalTo(updatedName)).body("phone", equalTo(updatedPhone));
+	}
 
-        Publisher publisher = this.buildPublisher(email, name, phone);
+	@Test
+	public void testDeletePublisher() throws JsonProcessingException {
 
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonInString = mapper.writeValueAsString(publisher);
+		String expectedEmail = "mihail.sadoveanu@email.org";
+		String expectedName = "Mihail";
+		String expectedPhone = "0064-9-555-5555";
 
-        publisher = given().contentType("application/json").body(jsonInString).when().post(PUBLISHERS_REST_URL)
-                .as(Publisher.class);
+		int publisherId = this.createPublisher(expectedEmail, expectedName, expectedPhone);
+		given().delete(PUBLISHERS_REST_URL + "/" + publisherId);
+		given().expect().statusCode(404).get(PUBLISHERS_REST_URL + "/" + publisherId);
+	}
 
-        return publisher.getPublisherId();
-    }
+	public int creategenericPublisher() throws JsonProcessingException {
 
-    public int createPublisher(String email, String name, String phone) throws JsonProcessingException {
-        Publisher publisher = this.buildPublisher(email, name, phone);
+		String email = "mihail.sadoveanu@email.org";
+		String name = "Mihail";
+		String phone = "0064-9-555-5555";
 
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonInString = mapper.writeValueAsString(publisher);
+		Publisher publisher = this.buildPublisher(email, name, phone);
 
-        publisher = given().contentType("application/json").body(jsonInString).when().post(PUBLISHERS_REST_URL)
-                .as(Publisher.class);
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonInString = mapper.writeValueAsString(publisher);
 
-        return publisher.getPublisherId();
-    }
+		publisher = given().contentType("application/json").body(jsonInString).when().post(PUBLISHERS_REST_URL)
+				.as(Publisher.class);
 
-    private Publisher buildPublisher(String email, String name, String phone) {
-        Publisher publisher = new Publisher();
-        publisher.setEmail(email);
-        publisher.setName(name);
-        publisher.setPhone(phone);
-        return publisher;
-    }
+		return publisher.getPublisherId();
+	}
+
+	public int createPublisher(String email, String name, String phone) throws JsonProcessingException {
+
+		String jsonInString = this.buildPublisherJson(email, name, phone);
+
+		return given().contentType("application/json").body(jsonInString).when().post(PUBLISHERS_REST_URL)
+				.as(Publisher.class).getPublisherId();
+	}
+
+	public String buildPublisherJson(String email, String name, String phone) throws JsonProcessingException {
+		Publisher publisher = this.buildPublisher(email, name, phone);
+
+		ObjectMapper mapper = new ObjectMapper();
+		return mapper.writeValueAsString(publisher);
+	}
+
+	private Publisher buildPublisher(String email, String name, String phone) {
+		Publisher publisher = new Publisher();
+		publisher.setEmail(email);
+		publisher.setName(name);
+		publisher.setPhone(phone);
+		return publisher;
+	}
 }
