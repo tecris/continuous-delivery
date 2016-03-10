@@ -1,8 +1,0 @@
-- name: step 1
-  command: mvn clean compile flyway:migrate
-
-- name: step 2
-  command: mvn wildfly:deploy
-
-- name: step 3
-  command: mvn clean integration-test
