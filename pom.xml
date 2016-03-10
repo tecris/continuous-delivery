@@ -7,6 +7,10 @@
   <version>1.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
 
+  <prerequisites>
+    <maven>3.1.1</maven>
+  </prerequisites>
+
   <scm>
     <url>https://github.com/tecris/continuous-delivery.git</url>
     <connection>scm:git:git://github.com/tecris/continuous-delivery.git</connection>
@@ -180,7 +184,7 @@
         <plugin>
           <groupId>org.flywaydb</groupId>
           <artifactId>flyway-maven-plugin</artifactId>
-          <version>3.2.1</version>
+          <version>4.0</version>
           <configuration>
             <driver>${db.driver}</driver>
             <url>jdbc:${database.vendor}://${database.host}:${database.port}/${database.name}</url>
@@ -200,7 +204,7 @@
         <plugin>
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
-          <version>0.7.5.201505241946</version>
+          <version>0.7.6.201602180812</version>
         </plugin>
         <plugin>
           <groupId>org.wildfly.plugins</groupId>
@@ -237,7 +241,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-war-plugin</artifactId>
-          <version>2.4</version>
+          <version>2.6</version>
           <configuration>
             <failOnMissingWebXml>false</failOnMissingWebXml>
             <archive>
