@@ -92,7 +92,7 @@ Demo: `http://localhost:8080/bookstore`
    `http://192.168.122.51:30002/bookstore`
 
 
-#### Varia kubectl commands
+ *  Varia kubectl commands
  
    ```
     $ kubectl describe pod pod_name
