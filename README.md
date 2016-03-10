@@ -16,23 +16,19 @@ Continuous delivery demo that aims to use following principles:
 
 <hr/>
 
-### Techno stack
- 1. Java JEE (Web Application)
- 1. Wildfly 10.0.0
- 1. MySQL 5.7
-
-### Prerequisites
-#### What is required to run this project:
- - Linux with:
-  - Java 8
-  - Maven 3.3
-  - Docker 1.10
-    - [Configured to run without sudo ... ](https://docs.docker.com/engine/installation/ubuntulinux/#create-a-docker-group)
-  - Docker Compose 1.6
-  - [Private registry](https://github.com/tecris/docker/tree/v16.02.01/registry2/private)
-  - [Mirror registry](https://github.com/tecris/docker/tree/v16.02.01/registry2/mirror)
+### Stack
+| *Technology* | *Version* |
+| ------------- | ------------- |
+| Java | 8 |
+| Wildfly | 10.0.0 |
+| MySQL | 5.7 |
+| Maven | 3.3 |
+| Docker | 1.10 |
+| Docker Compose | 1.6 |
 
 ### Continuous delivery with Jenkins
+ - Configure [private registry](https://github.com/tecris/docker/tree/v16.02.01/registry2/private)
+ - Configure [mirror registry](https://github.com/tecris/docker/tree/v16.02.01/registry2/mirror)
  - Enable Docker Remote API edit `/etc/default/docker` and update the DOCKER_OPTS:
   * `DOCKER_OPTS='-H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock ...'`
  - `$ ./startCdInfrastructure.sh`
