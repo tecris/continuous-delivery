@@ -67,6 +67,7 @@
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
         <version>${mysql.version}</version>
+        <scope>runtime</scope>
       </dependency>
       <dependency>
         <groupId>io.swagger</groupId>
