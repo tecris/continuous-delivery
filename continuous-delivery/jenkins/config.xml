@@ -99,62 +99,6 @@
 mvn -s /opt/maven_config/.m2/settings.xml clean compile flyway:migrate -Ddatabase.host=172.17.0.1</command>
     </hudson.tasks.Shell>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
-      <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.CommitCommand">
-        <containerId>planets-mysql-db</containerId>
-        <repo>blue.sky/planets-mysql-db</repo>
-        <tag>$BUILD_NUMBER</tag>
-        <runCmd></runCmd>
-      </dockerCmd>
-    </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
-    <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
-      <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.PushImageCommand">
-        <dockerRegistryEndpoint plugin="docker-commons@1.2">
-          <url>https://docker.host</url>
-        </dockerRegistryEndpoint>
-        <image>planets-mysql-db</image>
-        <tag>$BUILD_NUMBER</tag>
-        <registry>blue.sky</registry>
-      </dockerCmd>
-    </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
-    <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
-      <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.StopCommand">
-        <containerIds>planets-mysql-db</containerIds>
-      </dockerCmd>
-    </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
-    <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
-      <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.RemoveCommand">
-        <containerIds>planets-mysql-db</containerIds>
-        <ignoreIfNotFound>true</ignoreIfNotFound>
-        <removeVolumes>false</removeVolumes>
-        <force>true</force>
-      </dockerCmd>
-    </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
-    <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
-      <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.CreateContainerCommand">
-        <image>blue.sky/planets-mysql-db:$BUILD_NUMBER</image>
-        <command>mysqld</command>
-        <hostName></hostName>
-        <containerName>planets-mysql-db</containerName>
-        <envVars></envVars>
-        <links></links>
-        <exposedPorts>3306/tcp</exposedPorts>
-        <cpuShares></cpuShares>
-        <memoryLimit></memoryLimit>
-      </dockerCmd>
-    </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
-    <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
-      <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.StartCommand">
-        <containerIds>planets-mysql-db</containerIds>
-        <publishAllPorts>false</publishAllPorts>
-        <portBindings>172.17.0.1:5432:5432</portBindings>
-        <waitPorts></waitPorts>
-        <links></links>
-        <bindMounts></bindMounts>
-        <privileged>false</privileged>
-        <containerIdsLogging></containerIdsLogging>
-      </dockerCmd>
-    </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
-    <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.CreateImageCommand">
         <dockerFolder>$WORKSPACE/continuous-delivery/jenkins/docker</dockerFolder>
         <imageTag>blue.sky/planets-web:$BUILD_NUMBER</imageTag>
@@ -193,6 +137,9 @@ mvn -s /opt/maven_config/.m2/settings.xml clean compile flyway:migrate -Ddatabas
         <memoryLimit></memoryLimit>
       </dockerCmd>
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
+    <hudson.tasks.Shell>
+      <command>sleep 10</command>
+    </hudson.tasks.Shell>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.StartCommand">
         <containerIds>planets-web</containerIds>
@@ -214,12 +161,12 @@ mvn -s /opt/maven_config/.m2/settings.xml clean compile flyway:migrate -Ddatabas
     </hudson.tasks.Shell>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.StopCommand">
-        <containerIds>planets-web,planets-mysql-db</containerIds>
+        <containerIds>planets-web</containerIds>
       </dockerCmd>
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.RemoveCommand">
-        <containerIds>planets-web,planets-mysql-db</containerIds>
+        <containerIds>planets-web</containerIds>
         <ignoreIfNotFound>false</ignoreIfNotFound>
         <removeVolumes>false</removeVolumes>
         <force>false</force>
@@ -232,15 +179,8 @@ mvn -s /opt/maven_config/.m2/settings.xml clean compile flyway:migrate -Ddatabas
         <ignoreIfNotFound>true</ignoreIfNotFound>
       </dockerCmd>
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
-    <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
-      <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.RemoveImageCommand">
-        <imageName>blue.sky/planets-mysql-db:$BUILD_NUMBER</imageName>
-        <imageId></imageId>
-        <ignoreIfNotFound>true</ignoreIfNotFound>
-      </dockerCmd>
-    </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <hudson.tasks.Maven>
-      <targets>jacoco:prepare-agent install -Psonar</targets>
+      <targets>jacoco:prepare-agent install -Psonar -DskipITs</targets>
       <mavenName>M3</mavenName>
       <pom>pom.xml</pom>
       <usePrivateRepository>false</usePrivateRepository>
