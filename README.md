@@ -38,7 +38,7 @@ Continuous delivery demo that aims to use following principles:
  - Build war artifact
  - Upload artifact to maven repository
  - Start vanilla MySQL
- - Apply db schema [flywaydb.org](flywaydb.org)
+ - Apply db schema ([flywaydb.org](flywaydb.org))
  - Create web application image with latest war artifact
  - Push web application image to private docker registry
  - Start web application container
