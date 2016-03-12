@@ -28,7 +28,6 @@ Continuous delivery demo that aims to use following principles:
 
 ### Continuous delivery with Jenkins
  - Configure [private registry](https://github.com/tecris/docker/tree/v16.02.01/registry2/private)
- - Configure [mirror registry](https://github.com/tecris/docker/tree/v16.02.01/registry2/mirror)
  - Enable Docker Remote API edit `/etc/default/docker` and update the DOCKER_OPTS:
   * `DOCKER_OPTS='-H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock ...'`
  - `$ ./startCdInfrastructure.sh`
@@ -38,11 +37,10 @@ Continuous delivery demo that aims to use following principles:
 ##### Continuous Delivery life-cycle
  - Build war artifact
  - Upload artifact to maven repository
- - Create database image with latest database scripts (flyway)
- - Push database image to private docker registry
+ - Start vanilla MySQL
+ - Apply db schema [flywaydb.org](flywaydb.org)
  - Create web application image with latest war artifact
  - Push web application image to private docker registry
- - Start database container
  - Start web application container
  - Execute integration tests
  - Stop and remove web and database containers
