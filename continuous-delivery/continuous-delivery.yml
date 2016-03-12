@@ -17,7 +17,7 @@ services:
       - /opt/docker_volumes/nexus-data:/sonatype-work
 
   jenkins:
-    image: casadocker/alpine-jenkins:1.642.1
+    image: casadocker/jenkins-cd:1.642.2
     container_name: jenkins
     ports:
       - "8088:8080"
