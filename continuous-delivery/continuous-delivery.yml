@@ -1,7 +1,7 @@
 version: '2'
 services:
   sonar-db:
-    image: casadocker/postgresql:9.5
+    image: postgres:9.5
     container_name: sonar-db
     environment:
       - POSTGRES_DB=sonar
