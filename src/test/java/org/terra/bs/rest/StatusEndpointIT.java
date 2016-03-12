@@ -6,11 +6,14 @@ import org.junit.Test;
 
 public class StatusEndpointIT {
 
-	private static final String STATUS_REST_URL = "http://localhost:8080/bookstore/rest/status";
+	private static final String HOST = System.getProperty("test.host","localhost");
+	private static final String PORT = System.getProperty("test.port","8080");
+
+	private static final String REST_URL = "http://"+HOST+":"+PORT+"/bookstore/rest/status";
 
 	@Test
 	public void testGetStatus() {
 		
-		get(STATUS_REST_URL).then().statusCode(200);
+		get(REST_URL).then().statusCode(200);
 	}
 }

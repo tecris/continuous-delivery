@@ -12,7 +12,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class AuthorEndpointIT {
 
-	private static final String AUTHORS_REST_URL = "http://localhost:8080/bookstore/rest/authors";
+	private static final String HOST = System.getProperty("test.host","localhost");
+	private static final String PORT = System.getProperty("test.port","8080");
+
+	private static final String REST_URL = "http://"+HOST+":"+PORT+"/bookstore/rest/authors";
 
 	@Test
 	public void testCreateAuthor() throws JsonProcessingException {
@@ -23,7 +26,7 @@ public class AuthorEndpointIT {
 
 		String jsonInString = this.buildAuthorJson(expectedEmail, expectedFirstName, expectedLastName);
 
-		given().contentType("application/json").body(jsonInString).when().post(AUTHORS_REST_URL).then()
+		given().contentType("application/json").body(jsonInString).when().post(REST_URL).then()
 				.body("email", equalTo(expectedEmail)).body("firstName", equalTo(expectedFirstName))
 				.body("firstName", equalTo(expectedFirstName));
 	}
@@ -36,7 +39,7 @@ public class AuthorEndpointIT {
 		String lastName = "Sadoveanu";
 		String jsonInString = this.buildAuthorJson(email, firstName, lastName);
 
-		given().contentType("application/json").body(jsonInString).when().post(AUTHORS_REST_URL).then().statusCode(400);
+		given().contentType("application/json").body(jsonInString).when().post(REST_URL).then().statusCode(400);
 	}
 
 	@Test
@@ -55,9 +58,9 @@ public class AuthorEndpointIT {
 		author.setAuthorId(authorId);
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonInString = mapper.writeValueAsString(author);
-		given().contentType("application/json").body(jsonInString).when().put(AUTHORS_REST_URL + "/" + authorId);
+		given().contentType("application/json").body(jsonInString).when().put(REST_URL + "/" + authorId);
 
-		get(AUTHORS_REST_URL + "/" + authorId).then().body("email", equalTo(updatedEmail))
+		get(REST_URL + "/" + authorId).then().body("email", equalTo(updatedEmail))
 				.body("firstName", equalTo(updatedFirstName)).body("lastName", equalTo(updatedLastName));
 	}
 
@@ -69,15 +72,15 @@ public class AuthorEndpointIT {
 		String expectedLastName = "Sadoveanu";
 
 		Long authorId = this.createAuthor(expectedEmail, expectedFirstName, expectedLastName);
-		given().delete(AUTHORS_REST_URL + "/" + authorId);
-		given().expect().statusCode(404).get(AUTHORS_REST_URL + "/" + authorId);
+		given().delete(REST_URL + "/" + authorId);
+		given().expect().statusCode(404).get(REST_URL + "/" + authorId);
 	}
 
 	public Long createAuthor(String email, String firstName, String lastName) throws JsonProcessingException {
 
 		String jsonInString = this.buildAuthorJson(email, firstName, lastName);
 
-		return given().contentType("application/json").body(jsonInString).when().post(AUTHORS_REST_URL).as(Author.class)
+		return given().contentType("application/json").body(jsonInString).when().post(REST_URL).as(Author.class)
 				.getAuthorId();
 	}
 
@@ -96,7 +99,7 @@ public class AuthorEndpointIT {
 		String lastName = "Sadoveanu";
 		String jsonInString = this.buildAuthorJson(email, firstName, lastName);
 
-		return given().contentType("application/json").body(jsonInString).when().post(AUTHORS_REST_URL).as(Author.class)
+		return given().contentType("application/json").body(jsonInString).when().post(REST_URL).as(Author.class)
 				.getAuthorId();
 	}
 

@@ -27,7 +27,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class BookEndpointIT {
 
-    private static final String REST_URL = "http://localhost:8080/bookstore/rest/books";
+	private static final String HOST = System.getProperty("test.host","localhost");
+	private static final String PORT = System.getProperty("test.port","8080");
+
+	private static final String REST_URL = "http://"+HOST+":"+PORT+"/bookstore/rest/books";
 
     @Test
     public void testCreateBook() throws JsonProcessingException {

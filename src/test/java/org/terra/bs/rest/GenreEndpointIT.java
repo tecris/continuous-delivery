@@ -12,7 +12,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class GenreEndpointIT {
 
-	private static final String GENRES_REST_URL = "http://localhost:8080/bookstore/rest/genres";
+	private static final String HOST = System.getProperty("test.host","localhost");
+	private static final String PORT = System.getProperty("test.port","8080");
+
+	private static final String REST_URL = "http://"+HOST+":"+PORT+"/bookstore/rest/genres";
 
 	@Test
 	public void testCreateGenre() throws JsonProcessingException {
@@ -21,7 +24,7 @@ public class GenreEndpointIT {
 
 		String jsonInString = this.buildGenreJson(expectedGenre);
 
-		given().contentType("application/json").body(jsonInString).when().post(GENRES_REST_URL).then().body("genre", equalTo(expectedGenre));
+		given().contentType("application/json").body(jsonInString).when().post(REST_URL).then().body("genre", equalTo(expectedGenre));
 	}
 
 	@Test
@@ -31,7 +34,7 @@ public class GenreEndpointIT {
 
 		int genreId = this.createGenre(expectedGenre).getGenreId();
 
-		get(GENRES_REST_URL + "/" + genreId).then().body("genre", equalTo(expectedGenre));
+		get(REST_URL + "/" + genreId).then().body("genre", equalTo(expectedGenre));
 	}
 
 	@Test
@@ -39,7 +42,7 @@ public class GenreEndpointIT {
 
 		String jsonInString = this.buildGenreJson(null);
 
-		given().contentType("application/json").body(jsonInString).when().post(GENRES_REST_URL).then().statusCode(400);
+		given().contentType("application/json").body(jsonInString).when().post(REST_URL).then().statusCode(400);
 	}
 
 	@Test
@@ -47,7 +50,7 @@ public class GenreEndpointIT {
 
 		String jsonInString = this.buildGenreJson("scie");
 
-		given().contentType("application/json").body(jsonInString).when().post(GENRES_REST_URL).then().statusCode(400);
+		given().contentType("application/json").body(jsonInString).when().post(REST_URL).then().statusCode(400);
 	}
 
 	@Test
@@ -55,7 +58,7 @@ public class GenreEndpointIT {
 
 		String jsonInString = this.buildGenreJson("science-fict");
 
-		given().contentType("application/json").body(jsonInString).when().post(GENRES_REST_URL).then().statusCode(400);
+		given().contentType("application/json").body(jsonInString).when().post(REST_URL).then().statusCode(400);
 	}
 
 	@Test
@@ -70,9 +73,9 @@ public class GenreEndpointIT {
 		genre.setGenreId(genreId);
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonInString = mapper.writeValueAsString(genre);
-		given().contentType("application/json").body(jsonInString).when().put(GENRES_REST_URL + "/" + genreId);
+		given().contentType("application/json").body(jsonInString).when().put(REST_URL + "/" + genreId);
 
-		get(GENRES_REST_URL + "/" + genreId).then().body("genre", equalTo(updatedGenre));
+		get(REST_URL + "/" + genreId).then().body("genre", equalTo(updatedGenre));
 	}
 
 	@Test
@@ -81,15 +84,15 @@ public class GenreEndpointIT {
 		String expectedGenre = "fantasy";
 
 		int genreId = this.createGenre(expectedGenre).getGenreId();
-		given().delete(GENRES_REST_URL + "/" + genreId);
-		given().expect().statusCode(404).get(GENRES_REST_URL + "/" + genreId);
+		given().delete(REST_URL + "/" + genreId);
+		given().expect().statusCode(404).get(REST_URL + "/" + genreId);
 	}
 
 	public Genre createGenre(String genreString) throws JsonProcessingException {
 
 		String jsonInString = this.buildGenreJson(genreString);
 
-		return given().contentType("application/json").body(jsonInString).when().post(GENRES_REST_URL).as(Genre.class);
+		return given().contentType("application/json").body(jsonInString).when().post(REST_URL).as(Genre.class);
 	}
 
 	private String buildGenreJson(String genreString) throws JsonProcessingException {
