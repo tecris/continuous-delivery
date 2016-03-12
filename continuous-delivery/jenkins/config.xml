@@ -39,7 +39,7 @@
     <groupId>org.terra</groupId>
     <artifactId>planet</artifactId>
   </rootModule>
-  <goals>clean deploy</goals>
+  <goals>clean deploy -DskipITs</goals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>
   <ignoreUpstremChanges>false</ignoreUpstremChanges>
@@ -71,11 +71,11 @@
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.CreateContainerCommand">
-        <image>casadocker/mysql:5.7</image>
+        <image>mysql:5.7</image>
         <command></command>
         <hostName></hostName>
         <containerName>planets-mysql-db</containerName>
-        <envVars>MYSQL_ROOT_PASSWORD=mysql,MYSQL_USER=planets,MYSQL_PASSWORD=1planets!,MYSQL_DATABASE=planetsdb</envVars>
+        <envVars>MYSQL_ROOT_PASSWORD=mysql,MYSQL_USER=bookstore,MYSQL_PASSWORD=1bookstore!,MYSQL_DATABASE=bookstoredb</envVars>
         <links></links>
         <exposedPorts>3306/tcp</exposedPorts>
         <cpuShares></cpuShares>
@@ -96,7 +96,7 @@
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <hudson.tasks.Shell>
       <command>sleep 10
-mvn -Pdb-mysql -s /opt/maven_config/.m2/settings.xml clean compile flyway:migrate -Ddatabase.host=172.17.0.1</command>
+mvn -s /opt/maven_config/.m2/settings.xml clean compile flyway:migrate -Ddatabase.host=172.17.0.1</command>
     </hudson.tasks.Shell>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.CommitCommand">
@@ -156,7 +156,7 @@ mvn -Pdb-mysql -s /opt/maven_config/.m2/settings.xml clean compile flyway:migrat
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.CreateImageCommand">
-        <dockerFolder>$WORKSPACE/jenkins/docker</dockerFolder>
+        <dockerFolder>$WORKSPACE/continuous-delivery/jenkins/docker</dockerFolder>
         <imageTag>blue.sky/planets-web:$BUILD_NUMBER</imageTag>
         <noCache>true</noCache>
         <rm>false</rm>
@@ -210,7 +210,7 @@ mvn -Pdb-mysql -s /opt/maven_config/.m2/settings.xml clean compile flyway:migrat
       <command>sleep 10</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>mvn -Prun-it -s /opt/maven_config/.m2/settings.xml clean integration-test -Dtest.host=172.17.0.1 -Dtest.port=8089</command>
+      <command>mvn -s /opt/maven_config/.m2/settings.xml clean integration-test -Dtest.host=172.17.0.1 -Dtest.port=8089</command>
     </hudson.tasks.Shell>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.StopCommand">
