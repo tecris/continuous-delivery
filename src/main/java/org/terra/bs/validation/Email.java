@@ -25,6 +25,7 @@ public @interface Email {
 
         @Override
         public void initialize(final Email hasId) {
+        	// annotation has no type element(s)
         }
 
         @Override
