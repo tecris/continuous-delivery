@@ -11,7 +11,7 @@ public class Util {
      * respect the collection API in regards to Collection.equals(Object) and
      * hence this utility
      */
-    public static <T> boolean equal(Collection<T> a, Collection<T> b) {
+    public static <T> boolean collectionsEqual(Collection<T> a, Collection<T> b) {
         return new ArrayList<>(a).equals(new ArrayList<>(b));
     }
 

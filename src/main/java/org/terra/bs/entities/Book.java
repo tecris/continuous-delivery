@@ -147,7 +147,7 @@ public class Book implements java.io.Serializable {
         if (author == null) {
             if (other.author != null)
                 return false;
-        } else if (!Util.equal(this.author, other.author))
+        } else if (!Util.collectionsEqual(this.author, other.author))
             return false;
         if (bookId != other.bookId)
             return false;
