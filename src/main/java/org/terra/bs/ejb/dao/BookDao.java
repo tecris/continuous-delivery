@@ -68,7 +68,6 @@ public class BookDao {
 
     public List<Book> listAll(Integer startPosition, Integer maxResult) {
 
-        // TODO is this optimal ???
         List<Book> bookList = this.getAll();
         if (startPosition == null && maxResult == null) {
             return bookList;
@@ -76,20 +75,5 @@ public class BookDao {
         int from = startPosition == null ? 0 : startPosition;
         int end = from + (maxResult == null ? 0 : maxResult);
         return bookList.subList(from, end);
-
-        /*
-         * this works for cases when there is no lazy loading...
-         * 
-         * CriteriaQuery<Book> criteria = this.em.getCriteriaBuilder()
-         * .createQuery(Book.class); TypedQuery<Book> findAllQuery =
-         * this.em.createQuery(criteria .select(criteria.from(Book.class)));
-         * 
-         * if (startPosition != null) {
-         * findAllQuery.setFirstResult(startPosition); } if (maxResult != null)
-         * { findAllQuery.setMaxResults(maxResult); }
-         * 
-         * final List<Book> results = findAllQuery.getResultList(); return
-         * results;
-         */
     }
 }
