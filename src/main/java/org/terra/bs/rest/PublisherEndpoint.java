@@ -60,8 +60,7 @@ public class PublisherEndpoint {
     @Produces("application/json")
     public List<Publisher> listAll(@QueryParam("start") Integer startPosition, @QueryParam("max") Integer maxResult) {
 
-        final List<Publisher> results = this.em.listAll(startPosition, maxResult);
-        return results;
+        return this.em.listAll(startPosition, maxResult);
     }
 
     @PUT

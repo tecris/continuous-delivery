@@ -67,8 +67,7 @@ public class GenreEndpoint {
     @Produces("application/json")
     public List<Genre> listAll(@QueryParam("start") Integer startPosition, @QueryParam("max") Integer maxResult) {
 
-        final List<Genre> results = this.em.listAll(startPosition, maxResult);
-        return results;
+        return this.em.listAll(startPosition, maxResult);
     }
 
     @PUT

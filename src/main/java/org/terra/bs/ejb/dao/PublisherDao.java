@@ -51,7 +51,6 @@ public class PublisherDao {
         if (maxResult != null) {
             findAllQuery.setMaxResults(maxResult);
         }
-        final List<Publisher> results = findAllQuery.getResultList();
-        return results;
+        return findAllQuery.getResultList();
     }
 }

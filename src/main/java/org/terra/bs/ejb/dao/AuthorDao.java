@@ -51,7 +51,6 @@ public class AuthorDao {
         if (maxResult != null) {
             findAllQuery.setMaxResults(maxResult);
         }
-        final List<Author> results = findAllQuery.getResultList();
-        return results;
+        return findAllQuery.getResultList();
     }
 }

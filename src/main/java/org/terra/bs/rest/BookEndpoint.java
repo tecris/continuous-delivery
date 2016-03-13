@@ -60,8 +60,7 @@ public class BookEndpoint {
     @Produces("application/json")
     public List<Book> listAll(@QueryParam("start") Integer startPosition, @QueryParam("max") Integer maxResult) {
 
-        final List<Book> results = this.bookDao.listAll(startPosition, maxResult);
-        return results;
+        return this.bookDao.listAll(startPosition, maxResult);
     }
 
     @PUT

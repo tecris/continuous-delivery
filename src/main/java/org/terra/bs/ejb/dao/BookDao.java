@@ -63,8 +63,7 @@ public class BookDao {
         bookRoot.fetch("genre");
         query.distinct(true);
 
-        List<Book> bookList = em.createQuery(query.select(bookRoot)).getResultList();
-        return bookList;
+        return em.createQuery(query.select(bookRoot)).getResultList();
     }
 
     public List<Book> listAll(Integer startPosition, Integer maxResult) {

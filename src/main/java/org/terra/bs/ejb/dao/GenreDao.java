@@ -51,7 +51,6 @@ public class GenreDao {
         if (maxResult != null) {
             findAllQuery.setMaxResults(maxResult);
         }
-        final List<Genre> results = findAllQuery.getResultList();
-        return results;
+        return findAllQuery.getResultList();
     }
 }
