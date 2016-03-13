@@ -40,10 +40,11 @@ public class BookGenreId implements java.io.Serializable {
         this.bookId = bookId;
     }
 
+    @Override
     public boolean equals(Object other) {
-        if ((this == other))
+        if (this == other)
             return true;
-        if ((other == null))
+        if (other == null)
             return false;
         if (!(other instanceof BookGenreId))
             return false;
@@ -52,6 +53,7 @@ public class BookGenreId implements java.io.Serializable {
         return (this.getGenreId() == castOther.getGenreId()) && (this.getBookId() == castOther.getBookId());
     }
 
+    @Override
     public int hashCode() {
         int result = 17;
 
