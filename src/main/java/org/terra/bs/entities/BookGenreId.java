@@ -15,6 +15,7 @@ public class BookGenreId implements java.io.Serializable {
     private int bookId;
 
     public BookGenreId() {
+    	// JPA (@Embeddable) requires empty c-tor
     }
 
     public BookGenreId(int genreId, int bookId) {

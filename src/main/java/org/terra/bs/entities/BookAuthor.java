@@ -19,6 +19,7 @@ public class BookAuthor implements java.io.Serializable {
     private BookAuthorId id;
 
     public BookAuthor() {
+    	// JPA requires empty c-tor
     }
 
     public BookAuthor(BookAuthorId id) {

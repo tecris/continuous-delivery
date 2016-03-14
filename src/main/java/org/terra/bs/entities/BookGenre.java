@@ -19,6 +19,7 @@ public class BookGenre implements java.io.Serializable {
     private BookGenreId id;
 
     public BookGenre() {
+    	// JPA requires empty c-tor
     }
 
     public BookGenre(BookGenreId id) {
