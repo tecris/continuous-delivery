@@ -12,7 +12,6 @@ Continuous delivery demo that aims to use following principles:
 - [**Continuous delivery with Jenkins (on-prem)**](#continuous-delivery-with-jenkins)
 - [**E2E with Docker Compose and Maven**](#e2e-with-docker-compose-and-maven)
 - [**Swagger**](#swagger)
-- [**Kubernetes**](#kubernetes)
 
 <hr/>
 
@@ -66,40 +65,6 @@ Demo: `http://localhost:8080/bookstore`
  
    * [Swagger UI](https://github.com/swagger-api/swagger-ui) @ `http://localhost:81`
 
-
-#### Kubernetes
-
- * Assumptions: 
-  
-  - [**kubernetes installed**](https://github.com/tecris/kubernetes/blob/v16.02.02/coreos-libvirt/README.md)
-  - [**Continuous delivery with Jenkins**](#continuous-delivery-with-jenkins) step executed(2 builds are required to execute rolling update demo).
-
- * Deploy
-
-   ```$ ./deployToKubernetes.sh```
-   
- * Rolling update
- 
-   ```
-   $ kubectl scale --replicas=2 rc planets-web-rc-v1        # scale to 2 pods (optional)     
-   
-   # Replication Controller rolling update from "planets-web-rc-v1" to "planets-web-rc-v2".
-   # (image change from blue.sky/planets-web:1 to blue.sky/planets-web:2)
-   $ kubectl rolling-update planets-web-rc-v1 planets-web-rc-v2 -f kubernetes/planets-web-rc-v2.yaml    
-   ```
-   `http://192.168.122.51:30002/bookstore`
-
-
- *  Varia kubectl commands
- 
-   ```
-    $ kubectl describe pod pod_name
-    $ kubectl delete pod pod_name
-    $ kubectl get rc
-    $ kubectl describe rc planets-web-rc-v1
-    $ kubectl delete rc planets-web-rc-v1
-    $ kubectl delete svc planets-web-svc
-   ```
 
 
 [1]:https://github.com/fabric8io/docker-maven-plugin
