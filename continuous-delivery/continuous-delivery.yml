@@ -31,3 +31,5 @@ services:
       - "${DOCKER0_IP}:19000:9000"
     environment:
       - SONARQUBE_JDBC_URL=jdbc:postgresql://sonar-db:5432/sonar
+    depends_on:
+      - sonar-db
