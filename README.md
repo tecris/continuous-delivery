@@ -36,15 +36,15 @@ Continuous delivery demo that aims to use following principles:
 ##### Continuous Delivery life-cycle
  - Source code changes pushed to git
  - Jenkins detects changes and starts job
- - Build war/jar artifact
- - Upload artifact to maven repository
- - Start vanilla MySQL
- - Apply db schema ([flywaydb.org](flywaydb.org))
- - Create web application image with latest war artifact
- - Push web application image to private docker registry
- - Start web application container
- - Execute integration tests
- - Stop and remove web and database containers
+   - Build war/jar artifact
+   - Upload artifact to maven repository
+   - Start vanilla MySQL
+   - Apply db schema ([flywaydb.org](flywaydb.org))
+   - Create web application image with latest war artifact
+   - Push web application image to private docker registry
+   - Start web application container
+   - Execute integration tests
+   - Stop and remove web and database containers
 
  
 ### E2E with docker compose and Maven
