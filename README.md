@@ -34,7 +34,9 @@ Continuous delivery demo that aims to use following principles:
  - http://localhost:8088/job/continuous-delivery -> 'Build Now'
 
 ##### Continuous Delivery life-cycle
- - Build war artifact
+ - Source code changes pushed to git
+ - Jenkins detects changes and starts job
+ - Build war/jar artifact
  - Upload artifact to maven repository
  - Start vanilla MySQL
  - Apply db schema ([flywaydb.org](flywaydb.org))
