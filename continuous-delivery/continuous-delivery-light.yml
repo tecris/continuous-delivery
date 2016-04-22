@@ -1,0 +1,30 @@
+version: '2'
+services:
+
+  nexus:
+    image: sonatype/nexus:2.12.0-01
+    container_name: nexus
+    ports:
+      - "8081:8081"
+    volumes:
+      - /opt/docker_volumes/nexus-data:/sonatype-work
+    networks:
+      cd_net:
+        ipv4_address: 172.16.238.10
+
+  jenkins:
+    image: casadocker/jenkins:1.642.2
+    container_name: jenkins
+    ports:
+      - "8088:8080"
+    extra_hosts:
+      - "docker.host:${DOCKER_IP}"
+
+networks:
+  cd_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.16.238.0/24
+        gateway: 172.16.238.1
