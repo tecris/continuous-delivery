@@ -13,12 +13,15 @@ services:
         ipv4_address: 172.16.238.10
 
   jenkins:
-    image: casadocker/jenkins:1.642.2
+    image: casadocker/jenkins:1.651.1
     container_name: jenkins
     ports:
       - "8088:8080"
     extra_hosts:
       - "docker.host:${DOCKER_IP}"
+    networks:
+      cd_net:
+        ipv4_address: 172.16.238.20
 
 networks:
   cd_net:
@@ -27,4 +30,3 @@ networks:
       driver: default
       config:
       - subnet: 172.16.238.0/24
-        gateway: 172.16.238.1
