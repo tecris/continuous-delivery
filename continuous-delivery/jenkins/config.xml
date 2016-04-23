@@ -86,7 +86,7 @@
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.StartCommand">
         <containerIds>planets-mysql-db</containerIds>
         <publishAllPorts>false</publishAllPorts>
-        <portBindings>172.17.0.1:3306:3306</portBindings>
+        <portBindings>docker.host:3306:3306</portBindings>
         <waitPorts></waitPorts>
         <links></links>
         <bindMounts></bindMounts>
@@ -96,7 +96,7 @@
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <hudson.tasks.Shell>
       <command>sleep 10
-mvn -s /opt/maven_config/.m2/settings.xml clean compile flyway:migrate -Ddatabase.host=172.17.0.1</command>
+mvn -s /opt/maven_config/.m2/settings.xml clean compile flyway:migrate -Ddatabase.host=docker.host</command>
     </hudson.tasks.Shell>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.CreateImageCommand">
@@ -144,7 +144,7 @@ mvn -s /opt/maven_config/.m2/settings.xml clean compile flyway:migrate -Ddatabas
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.StartCommand">
         <containerIds>planets-web</containerIds>
         <publishAllPorts>true</publishAllPorts>
-        <portBindings>172.17.0.1:8089:8080
+        <portBindings>docker.host:8089:8080
 9990:9990</portBindings>
         <waitPorts></waitPorts>
         <links></links>
@@ -157,7 +157,7 @@ mvn -s /opt/maven_config/.m2/settings.xml clean compile flyway:migrate -Ddatabas
       <command>sleep 10</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>mvn -s /opt/maven_config/.m2/settings.xml clean integration-test -Dtest.host=172.17.0.1 -Dtest.port=8089</command>
+      <command>mvn -s /opt/maven_config/.m2/settings.xml clean integration-test -Dtest.host=docker.host -Dtest.port=8089</command>
     </hudson.tasks.Shell>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.33">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.StopCommand">
