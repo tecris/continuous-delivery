@@ -84,7 +84,7 @@ curl -X POST -H &quot;Content-Type: application/json&quot; -d &apos;{
 }&apos; http://docker.host:4243/containers/create?name=planets-mysql-db
 
 echo &quot;\n\n===== Start database container =====\n\n&quot;
-curl -v -X POST -H &quot;Content-Type: application/json&quot; -d &apos;{
+curl -X POST -H &quot;Content-Type: application/json&quot; -d &apos;{
   &quot;PortBindings&quot;: {
     &quot;3306/tcp&quot;: [{
       &quot;HostPort&quot;: &quot;3306&quot;
@@ -108,15 +108,42 @@ echo &quot;\n\n===== Build archive required for docker remote API when building 
 tar zcf $WORKSPACE/continuous-delivery/Dockerfile.tar.gz -C $WORKSPACE/continuous-delivery/jenkins/docker/ .
 
 echo &quot;\n\n===== Build web image =====\n\n&quot;
-curl -X POST -H &quot;Content-Type: application/tar&quot; --data-binary @$WORKSPACE/continuous-delivery/Dockerfile.tar.gz http://docker.host:4243/build?t=planets-web:$BUILD_NUMBER
+curl -X POST -H &quot;Content-Type: application/tar&quot; --data-binary @$WORKSPACE/continuous-delivery/Dockerfile.tar.gz http://docker.host:4243/build?t=bluesky/planets-web:$BUILD_NUMBER
 
-echo &quot;\n\n===== Cleanup, remote archive =====\n\n&quot;
+echo &quot;\n\n===== Cleanup, remove archive =====\n\n&quot;
 rm $WORKSPACE/continuous-delivery/Dockerfile.tar.gz
 
-echo &quot;\n\n===== Cleanup, stop database container =====\n\n&quot;
+sed -e &quot;s/TAG_NUMBER/$BUILD_NUMBER/g&quot; $WORKSPACE/continuous-delivery/jenkins/container-web-template.json &gt; $WORKSPACE/continuous-delivery/jenkins/container-web.json
+
+echo &quot;\n\n===== Create web container =====\n\n&quot;
+curl -X POST -H &quot;Content-Type: application/json&quot; -d @$WORKSPACE/continuous-delivery/jenkins/container-web.json http://docker.host:4243/containers/create?name=planets-web
+
+sleep 10
+
+echo &quot;\n\n===== Start database container =====\n\n&quot;
+curl -X POST -H &quot;Content-Type: application/json&quot; -d &apos;{
+  &quot;PortBindings&quot;: {
+    &quot;8080/tcp&quot;: [{
+      &quot;HostPort&quot;: &quot;8089&quot;
+    }]
+  },
+  &quot;RestartPolicy&quot;: {
+    &quot;Name&quot;: &quot;always&quot;
+  }
+}&apos; http://docker.host:4243/containers/planets-web/start
+
+echo &quot;\n\n===== Wait for web container to start =====\n\n&quot;
+sleep 10
+
+echo &quot;\n\n===== Execute integration tests =====\n\n&quot;
+mvn -s /opt/maven_config/.m2/settings.xml clean integration-test -Dtest.host=docker.host -Dtest.port=8089
+
+echo &quot;\n\n===== Cleanup, stop database &amp; web container =====\n\n&quot;
+curl -X POST http://docker.host:4243/containers/planets-web/stop
 curl -X POST http://docker.host:4243/containers/planets-mysql-db/stop
 
-echo &quot;\n\n===== Cleanup, remove database container =====\n\n&quot;
+echo &quot;\n\n===== Cleanup, remove database &amp; web container =====\n\n&quot;
+curl -X DELETE http://docker.host:4243/containers/planets-web
 curl -X DELETE http://docker.host:4243/containers/planets-mysql-db
 </command>
     </hudson.tasks.Shell>
