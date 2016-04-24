@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<maven2-moduleset plugin="maven-plugin@2.7.1">
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.4.4">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>https://github.com/tecris/continuous-delivery.git</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>*/master</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions>
+      <hudson.plugins.git.extensions.impl.LocalBranch>
+        <localBranch>master</localBranch>
+      </hudson.plugins.git.extensions.impl.LocalBranch>
+    </extensions>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers>
+    <hudson.triggers.SCMTrigger>
+      <spec>H/2 * * * *</spec>
+      <ignorePostCommitHooks>false</ignorePostCommitHooks>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
+  <concurrentBuild>true</concurrentBuild>
+  <rootModule>
+    <groupId>org.terra</groupId>
+    <artifactId>planet</artifactId>
+  </rootModule>
+  <goals>clean deploy -DskipITs</goals>
+  <aggregatorStyleBuild>true</aggregatorStyleBuild>
+  <incrementalBuild>false</incrementalBuild>
+  <ignoreUpstremChanges>false</ignoreUpstremChanges>
+  <archivingDisabled>false</archivingDisabled>
+  <siteArchivingDisabled>false</siteArchivingDisabled>
+  <fingerprintingDisabled>false</fingerprintingDisabled>
+  <resolveDependencies>false</resolveDependencies>
+  <processPlugins>false</processPlugins>
+  <mavenValidationLevel>-1</mavenValidationLevel>
+  <runHeadless>false</runHeadless>
+  <disableTriggerDownstreamProjects>false</disableTriggerDownstreamProjects>
+  <blockTriggerWhenBuilding>true</blockTriggerWhenBuilding>
+  <settings class="jenkins.mvn.DefaultSettingsProvider"/>
+  <globalSettings class="jenkins.mvn.FilePathGlobalSettingsProvider">
+    <path>/opt/maven_config/.m2/settings.xml</path>
+  </globalSettings>
+  <reporters/>
+  <publishers/>
+  <buildWrappers/>
+  <prebuilders/>
+  <postbuilders>
+    <hudson.tasks.Shell>
+      <command>curl -X POST http://docker.host:4243/containers/planets-mysql-db/stop
+
+curl -X DELETE http://docker.host:4243/containers/planets-mysql-db
+
+curl -X POST -H &quot;Content-Type: application/json&quot; -d &apos;{
+  &quot;Hostname&quot;: &quot;planets.db&quot;,
+  &quot;Image&quot;: &quot;mysql:5.7&quot;,
+  &quot;Env&quot;: [
+    &quot;MYSQL_ROOT_PASSWORD=mysql&quot;,
+    &quot;MYSQL_USER=bookstore&quot;,
+    &quot;MYSQL_PASSWORD=1bookstore!&quot;,
+    &quot;MYSQL_DATABASE=bookstoredb&quot;
+  ],
+  &quot;ExposedPorts&quot;: {
+    &quot;3306/tcp&quot;: {}
+  }
+}&apos; http://docker.host:4243/containers/create?name=planets-mysql-db
+
+curl -v -X POST -H &quot;Content-Type: application/json&quot; -d &apos;{
+  &quot;PortBindings&quot;: {
+    &quot;3306/tcp&quot;: [{
+      &quot;HostPort&quot;: &quot;3306&quot;
+    }]
+  },
+  &quot;RestartPolicy&quot;: {
+    &quot;Name&quot;: &quot;always&quot;
+  }
+}&apos; http://docker.host:4243/containers/planets-mysql-db/start
+
+sleep 10
+
+mvn -s /opt/maven_config/.m2/settings.xml clean compile flyway:migrate -Ddatabase.host=docker.host
+
+wget &quot;http://nexus:8081/service/local/artifact/maven/redirect?r=snapshots&amp;g=org.terra&amp;a=planet&amp;v=LATEST&amp;e=war&quot; -O $WORKSPACE/continuous-delivery/jenkins/docker/bookstore.war
+
+tar zcf $WORKSPACE/continuous-delivery/Dockerfile.tar.gz -C $WORKSPACE/continuous-delivery/jenkins/docker/ .
+	
+curl -X POST -H &quot;Content-Type: application/tar&quot; --data-binary @$WORKSPACE/continuous-delivery/Dockerfile.tar.gz http://docker.host:4243/build?t=planets-web:$BUILD_NUMBER
+
+rm $WORKSPACE/continuous-delivery/Dockerfile.tar.gz
+
+curl -X POST http://docker.host:4243/containers/planets-mysql-db/stop
+
+curl -X DELETE http://docker.host:4243/containers/planets-mysql-db
+</command>
+    </hudson.tasks.Shell>
+  </postbuilders>
+  <runPostStepsIfResult>
+    <name>SUCCESS</name>
+    <ordinal>0</ordinal>
+    <color>BLUE</color>
+    <completeBuild>true</completeBuild>
+  </runPostStepsIfResult>
+</maven2-moduleset>
