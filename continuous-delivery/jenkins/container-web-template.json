@@ -1,0 +1,17 @@
+{
+  "Hostname": "planets.web",
+  "Image": "planets-web:TAG_NUMBER",
+  "Cmd": [
+    "-Dmysql.ipaddress=planets-db",
+    "-Dmysql.port=3306",
+    "-Dmysql.database=bookstoredb",
+    "-Dmysql.username=bookstore",
+    "-Dmysql.password=1bookstore!"
+  ],
+  "HostConfig": {
+    "Links": ["planets-mysql-db:planets-db"]
+  },
+  "ExposedPorts": {
+    "8080/tcp": {}
+  }
+}
