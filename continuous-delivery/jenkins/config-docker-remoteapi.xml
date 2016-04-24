@@ -83,6 +83,7 @@ curl -X POST -H &quot;Content-Type: application/json&quot; -d &apos;{
   }
 }&apos; http://docker.host:4243/containers/create?name=planets-mysql-db
 
+echo &quot;\n\n===== Start database container =====\n\n&quot;
 curl -v -X POST -H &quot;Content-Type: application/json&quot; -d &apos;{
   &quot;PortBindings&quot;: {
     &quot;3306/tcp&quot;: [{
@@ -94,20 +95,28 @@ curl -v -X POST -H &quot;Content-Type: application/json&quot; -d &apos;{
   }
 }&apos; http://docker.host:4243/containers/planets-mysql-db/start
 
+echo &quot;\n\n===== Wait for database container to start =====\n\n&quot;
 sleep 10
 
+echo &quot;\n\n===== Deploy database scripts =====\n\n&quot;
 mvn -s /opt/maven_config/.m2/settings.xml clean compile flyway:migrate -Ddatabase.host=docker.host
 
+echo &quot;\n\n===== Get latest build from nexus repository =====\n\n&quot;
 wget &quot;http://nexus:8081/service/local/artifact/maven/redirect?r=snapshots&amp;g=org.terra&amp;a=planet&amp;v=LATEST&amp;e=war&quot; -O $WORKSPACE/continuous-delivery/jenkins/docker/bookstore.war
 
+echo &quot;\n\n===== Build archive required for docker remote API when building an image =====\n\n&quot;
 tar zcf $WORKSPACE/continuous-delivery/Dockerfile.tar.gz -C $WORKSPACE/continuous-delivery/jenkins/docker/ .
 
+echo &quot;\n\n===== Build web image =====\n\n&quot;
 curl -X POST -H &quot;Content-Type: application/tar&quot; --data-binary @$WORKSPACE/continuous-delivery/Dockerfile.tar.gz http://docker.host:4243/build?t=planets-web:$BUILD_NUMBER
 
+echo &quot;\n\n===== Cleanup, remote archive =====\n\n&quot;
 rm $WORKSPACE/continuous-delivery/Dockerfile.tar.gz
 
+echo &quot;\n\n===== Cleanup, stop database container =====\n\n&quot;
 curl -X POST http://docker.host:4243/containers/planets-mysql-db/stop
 
+echo &quot;\n\n===== Cleanup, remove database container =====\n\n&quot;
 curl -X DELETE http://docker.host:4243/containers/planets-mysql-db
 </command>
     </hudson.tasks.Shell>
