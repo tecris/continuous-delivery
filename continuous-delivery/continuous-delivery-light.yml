@@ -19,6 +19,7 @@ services:
       - "8088:8080"
     extra_hosts:
       - "docker.host:${DOCKER_IP}"
+      - "nexus:172.16.238.10"
     networks:
       cd_net:
         ipv4_address: 172.16.238.20
