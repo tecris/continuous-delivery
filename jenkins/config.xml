@@ -105,26 +105,25 @@ echo "\n\n===== Stop and remove db &amp; web containers =====\n\n"
 docker-compose stop ackris-db ackris-web
 docker-compose rm -f --all
 
-export DOCKER_URL=http://cloud.atlas:4243
 echo "\n==== PUSH IMAGE blue.sky/ackris-web:GIT_COMMIT ====\n"
 curl -X POST -H "X-Registry-Auth: empty" \
-	${DOCKER_URL}/images/blue.sky\/ackris-web/push?tag=$GIT_COMMIT
+	${DOCKER_HOST}/images/blue.sky\/ackris-web/push?tag=$GIT_COMMIT
 
 echo "\n==== TAG IMAGE to blue.sky/ackris-web:latest ====\n"
 curl -X POST -H "X-Registry-Auth: empty" \
-	${DOCKER_URL}/images/blue.sky\/ackris-web:$GIT_COMMIT/tag?repo=blue.sky\/ackris-web\&amp;force=0\&amp;tag=latest
+	${DOCKER_HOST}/images/blue.sky\/ackris-web:$GIT_COMMIT/tag?repo=blue.sky\/ackris-web\&amp;force=0\&amp;tag=latest
 
 echo "\n==== PUSH IMAGE blue.sky/ackris-web:latest ====\n"
 curl -X POST -H "X-Registry-Auth: empty" \
-	${DOCKER_URL}/images/blue.sky\/ackris-web/push?tag=latest
+	${DOCKER_HOST}/images/blue.sky\/ackris-web/push?tag=latest
 
 echo "\n==== REMOVE IMAGE blue.sky/ackris-web:GIT_REVISION ====\n"
 curl -X DELETE -H "X-Registry-Auth: empty" \
-	${DOCKER_URL}/images/blue.sky\/ackris-web:$GIT_COMMIT?force=1
+	${DOCKER_HOST}/images/blue.sky\/ackris-web:$GIT_COMMIT?force=1
 
 echo "\n==== REMOVE IMAGE blue.sky/ackris-web:latest ====\n"
 curl -X DELETE -H "X-Registry-Auth: empty" \
-	${DOCKER_URL}/images/blue.sky\/ackris-web:latest?force=1</command>
+	${DOCKER_HOST}/images/blue.sky\/ackris-web:latest?force=1</command>
     </hudson.tasks.Shell>
   </postbuilders>
   <runPostStepsIfResult>
