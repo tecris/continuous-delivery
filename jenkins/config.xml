@@ -75,8 +75,10 @@ docker-compose stop ackris-db ackris-web
 docker-compose rm -f ackris-db ackris-web
 
 echo &quot;\n\n===== Start db &amp; web containers	 =====\n\n&quot;
-docker-compose up -d ackris-db ackris-web
-sleep 10</command>
+docker-compose up -d ackris-db
+sleep 5
+docker-compose up -d ackris-web
+sleep 5</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Maven>
       <targets>clean compile flyway:migrate -Ddatabase.host=docker.host</targets>
@@ -88,7 +90,7 @@ sleep 10</command>
       <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
     </hudson.tasks.Maven>
     <hudson.tasks.Maven>
-      <targets>clean integration-test -Dtest.port=8070</targets>
+      <targets>clean integration-test -Dtest.port=8070 -Dtest.host=docker.host</targets>
       <mavenName>M3</mavenName>
       <usePrivateRepository>false</usePrivateRepository>
       <settings class="jenkins.mvn.FilePathSettingsProvider">
