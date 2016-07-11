@@ -101,25 +101,25 @@ docker-compose stop ackris-db ackris-web
 docker-compose rm -f ackris-db ackris-web
 
 export DOCKER_URL=https://cloud.atlas:2376
-echo &quot;\n==== PUSH IMAGE blue.sky/iv-gateway:GIT_COMMIT ====\n&quot;
+echo &quot;\n==== PUSH IMAGE blue.sky/ackris-web:GIT_COMMIT ====\n&quot;
 curl -k --config /opt/jenkins_config/.curlr -X POST -H &quot;X-Registry-Auth: empty&quot; \
-	${DOCKER_URL}/images/blue.sky\/iv-gateway/push?tag=$GIT_COMMIT
+	${DOCKER_URL}/images/blue.sky\/ackris-web/push?tag=$GIT_COMMIT
 
-echo &quot;\n==== TAG IMAGE to blue.sky/iv-gateway:latest ====\n&quot;
+echo &quot;\n==== TAG IMAGE to blue.sky/ackris-web:latest ====\n&quot;
 curl -k --config /opt/jenkins_config/.curlrc -X POST -H &quot;X-Registry-Auth: empty&quot; \
-	${DOCKER_URL}/images/blue.sky\/iv-gateway:$GIT_COMMIT/tag?repo=blue.sky\/iv-gateway\&amp;force=0\&amp;tag=latest
+	${DOCKER_URL}/images/blue.sky\/ackris-web:$GIT_COMMIT/tag?repo=blue.sky\/ackris-web\&amp;force=0\&amp;tag=latest
 
-echo &quot;\n==== PUSH IMAGE blue.sky/iv-gateway:latest ====\n&quot;
+echo &quot;\n==== PUSH IMAGE blue.sky/ackris-web:latest ====\n&quot;
 curl -k --config /opt/jenkins_config/.curlrc -X POST -H &quot;X-Registry-Auth: empty&quot; \
-	${DOCKER_URL}/images/blue.sky\/iv-gateway/push?tag=latest
+	${DOCKER_URL}/images/blue.sky\/ackris-web/push?tag=latest
 
-echo &quot;\n==== REMOVE IMAGE blue.sky/iv-gateway:GIT_REVISION ====\n&quot;
+echo &quot;\n==== REMOVE IMAGE blue.sky/ackris-web:GIT_REVISION ====\n&quot;
 curl -k --config /opt/jenkins_config/.curlrc -X DELETE -H &quot;X-Registry-Auth: empty&quot; \
-	${DOCKER_URL}/images/blue.sky\/iv-gateway:$GIT_COMMIT?force=1
+	${DOCKER_URL}/images/blue.sky\/ackris-web:$GIT_COMMIT?force=1
 
-echo &quot;\n==== REMOVE IMAGE blue.sky/iv-gateway:latest ====\n&quot;
+echo &quot;\n==== REMOVE IMAGE blue.sky/ackris-web:latest ====\n&quot;
 curl -k --config /opt/jenkins_config/.curlrc -X DELETE -H &quot;X-Registry-Auth: empty&quot; \
-	${DOCKER_URL}/images/blue.sky\/iv-gateway:latest?force=1</command>
+	${DOCKER_URL}/images/blue.sky\/ackris-web:latest?force=1</command>
     </hudson.tasks.Shell>
   </postbuilders>
   <runPostStepsIfResult>
