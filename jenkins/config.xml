@@ -72,7 +72,7 @@ echo &quot;\n\n===== Stop and remove db &amp; web containers =====\n\n&quot;
 
 
 docker-compose stop ackris-db ackris-web
-docker-compose rm -f ackris-db ackris-web
+docker-compose rm -f --all
 
 echo &quot;\n\n===== Start db &amp; web containers	 =====\n\n&quot;
 docker-compose up -d ackris-db
@@ -110,7 +110,7 @@ echo &quot;\n\n===== Stop and remove db &amp; web containers =====\n\n&quot;
 
 
 docker-compose stop ackris-db ackris-web
-docker-compose rm -f ackris-db-snapshot ackris-web-snapshot
+docker-compose rm -f --all
 
 export DOCKER_URL=https://cloud.atlas:2376
 echo &quot;\n==== PUSH IMAGE blue.sky/ackris-web:GIT_COMMIT ====\n&quot;
