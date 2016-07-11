@@ -15,6 +15,7 @@ dependencies:
 test:
   pre:
     - sudo service mysql stop                      # stop circleci mysql instance to avoid port clash
+    - mvn clean package                            # build application
     - docker-compose up -d ackris-db ackris-web    # start web(wildfly) and database(mysql) containers`
     - mvn clean compile flyway:migrate             # deploy database schema
 #- mvn clean wildfly:deploy                     # deploy application
