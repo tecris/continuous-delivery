@@ -3,7 +3,7 @@ services:
   ackris-db:
     image: mysql:5.7
     hostname: ackris.db
-    container_name: ackris-demo-db
+    container_name: ackris-db-snapshot
     stdin_open: true
     tty: true
     ports:
@@ -15,9 +15,10 @@ services:
       - MYSQL_DATABASE=bookstoredb
 
   ackris-web:
-    image: casadocker/alpine-wildfly-mysql:10.0.0
+    build: .
+    image: casadocker/akris-web:snapshot
     hostname: ackris.web
-    container_name: ackris-demo-web
+    container_name: ackris-web-snapshot
     # http://docs.docker.com/compose/networking/
     command: -Dmysql.ipaddress=ackris-db -Dmysql.port=3306 -Dmysql.database=bookstoredb -Dmysql.username=bookstore -Dmysql.password=1bookstore!
     stdin_open: true
