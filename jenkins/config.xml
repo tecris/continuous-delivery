@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<maven2-moduleset plugin="maven-plugin@2.7.1">
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.4.4">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>git://git-server/iv-gateway.git</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>*/master</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions>
+      <hudson.plugins.git.extensions.impl.LocalBranch>
+        <localBranch>master</localBranch>
+      </hudson.plugins.git.extensions.impl.LocalBranch>
+    </extensions>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers>
+    <hudson.triggers.SCMTrigger>
+      <spec>H/2 * * * *</spec>
+      <ignorePostCommitHooks>false</ignorePostCommitHooks>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
+  <concurrentBuild>true</concurrentBuild>
+  <rootModule>
+    <groupId>org.test.bookstore</groupId>
+    <artifactId>cd</artifactId>
+  </rootModule>
+  <goals>clean deploy -DskipITs</goals>
+  <aggregatorStyleBuild>true</aggregatorStyleBuild>
+  <incrementalBuild>false</incrementalBuild>
+  <ignoreUpstremChanges>false</ignoreUpstremChanges>
+  <archivingDisabled>false</archivingDisabled>
+  <siteArchivingDisabled>false</siteArchivingDisabled>
+  <fingerprintingDisabled>false</fingerprintingDisabled>
+  <resolveDependencies>false</resolveDependencies>
+  <processPlugins>false</processPlugins>
+  <mavenValidationLevel>-1</mavenValidationLevel>
+  <runHeadless>false</runHeadless>
+  <disableTriggerDownstreamProjects>false</disableTriggerDownstreamProjects>
+  <blockTriggerWhenBuilding>true</blockTriggerWhenBuilding>
+  <settings class="jenkins.mvn.DefaultSettingsProvider"/>
+  <globalSettings class="jenkins.mvn.FilePathGlobalSettingsProvider">
+    <path>/opt/maven_config/.m2/settings.xml</path>
+  </globalSettings>
+  <reporters/>
+  <publishers/>
+  <buildWrappers/>
+  <prebuilders/>
+  <postbuilders>
+    <hudson.tasks.Shell>
+      <command>export DOCKER_HOST=https://cloud.atlas:2376
+export CURL_CA_BUNDLE=
+export DOCKER_TLS_VERIFY=1
+export DOCKER_CERT_PATH=/opt/jenkins_config/.docker
+export TAG=$GIT_COMMIT
+
+echo &quot;\n\n===== Stop and remove db &amp; web containers =====\n\n&quot;
+
+
+docker-compose stop ackris-db ackris-web
+docker-compose rm -f ackris-db ackris-web
+
+echo &quot;\n\n===== Start db &amp; web containers	 =====\n\n&quot;
+docker-compose up -d ackris-db ackris-web</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Maven>
+      <targets>clean integration-test</targets>
+      <mavenName>M3</mavenName>
+      <usePrivateRepository>false</usePrivateRepository>
+      <settings class="jenkins.mvn.FilePathSettingsProvider">
+        <path>/opt/maven_config/.m2/settings.xml</path>
+      </settings>
+      <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
+    </hudson.tasks.Maven>
+    <hudson.tasks.Shell>
+      <command>export DOCKER_HOST=https://cloud.atlas:2376
+export CURL_CA_BUNDLE=
+export DOCKER_TLS_VERIFY=1
+export DOCKER_CERT_PATH=/opt/jenkins_config/.docker
+export REDIS_PORT=6380
+export TAG=$GIT_COMMIT
+
+echo &quot;\n\n===== Stop and remove db &amp; web containers =====\n\n&quot;
+
+
+docker-compose stop ackris-db ackris-web
+docker-compose rm -f ackris-db ackris-web
+
+export DOCKER_URL=https://cloud.atlas:2376
+echo &quot;\n==== PUSH IMAGE blue.sky/iv-gateway:GIT_COMMIT ====\n&quot;
+curl -k --config /opt/jenkins_config/.curlr -X POST -H &quot;X-Registry-Auth: empty&quot; \
+	${DOCKER_URL}/images/blue.sky\/iv-gateway/push?tag=$GIT_COMMIT
+
+echo &quot;\n==== TAG IMAGE to blue.sky/iv-gateway:latest ====\n&quot;
+curl -k --config /opt/jenkins_config/.curlrc -X POST -H &quot;X-Registry-Auth: empty&quot; \
+	${DOCKER_URL}/images/blue.sky\/iv-gateway:$GIT_COMMIT/tag?repo=blue.sky\/iv-gateway\&amp;force=0\&amp;tag=latest
+
+echo &quot;\n==== PUSH IMAGE blue.sky/iv-gateway:latest ====\n&quot;
+curl -k --config /opt/jenkins_config/.curlrc -X POST -H &quot;X-Registry-Auth: empty&quot; \
+	${DOCKER_URL}/images/blue.sky\/iv-gateway/push?tag=latest
+
+echo &quot;\n==== REMOVE IMAGE blue.sky/iv-gateway:GIT_REVISION ====\n&quot;
+curl -k --config /opt/jenkins_config/.curlrc -X DELETE -H &quot;X-Registry-Auth: empty&quot; \
+	${DOCKER_URL}/images/blue.sky\/iv-gateway:$GIT_COMMIT?force=1
+
+echo &quot;\n==== REMOVE IMAGE blue.sky/iv-gateway:latest ====\n&quot;
+curl -k --config /opt/jenkins_config/.curlrc -X DELETE -H &quot;X-Registry-Auth: empty&quot; \
+	${DOCKER_URL}/images/blue.sky\/iv-gateway:latest?force=1</command>
+    </hudson.tasks.Shell>
+  </postbuilders>
+  <runPostStepsIfResult>
+    <name>SUCCESS</name>
+    <ordinal>0</ordinal>
+    <color>BLUE</color>
+    <completeBuild>true</completeBuild>
+  </runPostStepsIfResult>
+</maven2-moduleset>
