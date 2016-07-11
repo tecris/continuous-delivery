@@ -78,7 +78,7 @@ echo &quot;\n\n===== Start db &amp; web containers	 =====\n\n&quot;
 docker-compose up -d ackris-db ackris-web</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Maven>
-      <targets>clean integration-test</targets>
+      <targets>clean integration-test -Dtest.port=8070</targets>
       <mavenName>M3</mavenName>
       <usePrivateRepository>false</usePrivateRepository>
       <settings class="jenkins.mvn.FilePathSettingsProvider">
