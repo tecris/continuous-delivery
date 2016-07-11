@@ -16,7 +16,7 @@ services:
 
   ackris-web:
     build: .
-    image: casadocker/akris-web:snapshot
+    image: casadocker/akris-web:${TAG}
     hostname: ackris.web
     container_name: ackris-web-snapshot
     # http://docs.docker.com/compose/networking/

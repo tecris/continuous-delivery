@@ -34,7 +34,6 @@ before_install:
 
 script:
   - /usr/local/maven/bin/mvn clean package                    # build application
-  - docker-compose up -d ackris-db ackris-web                 # start web(wildfly) and database(mysql) containers`
+  - TAG=snapshot docker-compose up -d ackris-db ackris-web    # start web(wildfly) and database(mysql) containers`
   - /usr/local/maven/bin/mvn clean compile flyway:migrate     # deploy database schema
-#- /usr/local/maven/bin/mvn clean wildfly:deploy             # deploy application
   - /usr/local/maven/bin/mvn clean integration-test           # run E2E tests
