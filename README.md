@@ -6,7 +6,7 @@
 Continuous delivery demo that aims to use following principles:
  - immutable environments
  - short lived environments 
-  - **built and destroyed** with every integration test run
+  - **built and destroyed** every time jenkins builds project
 
 <hr/>
 - [**Continuous delivery with Jenkins (on-prem)**](#continuous-delivery-with-jenkins)
@@ -26,11 +26,9 @@ Continuous delivery demo that aims to use following principles:
 | Docker Compose | 1.6 |
 
 ### Continuous delivery with Jenkins
- - Configure [private registry](https://github.com/tecris/docker/tree/v16.02.01/registry2/private)
- - Enable Docker Remote API edit `/etc/default/docker` and update the DOCKER_OPTS:
-  * `DOCKER_OPTS='-H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock ...'`
- - `$ ./startCdInfrastructure.sh`
- - `$ cd jenkins && ./createJob.sh localhost planets config.xml`
+ - Start [continuous delivery stack](https://github.com/tecris/infrastructure-as-code)
+ - Create jenkins plan
+   - `$ cd jenkins && ./createJob.sh localhost bookstore config.xml`
  - http://localhost:8088/job/continuous-delivery -> 'Build Now'
 
 ##### Continuous Delivery life-cycle
