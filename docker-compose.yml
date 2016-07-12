@@ -16,7 +16,7 @@ services:
 
   ackris-web:
     build: .
-    image: blue.sky/akris-web:${TAG}
+    image: blue.sky/ackris-web:${TAG}
     hostname: ackris.web
     container_name: ackris-web-snapshot
     # http://docs.docker.com/compose/networking/
