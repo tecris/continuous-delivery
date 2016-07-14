@@ -36,4 +36,4 @@ script:
   - /usr/local/maven/bin/mvn clean package                                                      # build application
   - TAG=snapshot docker-compose up -d ackris-db ackris-web                                      # start web(wildfly) and database(mysql) containers`
   - /usr/local/maven/bin/mvn clean compile flyway:migrate                                       # deploy database schema
-  - /usr/local/maven/bin/mvn clean verify -Dmaven.test.failure.ignore=false -Dtest.port=8071    # run E2E tests
+  - /usr/local/maven/bin/mvn clean verify -Dmaven.test.failure.ignore=false -Dtest.port=8070    # run E2E tests
