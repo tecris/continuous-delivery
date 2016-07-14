@@ -19,4 +19,4 @@ test:
     - TAG=snapshot docker-compose up -d ackris-db ackris-web    # start web(wildfly) and database(mysql) containers`
     - mvn clean compile flyway:migrate                          # deploy database schema
   override:
-    - mvn clean integration-test
+    - mvn clean integration-test -Dtest.port=8070
