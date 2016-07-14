@@ -86,7 +86,7 @@ sleep 5</command>
       <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
     </hudson.tasks.Maven>
     <hudson.tasks.Maven>
-      <targets>clean integration-test -Dtest.port=8070 -Dtest.host=docker.host</targets>
+      <targets>clean verify -Dmaven.test.failure.ignore=false -Dtest.port=8070 -Dtest.host=docker.host</targets>
       <mavenName>M3</mavenName>
       <usePrivateRepository>false</usePrivateRepository>
       <settings class="jenkins.mvn.FilePathSettingsProvider">
