@@ -56,7 +56,7 @@ Continuous delivery demo that aims to use following principles:
 
 Use `-Dmaven.buildNumber.doCheck=false` if project contains local changes
 
-Demo: `http://localhost:8080/bookstore`
+Demo: `http://localhost:8070/bookstore`
 
 #### Swagger
 
