@@ -53,6 +53,9 @@
     <wildfly.username>admin</wildfly.username>
     <wildfly.password>1admin!</wildfly.password>
     <sonar.language>java</sonar.language>
+    <serenity.version>1.1.37-rc.6</serenity.version>
+    <serenity.maven.version>1.1.37-rc.6</serenity.maven.version>
+    <serenity.cucumber.version>1.1.8</serenity.cucumber.version>
   </properties>
 
   <dependencyManagement>
@@ -109,6 +112,18 @@
         <version>${jackson.version}</version>
         <scope>test</scope>
       </dependency>
+      <dependency>
+        <groupId>net.serenity-bdd</groupId>
+        <artifactId>serenity-core</artifactId>
+        <version>${serenity.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>net.serenity-bdd</groupId>
+        <artifactId>serenity-cucumber</artifactId>
+        <version>${serenity.cucumber.version}</version>
+        <scope>test</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <dependencies>
@@ -148,6 +163,14 @@
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>net.serenity-bdd</groupId>
+      <artifactId>serenity-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>net.serenity-bdd</groupId>
+      <artifactId>serenity-cucumber</artifactId>
     </dependency>
   </dependencies>
 
@@ -273,6 +296,27 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>net.serenity-bdd.maven.plugins</groupId>
+        <artifactId>serenity-maven-plugin</artifactId>
+        <version>${serenity.maven.version}</version>
+        <dependencies>
+          <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-core</artifactId>
+            <version>${serenity.version}</version>
+          </dependency>
+        </dependencies>
+        <executions>
+          <execution>
+            <id>serenity-reports</id>
+            <phase>post-integration-test</phase>
+            <goals>
+              <goal>aggregate</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
