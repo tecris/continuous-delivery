@@ -31,6 +31,7 @@ before_install:
   - docker version
   - docker-compose version
   - /usr/local/maven/bin/mvn -version
+  - sudo service mysql stop
 
 script:
   - /usr/local/maven/bin/mvn clean package                                                      # build application
