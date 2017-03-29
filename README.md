@@ -8,12 +8,10 @@ Continuous delivery demo that aims to use following principles:
  - short lived environments 
   - **built and destroyed** every time jenkins builds project
 
-<hr/>
 - [**Continuous delivery with Jenkins (on-prem)**](#continuous-delivery-with-jenkins)
 - [**E2E with Docker Compose and Maven**](#e2e-with-docker-compose-and-maven)
 - [**Swagger**](#swagger)
 
-<hr/>
 
 ### Stack
 | *Technology* | *Version* |
