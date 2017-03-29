@@ -20,13 +20,13 @@ before_install:
   - apt-cache madison docker-engine
 
   # upgrade docker-engine to specific version
-  - sudo apt-get -o Dpkg::Options::="--force-confnew" install -y docker-engine=${DOCKER_VERSION}
+  # - sudo apt-get -o Dpkg::Options::="--force-confnew" install -y docker-engine=${DOCKER_VERSION}
 
   # reinstall docker-compose at specific version
-  - sudo rm /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
+  #- sudo rm /usr/local/bin/docker-compose
+  #- curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  #- chmod +x docker-compose
+  #- sudo mv docker-compose /usr/local/bin
   - "wget http://apache.mirror.iphh.net/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz && tar xfz apache-maven-3.3.9-bin.tar.gz && sudo mv apache-maven-3.3.9 /usr/local/maven-3.3.9 && sudo rm -f /usr/local/maven && sudo ln -s /usr/local/maven-3.3.9 /usr/local/maven"
   - docker version
   - docker-compose version
