@@ -53,9 +53,9 @@
     <wildfly.username>admin</wildfly.username>
     <wildfly.password>1admin!</wildfly.password>
     <sonar.language>java</sonar.language>
-    <serenity.version>1.1.37-rc.6</serenity.version>
-    <serenity.maven.version>1.1.37-rc.6</serenity.maven.version>
-    <serenity.cucumber.version>1.1.8</serenity.cucumber.version>
+    <serenity.version>1.5.3</serenity.version>
+    <serenity.maven.version>1.5.3</serenity.maven.version>
+    <serenity.cucumber.version>1.5.4</serenity.cucumber.version>
   </properties>
 
   <dependencyManagement>
@@ -203,12 +203,12 @@
         <plugin>
           <groupId>org.sonarsource.scanner.maven</groupId>
           <artifactId>sonar-maven-plugin</artifactId>
-          <version>3.0.1</version>
+          <version>3.3.0.603</version>
         </plugin>
         <plugin>
           <groupId>org.flywaydb</groupId>
           <artifactId>flyway-maven-plugin</artifactId>
-          <version>4.0</version>
+          <version>4.2.0</version>
           <configuration>
             <driver>${db.driver}</driver>
             <url>jdbc:${database.vendor}://${database.host}:${database.port}/${database.name}</url>
@@ -228,12 +228,12 @@
         <plugin>
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
-          <version>0.7.6.201602180812</version>
+          <version>0.7.9</version>
         </plugin>
         <plugin>
           <groupId>org.wildfly.plugins</groupId>
           <artifactId>wildfly-maven-plugin</artifactId>
-          <version>1.1.0.Alpha7</version>
+          <version>1.1.0</version>
           <configuration>
             <port>9990</port>
           </configuration>
@@ -241,7 +241,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-failsafe-plugin</artifactId>
-          <version>2.19.1</version>
+          <version>2.20</version>
           <executions>
             <execution>
               <id>integration-test</id>
@@ -265,12 +265,12 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-report-plugin</artifactId>
-          <version>2.19.1</version>
+          <version>2.20</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-war-plugin</artifactId>
-          <version>2.6</version>
+          <version>3.1.0</version>
           <configuration>
             <failOnMissingWebXml>false</failOnMissingWebXml>
             <archive>
