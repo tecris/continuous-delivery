@@ -233,7 +233,7 @@
         <plugin>
           <groupId>org.wildfly.plugins</groupId>
           <artifactId>wildfly-maven-plugin</artifactId>
-          <version>1.1.0</version>
+          <version>1.2.0.Alpha6</version>
           <configuration>
             <port>9990</port>
           </configuration>
