@@ -20,20 +20,22 @@ before_install:
   - apt-cache madison docker-engine
 
   # upgrade docker-engine to specific version
-  - sudo apt-get -o Dpkg::Options::="--force-confnew" install -y docker-engine=${DOCKER_VERSION}
+  # - sudo apt-get -o Dpkg::Options::="--force-confnew" install -y docker-engine=${DOCKER_VERSION}
 
   # reinstall docker-compose at specific version
-  - sudo rm /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
+  #- sudo rm /usr/local/bin/docker-compose
+  #- curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  #- chmod +x docker-compose
+  #- sudo mv docker-compose /usr/local/bin
   - "wget http://apache.mirror.iphh.net/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz && tar xfz apache-maven-3.3.9-bin.tar.gz && sudo mv apache-maven-3.3.9 /usr/local/maven-3.3.9 && sudo rm -f /usr/local/maven && sudo ln -s /usr/local/maven-3.3.9 /usr/local/maven"
   - docker version
   - docker-compose version
   - /usr/local/maven/bin/mvn -version
+  - sudo service mysql stop
 
 script:
   - /usr/local/maven/bin/mvn clean package                                                      # build application
   - TAG=snapshot docker-compose up -d ackris-db ackris-web                                      # start web(wildfly) and database(mysql) containers`
+  - sleep 10                                                                                    # give db time to start
   - /usr/local/maven/bin/mvn clean compile flyway:migrate                                       # deploy database schema
   - /usr/local/maven/bin/mvn clean verify -Dmaven.test.failure.ignore=false -Dtest.port=8070    # run E2E tests

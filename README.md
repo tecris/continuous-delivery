@@ -6,14 +6,15 @@
 Continuous delivery demo that aims to use following principles:
  - immutable environments
  - short lived environments 
-  - **built and destroyed** every time jenkins builds project
+ - **built and destroyed** for each git commit
 
-<hr/>
-- [**Continuous delivery with Jenkins (on-prem)**](#continuous-delivery-with-jenkins)
-- [**E2E with Docker Compose and Maven**](#e2e-with-docker-compose-and-maven)
-- [**Swagger**](#swagger)
 
-<hr/>
+[**Continuous delivery with Jenkins (on-prem)**](#continuous-delivery-with-jenkins)
+
+[**E2E with Docker Compose and Maven**](#e2e-with-docker-compose-and-maven)
+
+[**Swagger**](#swagger)
+
 
 ### Stack
 | *Technology* | *Version* |
