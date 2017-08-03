@@ -9,13 +9,25 @@ node {
       // Run the maven build
      sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
    }
-   stage('Integration Tests') {
+   stage('Destroy old environment') {
      withEnv(['DOCKER_HOST=http://192.168.0.14:4243']) {
        sh "TAG=dev docker-compose down"
+     }
+   }
+   stage('Start new environment') {
+     withEnv(['DOCKER_HOST=http://192.168.0.14:4243']) {
        sh "TAG=dev docker-compose up -d ackris-db ackris-web"
        sh "sleep 5"
-       sh "'${mvnHome}/bin/mvn' clean compile flyway:migrate -Ddatabase.host=192.168.0.14"
-       sh "'${mvnHome}/bin/mvn' clean verify -Dmaven.test.failure.ignore=false -Dtest.port=8070 -Dtest.host=192.168.0.14"
+     }
+   }
+   stage('Provision database') {
+     sh "'${mvnHome}/bin/mvn' clean compile flyway:migrate -Ddatabase.host=192.168.0.14"
+   }
+   stage('Run integration tests') {
+     sh "'${mvnHome}/bin/mvn' clean verify -Dmaven.test.failure.ignore=false -Dtest.port=8070 -Dtest.host=192.168.0.14"
+   }
+   stage('Destroy environment') {
+     withEnv(['DOCKER_HOST=http://192.168.0.14:4243']) {
        sh "TAG=dev docker-compose down"
      }
    }
