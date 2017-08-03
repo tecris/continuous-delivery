@@ -2,3 +2,4 @@ USER=user
 PASSWORD=pwd
 # login into jenkins, select user top right corner, Configure, Show API Token ...
 TOKEN=token
+CRUMB=crumb
