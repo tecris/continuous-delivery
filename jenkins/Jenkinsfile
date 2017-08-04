@@ -28,7 +28,7 @@ node {
    }
    stage('Destroy environment') {
      withEnv(['DOCKER_HOST=http://docker.host:4243']) {
-       sh "TAG=dev docker-compose down"
+       sh "TAG=dev docker-compose down --rmi all"
      }
    }
 }
