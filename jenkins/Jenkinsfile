@@ -1,7 +1,6 @@
 node {
    def mvnHome
-   stage('Preparation') { // for display purposes
-      // Get some code from a GitHub repository
+   stage('Checkout code') {
       git 'https://github.com/tecris/continuous-delivery.git'
       mvnHome = tool 'M3'
    }
