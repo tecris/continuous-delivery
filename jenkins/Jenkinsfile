@@ -10,15 +10,11 @@ node {
      sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
    }
    stage('Destroy old environment') {
-     withEnv(['DOCKER_HOST=http://docker.host:4243']) {
-       sh "TAG=dev docker-compose down"
-     }
+     sh "TAG=dev docker-compose -H http://docker.host:4243 down"
    }
-   stage('Start new environment') {
-     withEnv(['DOCKER_HOST=http://docker.host:4243']) {
-       sh "TAG=dev docker-compose up -d ackris-db ackris-web"
-       sh "sleep 5"
-     }
+   stage('Build image & start new environment') {
+     sh "TAG=dev docker-compose -H http://docker.host:4243 up -d ackris-db ackris-web"
+     sh "sleep 5"
    }
    stage('Provision database') {
      sh "'${mvnHome}/bin/mvn' clean compile flyway:migrate -Ddatabase.host=docker.host"
@@ -27,8 +23,6 @@ node {
      sh "'${mvnHome}/bin/mvn' clean verify -Dmaven.test.failure.ignore=false -Dtest.port=8070 -Dtest.host=docker.host"
    }
    stage('Destroy environment') {
-     withEnv(['DOCKER_HOST=http://docker.host:4243']) {
-       sh "TAG=dev docker-compose down --rmi all"
-     }
+     sh "TAG=dev docker-compose -H http://docker.host:4243 down"
    }
 }
