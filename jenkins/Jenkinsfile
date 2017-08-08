@@ -9,10 +9,10 @@ node {
      sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
    }
    stage('Destroy old environment') {
-     sh "TAG=dev docker-compose -H http://docker.host:2376 down"
+     sh "TAG=dev docker-compose -H http://docker.host:4243 down"
    }
    stage('Build image & start new environment') {
-     sh "TAG=dev docker-compose -H http://docker.host:2376 up -d ackris-db ackris-web"
+     sh "TAG=dev docker-compose -H http://docker.host:4243 up -d ackris-db ackris-web"
      sh "sleep 5"
    }
    stage('Provision database') {
@@ -22,6 +22,6 @@ node {
      sh "'${mvnHome}/bin/mvn' clean verify -Dmaven.test.failure.ignore=false -Dtest.port=8070 -Dtest.host=docker.host"
    }
    stage('Destroy environment') {
-     sh "TAG=dev docker-compose -H http://docker.host:2376 down"
+     sh "TAG=dev docker-compose -H http://docker.host:4243 down"
    }
 }
