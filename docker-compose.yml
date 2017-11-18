@@ -1,5 +1,6 @@
-version: '2'
+version: '3'
 services:
+
   ackris-db:
     image: mysql:5.7
     hostname: ackris.db
