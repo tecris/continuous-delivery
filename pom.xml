@@ -35,7 +35,7 @@
     <maven.compiler.target>1.7</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <mysql.version>6.0.3</mysql.version>
+    <mysql.version>8.0.8-dmr</mysql.version>
     <datasource.name>MySqlDS</datasource.name>
     <database.vendor>mysql</database.vendor>
     <mysql.root.password>mysql</mysql.root.password>
@@ -53,9 +53,9 @@
     <wildfly.username>admin</wildfly.username>
     <wildfly.password>1admin!</wildfly.password>
     <sonar.language>java</sonar.language>
-    <serenity.version>1.6.9</serenity.version>
+    <serenity.version>1.7.5</serenity.version>
     <serenity.maven.version>1.5.3</serenity.maven.version>
-    <serenity.cucumber.version>1.5.15</serenity.cucumber.version>
+    <serenity.cucumber.version>1.6.4</serenity.cucumber.version>
   </properties>
 
   <dependencyManagement>

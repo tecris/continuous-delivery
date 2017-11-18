@@ -1,42 +1,18 @@
 sudo: required
 
-env:
-  global:
-    - DOCKER_VERSION=1.10.2-0~trusty
-    - DOCKER_COMPOSE_VERSION=1.6.2
-    - MAVEN_VERSION=3.5.2 
-
 services:
   - docker
-
-jdk:
-  - oraclejdk8
 
 cache:
   directories:
   - $HOME/.m2
 
 before_install:
-  # list docker-engine versions
-  - apt-cache madison docker-engine
-
-  # upgrade docker-engine to specific version
-  # - sudo apt-get -o Dpkg::Options::="--force-confnew" install -y docker-engine=${DOCKER_VERSION}
-
-  # reinstall docker-compose at specific version
-  #- sudo rm /usr/local/bin/docker-compose
-  #- curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  #- chmod +x docker-compose
-  #- sudo mv docker-compose /usr/local/bin
-  - "wget http://apache.mirror.iphh.net/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz && tar xfz apache-maven-${MAVEN_VERSION}-bin.tar.gz && sudo mv apache-maven-${MAVEN_VERSION} /usr/local/maven-${MAVEN_VERSION} && sudo rm -f /usr/local/maven && sudo ln -s /usr/local/maven-${MAVEN_VERSION} /usr/local/maven"
-  - docker version
-  - docker-compose version
-  - /usr/local/maven/bin/mvn -version
   - sudo service mysql stop
 
 script:
-  - /usr/local/maven/bin/mvn clean package                                                      # build application
-  - TAG=snapshot docker-compose up -d ackris-db ackris-web                                      # start web(wildfly) and database(mysql) containers`
-  - sleep 10                                                                                    # give db time to start
-  - /usr/local/maven/bin/mvn clean compile flyway:migrate                                       # deploy database schema
-  - /usr/local/maven/bin/mvn clean verify -Dmaven.test.failure.ignore=false -Dtest.port=8070    # run E2E tests
+  - mvn clean package                                                      # build application
+  - TAG=snapshot docker-compose up -d ackris-db ackris-web                 # start web(wildfly) and database(mysql) containers`
+  - sleep 10                                                               # give db time to start
+  - mvn clean compile flyway:migrate                                       # deploy database schema
+  - mvn clean verify -Dmaven.test.failure.ignore=false -Dtest.port=8070    # run E2E tests
