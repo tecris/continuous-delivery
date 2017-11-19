@@ -20,9 +20,9 @@ Continuous delivery demo that aims to use following principles:
 | *Technology* | *Version* |
 | ------------- | ------------- |
 | Java | 8 |
-| Wildfly | 10.0.0 |
+| Wildfly | 10.1.0 |
 | MySQL | 5.7 |
-| Maven | 3.3 |
+| Maven | 3.5 |
 | Docker | 1.10 |
 | Docker Compose | 1.6 |
 
@@ -36,14 +36,10 @@ Continuous delivery demo that aims to use following principles:
  - Source code changes pushed to git
  - Jenkins detects changes and starts job
    - Build war/jar artifact
-   - Upload artifact to maven repository
-   - Start vanilla MySQL
+   - Start stack (includes image build for java web app)
    - Apply db schema ([flywaydb.org](flywaydb.org))
-   - Create web application image with latest war artifact
-   - Push web application image to private docker registry
-   - Start web application container
    - Execute integration tests
-   - Stop and remove web and database containers
+   - Stop stack (includes destroy of web and database containers)
 
  
 ### E2E with docker compose and Maven
