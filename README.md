@@ -20,7 +20,7 @@ Continuous delivery demo that aims to use following principles:
 | *Technology* | *Version* |
 | ------------- | ------------- |
 | Java | 8 |
-| Wildfly | 10.1.0 |
+| Wildfly | 13.0.0 |
 | MySQL | 5.7 |
 | Maven | 3.5 |
 | Docker | 1.10 |
