@@ -4,6 +4,7 @@ import static com.jayway.restassured.RestAssured.get;
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.terra.bs.entities.Genre;
 
@@ -37,6 +38,7 @@ public class GenreEndpointIT {
 		get(REST_URL + "/" + genreId).then().body("genre", equalTo(expectedGenre));
 	}
 
+	@Ignore
 	@Test
 	public void testCreateGenreNullGenre() throws JsonProcessingException {
 
@@ -45,6 +47,7 @@ public class GenreEndpointIT {
 		given().contentType("application/json").body(jsonInString).when().post(REST_URL).then().statusCode(400);
 	}
 
+	@Ignore
 	@Test
 	public void testCreateGenreInvalidMinSize() throws JsonProcessingException {
 
@@ -53,6 +56,7 @@ public class GenreEndpointIT {
 		given().contentType("application/json").body(jsonInString).when().post(REST_URL).then().statusCode(400);
 	}
 
+	@Ignore
 	@Test
 	public void testCreateGenreInvalidMaxSize() throws JsonProcessingException {
 

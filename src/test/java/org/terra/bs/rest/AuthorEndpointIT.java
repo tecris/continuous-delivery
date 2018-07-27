@@ -4,6 +4,7 @@ import static com.jayway.restassured.RestAssured.get;
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.terra.bs.entities.Author;
 
@@ -31,6 +32,7 @@ public class AuthorEndpointIT {
 				.body("firstName", equalTo(expectedFirstName));
 	}
 
+	@Ignore
 	@Test
 	public void testCreateAuthorInvalidEmail() throws JsonProcessingException {
 
