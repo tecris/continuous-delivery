@@ -16,8 +16,9 @@ jobs:
           name: start stack
           command: |
             set -x
-            TAG=snapshot docker-compose up -d ackris-db ackris-web
+            TAG=snapshot docker-compose up -d ackris-db
             sleep 10
+            TAG=snapshot docker-compose up -d ackris-web
 
       - run:
           name: apply db scripts

@@ -5,7 +5,7 @@
 
 Continuous delivery demo that aims to use following principles:
  - immutable environments
- - short lived environments 
+ - short lived environments
  - **built and destroyed** for each git commit
 
 
@@ -21,7 +21,7 @@ Continuous delivery demo that aims to use following principles:
 | ------------- | ------------- |
 | Java | 8 |
 | Wildfly | 13.0.0 |
-| MySQL | 5.7 |
+| MySQL | 8.0 |
 | Maven | 3.5 |
 | Docker | 1.10 |
 | Docker Compose | 1.6 |
@@ -41,7 +41,7 @@ Continuous delivery demo that aims to use following principles:
    - Execute integration tests
    - Stop stack (includes destroy of web and database containers)
 
- 
+
 ### E2E with docker compose and Maven
   * **Step-by-step**
 
@@ -58,7 +58,7 @@ Demo: `http://localhost:8070/bookstore`
 #### Swagger
 
    * `$ docker-compose up -d swaggerui`
- 
+
    * [Swagger UI](https://github.com/swagger-api/swagger-ui) @ `http://localhost:81`
 
 
