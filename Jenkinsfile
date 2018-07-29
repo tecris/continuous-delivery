@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'trivialis/maven:3' 
+            image 'trivialis/maven:3'
             args '-v /root/.m2:/root/.m2'
         }
     }
@@ -11,5 +11,10 @@ pipeline {
                 sh 'mvn -B -DskipTests clean package'
             }
         }
+        stage('Start services') {
+           steps {
+               sh 'TAG=dev docker-compose up -d ackris-db ackris-web'
+           }
+       }
     }
 }
