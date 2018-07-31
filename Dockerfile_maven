@@ -7,4 +7,3 @@ RUN apk --update add --no-cache git mysql-client python py-pip \
     && pip install docker-compose==${DOCKER_COMPOSE_VERSION}
 
 COPY wait-for-mysql.sh ./
-RUN ls -l;pwd
