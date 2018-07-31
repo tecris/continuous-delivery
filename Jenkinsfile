@@ -16,5 +16,10 @@ pipeline {
                sh 'TAG=dev docker-compose up -d ackris-db ackris-web'
            }
        }
+       stage('Apply db changes') {
+          steps {
+              sh 'TAG=dev docker-compose up -d flyway-migration'
+          }
+       }
     }
 }
