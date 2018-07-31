@@ -23,7 +23,7 @@ pipeline {
        }
        stage('Run tests') {
           steps {
-              sh 'docker-compose up -d maven-test'
+              sh 'docker-compose up maven-test'
           }
        }
     }
