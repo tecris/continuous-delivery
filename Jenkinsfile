@@ -26,10 +26,10 @@ pipeline {
               sh 'docker-compose up -d maven-test'
           }
        }
-       post {
-        always {
-            junit 'build/reports/**/*.xml'
-        }
     }
-    }
+    post {
+     always {
+         junit 'build/reports/**/*.xml'
+     }
+   }
 }
