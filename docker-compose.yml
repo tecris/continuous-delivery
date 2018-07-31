@@ -61,6 +61,21 @@ services:
     depends_on:
         - ackris-db
 
+  maven-test:
+    image: trivialis/maven:3
+    container_name: maven-test
+    volumes:
+      - ./:/opt
+      - ~/.m2:/root/.m2
+    entrypoint:
+      - mvn
+      - -f
+      - /opt/pom.xml
+      - clean
+      - verify
+      - -Dmaven.test.failure.ignore=false
+      - -Dtest.host=ackris-web
+      - -Dtest.port=8080
 
   swaggerui:
     image: schickling/swagger-ui

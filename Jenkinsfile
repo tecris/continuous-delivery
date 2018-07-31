@@ -23,7 +23,7 @@ pipeline {
        }
        stage('Run tests') {
           steps {
-              sh 'mvn clean verify -Dmaven.test.failure.ignore=false -Dtest.host=ackris-web -Dtest.port=8070'
+              sh 'docker-compose up -d maven-test'
           }
        }
     }
