@@ -18,7 +18,7 @@ pipeline {
        }
        stage('Apply db changes') {
           steps {
-              sh 'TAG=dev docker-compose up -d flyway-migrate'
+              sh 'TAG=dev docker-compose up flyway-migrate'
           }
        }
        stage('Run tests') {
