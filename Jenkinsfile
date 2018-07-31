@@ -23,9 +23,8 @@ pipeline {
        }
        stage('Run tests') {
           steps {
-              sh 'mvn clean verify -Dmaven.test.failure.ignore=false -Dtest.port=8070'
+              sh 'mvn clean verify -Dmaven.test.failure.ignore=false -Dtest.host=ackris-web -Dtest.port=8070'
           }
        }
     }
 }
-
