@@ -21,5 +21,11 @@ pipeline {
               sh 'TAG=dev docker-compose up -d flyway-migrate'
           }
        }
+       stage('Run tests') {
+          steps {
+              sh 'mvn clean verify -Dmaven.test.failure.ignore=false -Dtest.port=8070'
+          }
+       }
     }
 }
+
