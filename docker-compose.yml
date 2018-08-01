@@ -47,10 +47,17 @@ services:
     image: trivialis/maven:3
     container_name: flyway-migrate
     volumes:
-      - /opt:/opt
+      - project-data-volume:/opt
       - ~/.m2:/root/.m2
     entrypoint:
-      - pwd
+      - /wait-for-mysql.sh
+      - ackris-db
+      - mvn
+      - -f
+      - /opt/pom.xml
+      - clean
+      - -Ddatabase.host=ackris-db
+      - flyway:migrate
     depends_on:
         - ackris-db
 
@@ -79,3 +86,7 @@ services:
     environment:
       - API_URL=https://raw.githubusercontent.com/tecris/continuous-delivery/master/swagger/swagger.json
       #- API_URL=http://localhost:8080/bookstore/rest/swagger.json
+
+volumes:
+  project-data-volume:
+     external: true
