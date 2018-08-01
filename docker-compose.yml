@@ -88,5 +88,6 @@ services:
       #- API_URL=http://localhost:8080/bookstore/rest/swagger.json
 
 volumes:
-  project-data-volume:
-     external: true
+  data:
+    external: true
+    name: project-data-volume
