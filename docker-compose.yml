@@ -50,7 +50,7 @@ services:
       - /opt:/opt
       - ~/.m2:/root/.m2
     entrypoint:
-      - pwd;ls -l
+      - pwd
     depends_on:
         - ackris-db
 
