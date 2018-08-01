@@ -65,7 +65,7 @@ services:
     image: trivialis/maven:3
     container_name: maven-test
     volumes:
-      - /opt:/opt
+      - project-data-volume:/opt
       - ~/.m2:/root/.m2
     entrypoint:
       - mvn
@@ -88,6 +88,6 @@ services:
       #- API_URL=http://localhost:8080/bookstore/rest/swagger.json
 
 volumes:
-  data:
+  project-data-volume:
     external: true
-    name: project-data-volume
+    name: jenkins-workspace
