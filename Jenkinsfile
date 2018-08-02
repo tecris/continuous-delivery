@@ -18,12 +18,12 @@ pipeline {
        }
        stage('Apply db changes') {
           steps {
-              sh 'TAG=dev docker-compose -f docker-compose.yaml -f docker-compose-jenkins.yaml -f docker-compose-cd.yml up flyway-migrate'
+              sh 'TAG=dev docker-compose -f docker-compose.yaml -f docker-compose-jenkins.yaml -f docker-compose-cd.yaml up flyway-migrate'
           }
        }
        stage('Run tests') {
           steps {
-              sh 'docker-compose -f docker-compose.yaml -f docker-compose-jenkins.yaml -f docker-compose-cd.yml up maven-test'
+              sh 'docker-compose -f docker-compose.yaml -f docker-compose-jenkins.yaml -f docker-compose-cd.yaml up maven-test'
           }
        }
     }
