@@ -43,40 +43,6 @@ services:
     depends_on:
       - ackris-db
 
-  flyway-migrate:
-    image: trivialis/maven:3
-    container_name: flyway-migrate
-    volumes:
-      - project-data-volume:/opt
-      - ~/.m2:/root/.m2
-    entrypoint:
-      - /wait-for-mysql.sh
-      - ackris-db
-      - mvn
-      - -f
-      - /opt/continuous-delivery/pom.xml
-      - clean
-      - -Ddatabase.host=ackris-db
-      - flyway:migrate
-    depends_on:
-        - ackris-db
-
-  maven-test:
-    image: trivialis/maven:3
-    container_name: maven-test
-    volumes:
-      - project-data-volume:/opt
-      - ~/.m2:/root/.m2
-    entrypoint:
-      - mvn
-      - -f
-      - /opt/continuous-delivery/pom.xml
-      - clean
-      - verify
-      - -Dmaven.test.failure.ignore=false
-      - -Dtest.host=ackris-web
-      - -Dtest.port=8080
-
   swaggerui:
     image: schickling/swagger-ui
     hostname: swagger-ui
@@ -86,8 +52,3 @@ services:
     environment:
       - API_URL=https://raw.githubusercontent.com/tecris/continuous-delivery/master/swagger/swagger.json
       #- API_URL=http://localhost:8080/bookstore/rest/swagger.json
-
-volumes:
-  project-data-volume:
-    external: true
-    name: jenkins-workspace
