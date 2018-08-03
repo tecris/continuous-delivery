@@ -4,7 +4,6 @@
 
 # ./createJob.sh localhost 8080 continuous-delivery config_jenkins2x.xml
 
-
 HOST=$1
 PORT=$2
 JOB_NAME=$3
