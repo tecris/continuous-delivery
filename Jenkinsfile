@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Remove left overs from previous run (if any)') {
             steps {
-                sh 'TAG=dev docker-compose rm'
+                sh 'TAG=dev docker-compose rm -f'
             }
         }
         stage('Build') {
@@ -38,7 +38,7 @@ pipeline {
       }
       stage('Remove containers') {
          steps {
-             sh 'TAG=dev docker-compose rm'
+             sh 'TAG=dev docker-compose rm -f'
          }
      }
     }
