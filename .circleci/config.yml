@@ -3,7 +3,7 @@ jobs:
   build:
     machine:
       # https://circleci.com/docs/2.0/configuration-reference/#machine
-      image: circleci/classic:201710-02
+      image: circleci/classic:201711-01
 
     steps:
       - checkout
@@ -16,9 +16,8 @@ jobs:
           name: start stack
           command: |
             set -x
-            TAG=snapshot docker-compose up -d ackris-db
+            TAG=snapshot docker-compose up -d ackris-db ackris-web
             sleep 10
-            TAG=snapshot docker-compose up -d ackris-web
 
       - run:
           name: apply db scripts
