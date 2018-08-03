@@ -2,7 +2,7 @@
 
 . data
 
-# ./createJob.sh localhost 8080 bookstore config.xml
+# ./createJob.sh localhost 8080 continuous-delivery config_jenkins2x.xml
 
 HOST=$1
 PORT=$2
