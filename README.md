@@ -31,8 +31,8 @@ Continuous delivery demo that aims to use following principles:
    - `$ ./startJenkins.sh`
    - login to [jenkins](localhost:8080) (password can be seen in jenkins log when it starts)
    - select 'Install selected plugins'
-   - edit `./jenkins/data` 
  - Create jenkins plan
+   - edit `./jenkins/data` 
    - `$ cd jenkins && ./createJob.sh localhost 8080 continuous-delivery config.xml`
  - Go to [jenkins job](http://localhost:8080/job/continuous-delivery), build will start in under 2 minutes. Alternatively the build can be started manually -> 'Build Now'
 
