@@ -9,6 +9,8 @@ PORT=$2
 JOB_NAME=$3
 FILE=$4
 
+# https://wiki.jenkins.io/display/JENKINS/Remote+access+API#RemoteaccessAPI-CSRFProtection
+
 CRUMB=$(wget -q --auth-no-challenge --user $USER --password $PASSWORD --output-document - \
          "http://${HOST}:${PORT}/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,\":\",//crumb)")
 
