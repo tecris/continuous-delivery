@@ -1,4 +1,4 @@
-# docker build -f Dockerfile_maven -t trivialis/maven:3 ./
+# docker build -f Dockerfile -t trivialis/maven:3 ./
 FROM maven:3-alpine
 
 ENV DOCKER_COMPOSE_VERSION=1.21.2
