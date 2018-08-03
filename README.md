@@ -27,10 +27,14 @@ Continuous delivery demo that aims to use following principles:
 | Docker Compose | 1.6 |
 
 ### Continuous delivery with Jenkins
- - Start [continuous delivery stack](https://github.com/tecris/infrastructure-as-code)
+ - Start jenkins
+   - `$ ./startJenkins.sh`
+   - login to [jenkins](localhost:8080) (password can be seen in jenkins log when it starts)
+   - select 'Install selected plugins'
+   - edit `./jenkins/data` 
  - Create jenkins plan
-   - `$ cd jenkins && ./createJob.sh localhost bookstore config.xml`
- - http://localhost:8088/job/continuous-delivery -> 'Build Now'
+   - `$ cd jenkins && ./createJob.sh localhost 8080 continuous-delivery config.xml`
+ - Go to [jenkins job](http://localhost:8080/job/continuous-delivery), build will start in under 2 minutes. Alternatively the build can be started manually -> 'Build Now'
 
 ##### Continuous Delivery life-cycle
  - Source code changes pushed to git
