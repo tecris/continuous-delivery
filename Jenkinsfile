@@ -28,7 +28,7 @@ pipeline {
        }
        stage('Stop & destroy services') {
           steps {
-              sh 'TAG=dev docker-compose up -d ackris-db ackris-web down'
+              sh 'TAG=dev docker-compose down'
           }
       }
     }
