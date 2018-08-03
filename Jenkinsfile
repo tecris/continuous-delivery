@@ -28,7 +28,7 @@ pipeline {
        }
        stage('Stop & destroy services') {
           steps {
-              sh 'TAG=dev docker-compose down'
+              sh 'TAG=dev docker-compose -f docker-compose.yaml -f docker-compose-jenkins.yaml -f docker-compose-cd.yaml down'
           }
       }
     }
