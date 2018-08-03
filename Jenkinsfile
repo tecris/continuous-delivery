@@ -26,6 +26,11 @@ pipeline {
               sh 'docker-compose -f docker-compose.yaml -f docker-compose-jenkins.yaml -f docker-compose-cd.yaml up maven-test'
           }
        }
+       stage('Stop & destroy services') {
+          steps {
+              sh 'TAG=dev docker-compose up -d ackris-db ackris-web down'
+          }
+      }
     }
     post {
      always {
