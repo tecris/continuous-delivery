@@ -28,14 +28,9 @@ pipeline {
        }
        stage('Stop services') {
           steps {
-              sh 'TAG=dev docker-compose -f docker-compose.yaml -f docker-compose-cd.yaml stop ackris-db ackris-web maven-test flyway-migrate'
+              sh 'TAG=dev docker-compose -f docker-compose.yaml -f docker-compose-cd.yaml stop'
           }
       }
-      stage('Remove containers') {
-         steps {
-             sh 'TAG=dev docker-compose -f docker-compose.yaml -f docker-compose-cd.yaml rm'
-         }
-     }
     }
     post {
      always {
