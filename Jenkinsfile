@@ -28,9 +28,14 @@ pipeline {
        }
        stage('Stop services') {
           steps {
-              sh 'TAG=dev docker-compose -f docker-compose.yaml -f docker-compose-cd.yaml stop'
+              sh 'TAG=dev docker-compose stop'
           }
       }
+      stage('Remove containers') {
+         steps {
+             sh 'TAG=dev docker-compose rm'
+         }
+     }
     }
     post {
      always {
