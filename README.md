@@ -6,7 +6,7 @@
 Continuous delivery demo that aims to use following principles:
  - immutable environments
  - short lived environments
- - **built and destroyed** for each git commit
+ - **built and destroyed** with each jenkins run
 
 
 [**Continuous delivery with Jenkins (on-prem)**](#continuous-delivery-with-jenkins)
