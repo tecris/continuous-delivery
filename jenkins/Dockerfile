@@ -1,4 +1,4 @@
-# docker build -f Dockerfile_jenkins -t trivialis/jenkins:2.134 ./
+# docker build -f Dockerfile -t trivialis/jenkinsci-blueocean:2.7.1 ./
 FROM jenkinsci/blueocean:1.7.1
 
 ENV DOCKER_COMPOSE_VERSION=1.21.2

@@ -2,7 +2,7 @@ version: '3.4'
 services:
 
   jenkins:
-    image: trivialis/jenkins:2.134
+    image: trivialis/jenkinsci-blueocean:2.7.1
     container_name: jenkins
     user: root
     ports:
