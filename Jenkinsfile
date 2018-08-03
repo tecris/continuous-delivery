@@ -26,11 +26,16 @@ pipeline {
               sh 'docker-compose -f docker-compose.yaml -f docker-compose-jenkins.yaml -f docker-compose-cd.yaml up maven-test'
           }
        }
-       stage('Stop & destroy services') {
+       stage('Stop services') {
           steps {
-              sh 'TAG=dev docker-compose -f docker-compose.yaml -f docker-compose-jenkins.yaml -f docker-compose-cd.yaml down'
+              sh 'TAG=dev docker-compose -f docker-compose.yaml -f docker-compose-cd.yaml stop ackris-db ackris-web maven-test flyway-migrate'
           }
       }
+      stage('Remove containers') {
+         steps {
+             sh 'TAG=dev docker-compose -f docker-compose.yaml -f docker-compose-cd.yaml rm'
+         }
+     }
     }
     post {
      always {
