@@ -6,6 +6,11 @@ pipeline {
         }
     }
     stages {
+        stage('Remove left overs from previous run (if any)') {
+            steps {
+                sh 'TAG=dev docker-compose rm'
+            }
+        }
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
