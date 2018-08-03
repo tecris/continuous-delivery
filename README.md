@@ -23,8 +23,8 @@ Continuous delivery demo that aims to use following principles:
 | Wildfly | 13.0.0 |
 | MySQL | 8.0 |
 | Maven | 3.5 |
-| Docker | 1.10 |
-| Docker Compose | 1.6 |
+| Docker | 17.11.0-ce |
+| Docker Compose | 1.17.1 |
 
 ### Continuous delivery with Jenkins
  - Start jenkins
