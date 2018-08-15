@@ -5,7 +5,7 @@ services:
     image: trivialis/maven:3
     container_name: flyway-migrate
     volumes:
-      - project-data-volume:/opt
+      - ./:/opt/continuous-delivery
       - ~/.m2:/root/.m2
     entrypoint:
       - /wait-for-mysql.sh
@@ -23,7 +23,7 @@ services:
     image: trivialis/maven:3
     container_name: maven-test
     volumes:
-      - project-data-volume:/opt
+      - ./:/opt/continuous-delivery
       - ~/.m2:/root/.m2
     entrypoint:
       - mvn
