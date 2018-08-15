@@ -16,8 +16,8 @@ jobs:
 
       - run:
           name: apply db scripts
-          command: TAG=dev docker-compose -f docker-compose.yaml -f docker-compose-jenkins.yaml -f docker-compose-cd.yaml up flyway-migrate
+          command: TAG=dev docker-compose -f docker-compose.yaml-f docker-compose-cd.yaml up flyway-migrate
 
       - run:
           name: run tests
-          command: docker-compose -f docker-compose.yaml -f docker-compose-jenkins.yaml -f docker-compose-cd.yaml up maven-test
+          command: docker-compose -f docker-compose.yaml -f docker-compose-cd.yaml up maven-test

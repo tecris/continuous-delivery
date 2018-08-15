@@ -8,10 +8,5 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - project-data-volume:/var/jenkins_home/workspace
       - ~/.m2:/root/.m2
       - /var/run/docker.sock:/var/run/docker.sock
-
-volumes:
-  project-data-volume:
-    name: jenkins-workspace

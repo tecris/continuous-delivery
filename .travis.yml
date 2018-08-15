@@ -14,6 +14,6 @@ script:
   # start database(mysql) & web(wildfly) containers
   - TAG=dev docker-compose up -d ackris-db ackris-web
   # deploy database schema
-  - TAG=dev docker-compose -f docker-compose.yaml -f docker-compose-jenkins.yaml -f docker-compose-cd.yaml up flyway-migrate
+  - TAG=dev docker-compose -f docker-compose.yaml -f docker-compose-cd.yaml up flyway-migrate
   # run E2E tests
-  - TAG=dev docker-compose -f docker-compose.yaml -f docker-compose-jenkins.yaml -f docker-compose-cd.yaml up maven-test
+  - TAG=dev docker-compose -f docker-compose.yaml -f docker-compose-cd.yaml up maven-test
