@@ -11,7 +11,9 @@ before_install:
   - sudo service mysql stop
 
 script:
-  - TAG=snapshot docker-compose up -d ackris-db ackris-web                 # start database(mysql) & web(wildfly) containers
-  - sleep 10                                                               # allow db to start
-  - mvn clean compile flyway:migrate                                       # deploy database schema
-  - mvn clean verify -Dmaven.test.failure.ignore=false -Dtest.port=8070    # run E2E tests
+  # start database(mysql) & web(wildfly) containers
+  - TAG=dev docker-compose up -d ackris-db ackris-web
+  # deploy database schema
+  - TAG=dev docker-compose -f docker-compose.yaml -f docker-compose-jenkins.yaml -f docker-compose-cd.yaml up flyway-migrate
+  # run E2E tests
+  - TAG=dev docker-compose -f docker-compose.yaml -f docker-compose-jenkins.yaml -f docker-compose-cd.yaml up maven-test

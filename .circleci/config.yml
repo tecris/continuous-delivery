@@ -12,13 +12,12 @@ jobs:
           name: start stack
           command: |
             set -x
-            TAG=snapshot docker-compose up -d ackris-db ackris-web
-            sleep 10
+            TAG=dev docker-compose up -d ackris-db ackris-web
 
       - run:
           name: apply db scripts
-          command: mvn clean compile flyway:migrate
+          command: TAG=dev docker-compose -f docker-compose.yaml -f docker-compose-jenkins.yaml -f docker-compose-cd.yaml up flyway-migrate
 
       - run:
           name: run tests
-          command: mvn clean verify -Dmaven.test.failure.ignore=false -Dtest.port=8070
+          command: docker-compose -f docker-compose.yaml -f docker-compose-jenkins.yaml -f docker-compose-cd.yaml up maven-test
