@@ -9,10 +9,6 @@ jobs:
       - checkout
 
       - run:
-          name: Build application
-          command: mvn clean package
-
-      - run:
           name: start stack
           command: |
             set -x
