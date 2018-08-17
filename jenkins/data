@@ -1,5 +1,5 @@
 USER=user
-password may also be found at: /var/jenkins_home/secrets/initialAdminPassword
+# password may also be found at: /var/jenkins_home/secrets/initialAdminPassword
 PASSWORD=pwd
 # login into jenkins, select user top right corner, Configure, Show API Token ...
 TOKEN=token
